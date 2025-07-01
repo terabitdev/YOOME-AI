@@ -1,57 +1,108 @@
 import 'package:flutter/material.dart';
+import 'package:yoome_ai/resources/components/google_roundbutton.dart';
+import 'package:yoome_ai/resources/components/reuseable_social_button.dart';
 
-class SignInScreen extends StatefulWidget {
+class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
-}
-
-class _SignInScreenState extends State<SignInScreen> {
-  int selectedCharacterIndex = 7; // The angel character is selected by default
-  bool isLoading = false;
-  String? loadingProvider;
-
-  // Single character grid image path
-  final String characterGridImage = 'assets/images/grid_image.png';
-
-  @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.black,
-        body: Column(
-          children: [
-            // Character Grid Section
-            Expanded(
-              flex: 7,
-              child: Stack(
-                children: [
-                  // Background character grid image
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
-                    child: Image.asset(
-                      'assets/images/grid_image.png',
-                      fit: BoxFit.cover,
-                      width: double.infinity,
-                      height: double.infinity,
-                      errorBuilder: (context, error, stackTrace) {
-                        // Fallback when main image doesn't exist
-                        return Center(
-                          child: Text(
-                            'Character Grid Image\nNot Found',
-                            style: TextStyle(color: Colors.white, fontSize: 16),
-                            textAlign: TextAlign.center,
-                          ),
-                        );
-                      },
-                    ),
+    return Scaffold(
+      body: Stack(
+        children: [
+          SizedBox.expand(
+            child: Image.asset(
+              'assets/images/grid_image.png', // Your full character collage
+              fit: BoxFit.cover,
+            ),
+          ),
+          Positioned.fill(
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.fromLTRB(24, 40, 24, 30),
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Colors.transparent, Colors.black],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
                   ),
-                ],
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    GoogleRoundButton(
+                      title: "Sign in with Google",
+                      onTap: () {},
+                      color: const Color(0xFF1A1A1A),
+                      loading: false,
+                    ),
+
+                    const SizedBox(height: 24),
+
+                    // Divider and "or"
+                    Row(
+                      children: [
+                        const Expanded(child: Divider(color: Colors.white30)),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 12),
+                          child: Text(
+                            "Or continue with",
+                            style: TextStyle(color: Colors.white54),
+                          ),
+                        ),
+                        const Expanded(child: Divider(color: Colors.white30)),
+                      ],
+                    ),
+
+                    const SizedBox(height: 20),
+
+                    // Social Buttons (X, Discord, Mail)
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        SocialButton(icon: Icons.close, onTap: () {}),
+                        SocialButton(
+                          icon: Icons.discord,
+                          onTap: () {},
+                          iconColor: Colors.indigoAccent,
+                        ),
+                        SocialButton(
+                          icon: Icons.email_outlined,
+                          onTap: () {},
+                          iconColor: Colors.purpleAccent,
+                        ),
+                      ],
+                    ),
+
+                    const SizedBox(height: 30),
+
+                    // Terms & Privacy
+                    RichText(
+                      textAlign: TextAlign.center,
+                      text: const TextSpan(
+                        style: TextStyle(fontSize: 12, color: Colors.white60),
+                        text: 'By signing in, you agree to our\n',
+                        children: [
+                          TextSpan(
+                            text: 'Terms & Condition',
+                            style: TextStyle(color: Color(0xFFA259FF)),
+                          ),
+                          TextSpan(text: ' and '),
+                          TextSpan(
+                            text: 'Privacy Policy',
+                            style: TextStyle(color: Color(0xFFA259FF)),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
