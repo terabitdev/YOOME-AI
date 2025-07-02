@@ -1,29 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SocialButton extends StatelessWidget {
-  final IconData icon;
+  final String imagePath; // Image asset path
   final VoidCallback onTap;
   final Color bgColor;
-  final Color iconColor;
 
   const SocialButton({
     Key? key,
-    required this.icon,
+    required this.imagePath,
     required this.onTap,
     this.bgColor = const Color(0xFF1A1A1A),
-    this.iconColor = Colors.white,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(40),
       child: Container(
-        width: 60,
-        height: 60,
-        decoration: BoxDecoration(color: bgColor, shape: BoxShape.circle),
-        child: Icon(icon, color: iconColor, size: 28),
+        width: 98.w,
+        height: 48.h,
+        decoration: BoxDecoration(
+          color: bgColor,
+          borderRadius: BorderRadius.circular(24.r),
+        ),
+        child: Center(
+          child: Image.asset(
+            imagePath,
+            width: 28.w,
+            height: 28.h,
+            fit: BoxFit.contain,
+          ),
+        ),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:yoome_ai/resources/constants/app_images.dart';
 
 class GoogleRoundButton extends StatelessWidget {
   final String title;
@@ -36,7 +37,7 @@ class GoogleRoundButton extends StatelessWidget {
                   children: [
                     // Google Icon
                     Image.asset(
-                      'assets/images/google.png',
+                      AppImages.googleLogo,
                       height: 24.h, // Adjust the size of the Google icon
                       width: 24.w,
                     ),
