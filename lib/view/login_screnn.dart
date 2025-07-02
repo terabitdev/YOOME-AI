@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yoome_ai/resources/colors/app_colors.dart';
-import 'package:yoome_ai/resources/components/custom_roundbutton.dart';
+import 'package:yoome_ai/resources/components/round_button.dart';
 import 'package:yoome_ai/resources/components/custom_textfield.dart';
 import 'package:yoome_ai/view/verification_code_screen.dart';
 

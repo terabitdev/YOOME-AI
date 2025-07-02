@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:yoome_ai/Controllers/splash_controller.dart';
 
+
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
 

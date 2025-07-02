@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:yoome_ai/resources/colors/app_colors.dart';
+import 'package:yoome_ai/view/welcome_screen.dart';
 
 class VerificationCodeScreen extends StatefulWidget {
   const VerificationCodeScreen({super.key});
@@ -52,15 +54,15 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
               SizedBox(height: 36.h),
               PinCodeTextField(
                 appContext: context,
-                length: 6,
+                length: 4,
                 controller: codeController,
                 animationType: AnimationType.fade,
                 onChanged: (value) {},
                 pinTheme: PinTheme(
                   shape: PinCodeFieldShape.box,
-                  borderRadius: BorderRadius.circular(8.r),
-                  fieldHeight: 50.h,
-                  fieldWidth: 40.w,
+                  borderRadius: BorderRadius.circular(28.r),
+                  fieldHeight: 80.h,
+                  fieldWidth: 80.w,
                   activeFillColor: ColorConstants.textFieldColor,
                   inactiveFillColor: ColorConstants.textFieldColor,
                   selectedFillColor: ColorConstants.textFieldColor,
@@ -79,12 +81,21 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                 children: [
                   Icon(Icons.email, color: Color(0xFFC0C0C0), size: 20.sp),
                   SizedBox(width: 8.w),
-                  Text(
-                    'Resend code (57)',
-                    style: TextStyle(
-                      color: Color(0xFFC0C0C0),
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w400,
+                  InkWell(
+                    onTap: () {
+                      Get.to(
+                        () => WelcomeScreen(),
+                        transition: Transition.rightToLeft,
+                      );
+                      print('Resend code tapped');
+                    },
+                    child: Text(
+                      'Resend code (57)',
+                      style: TextStyle(
+                        color: Color(0xFFC0C0C0),
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
                   ),
                 ],
