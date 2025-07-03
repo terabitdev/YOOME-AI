@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yoome_ai/resources/colors/app_colors.dart';
+import 'package:yoome_ai/resources/constants/app_style.dart';
 
 class CustomTextField extends StatefulWidget {
   final String title;
@@ -63,7 +64,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         filled: true,
         fillColor: ColorConstants.textFieldColor,
         hintText: widget.title,
-        hintStyle: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w400),
+        hintStyle: LTextStyle14500,
         errorText: widget.errorText,
       ),
     );

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:yoome_ai/resources/constants/app_style.dart';
 
 class AgeSelectionWidget extends StatelessWidget {
   final List<String> ageOptions;
@@ -18,14 +20,7 @@ class AgeSelectionWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Your Age',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
+        Text('Your Age', style: GenderTwextStyle14500),
         SizedBox(height: 16.h),
         Row(children: ageOptions.map((age) => _buildAgeOption(age)).toList()),
       ],
@@ -59,7 +54,7 @@ class AgeSelectionWidget extends StatelessWidget {
             child: Center(
               child: Text(
                 age,
-                style: TextStyle(
+                style: GoogleFonts.outfit(
                   color: isSelected ? Colors.white : const Color(0xFFD1D5DB),
                   fontSize: 16,
                   fontWeight: FontWeight.w500,

@@ -2,8 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:yoome_ai/nav_bar.dart';
 import 'package:yoome_ai/resources/colors/app_colors.dart';
 import 'package:yoome_ai/resources/components/progress_bar.dart';
+import 'package:yoome_ai/resources/constants/app_style.dart';
 
 class YourInterestScreen extends StatefulWidget {
   const YourInterestScreen({Key? key}) : super(key: key);
@@ -76,14 +78,7 @@ class _YourInterestScreenState extends State<YourInterestScreen> {
             children: [
               const ProgressBarWidget(currentStep: 3, totalSteps: 3),
               SizedBox(height: 20.h),
-              Text(
-                'Your Interests',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 19.sp,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
+              Text('Your Interests', style: YITextStyle19700),
 
               SizedBox(height: 30.h),
 
@@ -155,14 +150,7 @@ class _YourInterestScreenState extends State<YourInterestScreen> {
                           border: Border.all(color: Colors.white, width: 2.w),
                         ),
                         child: Center(
-                          child: Text(
-                            'Skip',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
+                          child: Text('Skip', style: YPBTextStyle14700),
                         ),
                       ),
                     ),
@@ -174,6 +162,7 @@ class _YourInterestScreenState extends State<YourInterestScreen> {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
+                        Get.to(() => CustomNavigationBar());
                         _enterYoome();
                       },
                       child: Container(
@@ -183,14 +172,7 @@ class _YourInterestScreenState extends State<YourInterestScreen> {
                           borderRadius: BorderRadius.circular(25.r),
                         ),
                         child: Center(
-                          child: Text(
-                            'Enter YOOME',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
+                          child: Text('Enter YOOME', style: YPBTextStyle14700),
                         ),
                       ),
                     ),
@@ -214,14 +196,7 @@ class _YourInterestScreenState extends State<YourInterestScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          title,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
+        Text(title, style: YIBTextStyle14500),
         SizedBox(height: 16.h),
         Wrap(
           spacing: 8.w,

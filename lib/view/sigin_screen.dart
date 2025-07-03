@@ -3,6 +3,7 @@ import 'package:yoome_ai/resources/components/google_roundbutton.dart';
 import 'package:yoome_ai/resources/components/reuseable_social_button.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yoome_ai/resources/constants/app_images.dart';
+import 'package:yoome_ai/resources/constants/app_style.dart';
 import 'package:yoome_ai/view/login_screnn.dart';
 import 'package:get/get.dart';
 
@@ -15,10 +16,7 @@ class SignInScreen extends StatelessWidget {
       body: Stack(
         children: [
           SizedBox.expand(
-            child: Image.asset(
-              AppImages.gridImage,
-              fit: BoxFit.cover,
-            ),
+            child: Image.asset(AppImages.gridImage, fit: BoxFit.cover),
           ),
           Positioned.fill(
             child: Align(
@@ -47,22 +45,24 @@ class SignInScreen extends StatelessWidget {
                     SizedBox(height: 28.h),
                     Row(
                       children: [
-                        const Expanded(child: Divider(color: Colors.white30)),
-                        const Padding(
+                        Expanded(child: Divider(color: Colors.white30)),
+                        Padding(
                           padding: EdgeInsets.symmetric(horizontal: 12),
                           child: Text(
                             "Or continue with",
-                            style: TextStyle(color: Colors.white54),
+                            style: DTextStyle13400,
                           ),
                         ),
-                        const Expanded(child: Divider(color: Colors.white30)),
+                        Expanded(child: Divider(color: Colors.white30)),
                       ],
                     ),
                     SizedBox(height: 24.h),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        SocialButton(imagePath: AppImages.twitterLogo, onTap: () {},
+                        SocialButton(
+                          imagePath: AppImages.twitterLogo,
+                          onTap: () {},
                           bgColor: Color(0x80000000),
                         ),
                         SocialButton(
@@ -80,15 +80,15 @@ class SignInScreen extends StatelessWidget {
                     SizedBox(height: 67.h),
                     RichText(
                       textAlign: TextAlign.center,
-                      text: const TextSpan(
-                        style: TextStyle(fontSize: 12, color: Colors.white60),
+                      text: TextSpan(
+                        style: PTextStyle13400White,
                         text: 'By signing in, you agree to our\n',
                         children: [
                           TextSpan(
                             text: 'Terms & Condition',
                             style: TextStyle(color: Color(0xFFA259FF)),
                           ),
-                          TextSpan(text: ' and '),
+                          TextSpan(text: ' and ', style: PTextStyle13400White),
                           TextSpan(
                             text: 'Privacy Policy',
                             style: TextStyle(color: Color(0xFFA259FF)),

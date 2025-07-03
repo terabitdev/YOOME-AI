@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yoome_ai/resources/constants/app_images.dart';
+import 'package:yoome_ai/resources/constants/app_style.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -42,15 +43,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text(
-                  'For You',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 19,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
+              children: [
+                Text('For You', style: HTextStyle19700),
                 Icon(Icons.search, color: Colors.white, size: 24),
               ],
             ),

@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:yoome_ai/resources/constants/app_style.dart';
 
 class GenderSelectionWidget extends StatelessWidget {
   final List<Map<String, String>> genderOptions;
@@ -20,14 +22,7 @@ class GenderSelectionWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Your Gender',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
+        Text('Your Gender', style: GenderTwextStyle14500),
         SizedBox(height: 16.h),
         ...genderOptions.map((option) => _buildGenderOption(option)).toList(),
       ],
@@ -67,7 +62,7 @@ class GenderSelectionWidget extends StatelessWidget {
               Expanded(
                 child: Text(
                   option['label']!,
-                  style: TextStyle(
+                  style: GoogleFonts.outfit(
                     color: isSelected ? Colors.white : Colors.grey,
                     fontSize: 16,
                     fontWeight: FontWeight.w500,

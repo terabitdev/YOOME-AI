@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yoome_ai/resources/colors/app_colors.dart';
 import 'package:yoome_ai/resources/components/round_button.dart';
 import 'package:yoome_ai/resources/components/custom_textfield.dart';
+import 'package:yoome_ai/resources/constants/app_style.dart';
 import 'package:yoome_ai/view/verification_code_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -30,25 +31,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: const Icon(Icons.arrow_back, color: Colors.white),
                   ),
                   SizedBox(width: 10.w),
-                  Text(
-                    'Login',
-                    style: TextStyle(
-                      fontSize: 22.sp,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,
-                    ),
-                  ),
+                  Text('Login', style: LTextStyle18500),
                 ],
               ),
               SizedBox(height: 34.h),
-              Text(
-                'EMAIL',
-                style: TextStyle(
-                  fontSize: 12.sp,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.white,
-                ),
-              ),
+              Text('EMAIL', style: LTextStyle12400),
               SizedBox(height: 7.h),
               CustomTextField(
                 controller: emailController,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yoome_ai/resources/constants/app_style.dart';
 
 class RoundButton extends StatelessWidget {
   final String title;
@@ -30,14 +31,7 @@ class RoundButton extends StatelessWidget {
                   strokeWidth: 3,
                   color: Colors.white,
                 )
-              : Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+              : Text(title, style: LRButtonTextStyle167400),
         ),
       ),
     );

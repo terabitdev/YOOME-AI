@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:yoome_ai/resources/colors/app_colors.dart';
+import 'package:yoome_ai/resources/constants/app_style.dart';
 import 'package:yoome_ai/view/welcome_screen.dart';
 
 class VerificationCodeScreen extends StatefulWidget {
@@ -32,25 +33,11 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                     child: const Icon(Icons.arrow_back, color: Colors.white),
                   ),
                   SizedBox(width: 10.w),
-                  Text(
-                    'Login',
-                    style: TextStyle(
-                      fontSize: 22.sp,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,
-                    ),
-                  ),
+                  Text('Login', style: LTextStyle18500),
                 ],
               ),
               SizedBox(height: 34.h),
-              Text(
-                'Verification Code',
-                style: TextStyle(
-                  fontSize: 19.sp,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white,
-                ),
-              ),
+              Text('Verification Code', style: VTextStyle19700),
               SizedBox(height: 36.h),
               PinCodeTextField(
                 appContext: context,
@@ -89,14 +76,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                       );
                       print('Resend code tapped');
                     },
-                    child: Text(
-                      'Resend code (57)',
-                      style: TextStyle(
-                        color: Color(0xFFC0C0C0),
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
+                    child: Text('Resend code (57)', style: RTextStyle18400),
                   ),
                 ],
               ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yoome_ai/resources/constants/app_images.dart';
+import 'package:yoome_ai/resources/constants/app_style.dart';
 
 class GoogleRoundButton extends StatelessWidget {
   final String title;
@@ -43,14 +44,7 @@ class GoogleRoundButton extends StatelessWidget {
                     ),
                     SizedBox(width: 10.h),
                     // Button Text
-                    Text(
-                      title,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.sp,
-                      ),
-                    ),
+                    Text(title, style: GbuttonTextStyle14500White),
                   ],
                 ),
         ),

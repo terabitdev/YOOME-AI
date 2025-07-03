@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/utils.dart';
 import 'package:yoome_ai/resources/colors/app_colors.dart';
 import 'package:yoome_ai/resources/components/progress_bar.dart';
+import 'package:yoome_ai/resources/constants/app_style.dart';
 import 'package:yoome_ai/view/your_interest_screen.dart';
 
 class YourPreferenceScreen extends StatefulWidget {
@@ -37,24 +38,10 @@ class _YourPreferenceScreenState extends State<YourPreferenceScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: 20.h),
-                      Text(
-                        'Your Preferences',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 19.sp,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
+                      Text('Your Preferences', style: YPTextStyle19700),
 
                       SizedBox(height: 40.h),
-                      Text(
-                        'Character Preferences',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
+                      Text('Character Preferences', style: YPTextStyle214500),
 
                       SizedBox(height: 20.h),
                       Row(
@@ -82,14 +69,7 @@ class _YourPreferenceScreenState extends State<YourPreferenceScreen> {
                       ),
 
                       SizedBox(height: 40.h),
-                      Text(
-                        'Character Replay',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
+                      Text('Character Replay', style: YPMFTextStyle15400),
 
                       SizedBox(height: 20.h),
                       Row(
@@ -140,7 +120,7 @@ class _YourPreferenceScreenState extends State<YourPreferenceScreen> {
                         minimumSize: Size.fromHeight(50.h),
                       ),
                       onPressed: () {},
-                      child: const Text('Skip'),
+                      child: Text('Skip', style: YPBTextStyle14700),
                     ),
                   ),
                   SizedBox(width: 16.w),
@@ -157,14 +137,7 @@ class _YourPreferenceScreenState extends State<YourPreferenceScreen> {
                       onPressed: () {
                         Get.to(() => const YourInterestScreen());
                       },
-                      child: const Text(
-                        'Enter YOOME',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
+                      child: Text('Enter YOOME', style: YPBTextStyle14700),
                     ),
                   ),
                 ],
@@ -243,14 +216,7 @@ class CharacterCard extends StatelessWidget {
             if (showTitle)
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 12),
-                child: Text(
-                  title,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
+                child: Text(title, style: YPMFTextStyle15400),
               ),
           ],
         ),

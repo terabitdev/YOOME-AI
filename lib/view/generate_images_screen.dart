@@ -64,11 +64,6 @@ class _GenerateImagesScreenState extends State<GenerateImagesScreen> {
                               color: const Color(0xFF3A3A3A),
                               borderRadius: BorderRadius.circular(20.r),
                             ),
-                            child: Image.asset(
-                              'assets/images/prompt.png',
-                              width: 18.r,
-                              height: 18.r,
-                            ),
                           ),
                         ),
                       ),

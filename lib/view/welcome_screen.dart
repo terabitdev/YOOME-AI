@@ -8,6 +8,7 @@ import 'package:yoome_ai/resources/components/gender_selection.dart';
 import 'package:yoome_ai/resources/components/progress_bar.dart';
 import 'package:yoome_ai/resources/components/round_button.dart';
 import 'package:yoome_ai/resources/colors/app_colors.dart';
+import 'package:yoome_ai/resources/constants/app_style.dart';
 import 'package:yoome_ai/view/your_preference_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -43,24 +44,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   const ProgressBarWidget(currentStep: 1, totalSteps: 3),
                   SizedBox(height: 23.h),
 
-                  Text(
-                    'Welcome YOOME AI!',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 19.sp,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
+                  Text('Welcome YOOME AI!', style: WTextStyle19700),
                   SizedBox(height: 61.h),
 
-                  Text(
-                    'Your Name',
-                    style: TextStyle(
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.white,
-                    ),
-                  ),
+                  Text('YOUR NAME', style: LTextStyle12400),
                   SizedBox(height: 7.h),
 
                   CustomTextField(
