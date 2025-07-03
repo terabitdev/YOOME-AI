@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:get/utils.dart';
 import 'package:yoome_ai/resources/colors/app_colors.dart';
 import 'package:yoome_ai/resources/components/progress_bar.dart';
 import 'package:yoome_ai/view/your_interest_screen.dart';
@@ -24,154 +25,144 @@ class _YourPreferenceScreenState extends State<YourPreferenceScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            // Progress Bar
+            // ─── Progress bar stays full‑width ───
             const ProgressBarWidget(currentStep: 2, totalSteps: 3),
 
-            // Content
+            // ─── Everything else gets ONE horizontal padding of 24 ───
             Expanded(
-              child: SingleChildScrollView(
+              child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24.w),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: 20.h),
-
-                    // Title
-                    Text(
-                      'Your Preferences',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 32.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-
-                    SizedBox(height: 40.h),
-
-                    // Character Preferences Section
-                    Text(
-                      'Character Preferences',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-
-                    SizedBox(height: 20.h),
-                    Row(
-                      children: [
-                        _buildCharacterCard('Male', 'assets/images/2.png'),
-                        SizedBox(width: 16.w),
-                        _buildCharacterCard('Female', 'assets/images/1.png'),
-                      ],
-                    ),
-
-                    SizedBox(height: 40.h),
-
-                    // Character Replay Section
-                    Text(
-                      'Character Replay',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-
-                    SizedBox(height: 20.h),
-
-                    // Replay Cards Row
-                    Row(
-                      children: [
-                        _buildReplayCard(
-                          'Interactive Story',
-                          '(Long Conversation)',
-                          'interactive_story',
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 20.h),
+                      Text(
+                        'Your Preferences',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 19.sp,
+                          fontWeight: FontWeight.w700,
                         ),
-                        SizedBox(width: 16.w),
-                        _buildReplayCard(
-                          'Casual Talk',
-                          '(Short Conversation)',
-                          'casual_talk',
-                        ),
-                      ],
-                    ),
+                      ),
 
-                    SizedBox(height: 60.h),
-                  ],
+                      SizedBox(height: 40.h),
+                      Text(
+                        'Character Preferences',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+
+                      SizedBox(height: 20.h),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: CharacterCard(
+                              title: 'Male',
+                              imagePath: 'assets/images/animal.png',
+                              isSelected: selectedCharacter == 'male',
+                              onTap: () =>
+                                  setState(() => selectedCharacter = 'male'),
+                            ),
+                          ),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: CharacterCard(
+                              title: 'Female',
+                              imagePath: 'assets/images/cat.png',
+                              isSelected: selectedCharacter == 'female',
+                              onTap: () =>
+                                  setState(() => selectedCharacter = 'female'),
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(height: 40.h),
+                      Text(
+                        'Character Replay',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+
+                      SizedBox(height: 20.h),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: CharacterCard(
+                              title: '',
+                              imagePath: 'assets/images/Card.png',
+                              isSelected: selectedReplay == 'casual',
+                              onTap: () =>
+                                  setState(() => selectedReplay = 'casual'),
+                            ),
+                          ),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: CharacterCard(
+                              title: '',
+                              imagePath: 'assets/images/Card.png',
+                              isSelected: selectedReplay == 'long',
+                              onTap: () =>
+                                  setState(() => selectedReplay = 'long'),
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(height: 60.h), // space above buttons
+                    ],
+                  ),
                 ),
               ),
             ),
 
-            // Bottom Buttons
-            Container(
-              padding: EdgeInsets.all(24.w),
+            // ─── Bottom buttons also live in the same Padding ───
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
               child: Row(
                 children: [
-                  // Skip Button
+                  // Skip
                   Expanded(
-                    child: GestureDetector(
-                      onTap: () {
-                        Get.to(() => const YourInterestScreen());
-                      },
-                      child: Container(
-                        height: 50.h,
-                        decoration: BoxDecoration(
-                          color: Colors.transparent,
+                    child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: Colors.white, width: 2),
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(25.r),
-                          border: Border.all(
-                            color: ColorConstants.buttonColor,
-                            width: 2.w,
-                          ),
                         ),
-                        child: Center(
-                          child: Text(
-                            'Skip',
-                            style: TextStyle(
-                              color: ColorConstants.buttonColor,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
+                        minimumSize: Size.fromHeight(50.h),
                       ),
+                      onPressed: () {},
+                      child: const Text('Skip'),
                     ),
                   ),
-
                   SizedBox(width: 16.w),
-
-                  // Next Button
+                  // Enter YOOME
                   Expanded(
-                    child: GestureDetector(
-                      onTap: () {
-                        if (_isFormValid()) {
-                          Get.to(() => const YourInterestScreen());
-                        } else {
-                          Get.snackbar(
-                            'Incomplete Selection',
-                            'Please select your preferences',
-                            snackPosition: SnackPosition.BOTTOM,
-                          );
-                        }
-                      },
-                      child: Container(
-                        height: 50.h,
-                        decoration: BoxDecoration(
-                          color: _isFormValid()
-                              ? ColorConstants.buttonColor
-                              : ColorConstants.buttonColor.withOpacity(0.5),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: ColorConstants.buttonColor,
+                        shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(25.r),
                         ),
-                        child: Center(
-                          child: Text(
-                            'Next',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
+                        minimumSize: Size.fromHeight(50.h),
+                      ),
+                      onPressed: () {
+                        Get.to(() => const YourInterestScreen());
+                      },
+                      child: const Text(
+                        'Enter YOOME',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700,
                         ),
                       ),
                     ),
@@ -179,352 +170,91 @@ class _YourPreferenceScreenState extends State<YourPreferenceScreen> {
                 ],
               ),
             ),
+
+            SizedBox(height: 20.h),
           ],
         ),
       ),
     );
   }
+}
 
-  Widget _buildCharacterCard(String label, String imagePath) {
-    bool isSelected = selectedCharacter == label;
+class CharacterCard extends StatelessWidget {
+  /// Full asset path, e.g. 'assets/images/animal.png'
+  final String imagePath;
 
-    // 🔍 Debug: Print image path to console
-    print('Loading image: $imagePath for $label');
+  /// Text you might want under the image (“Male”, “Female”, etc.)
+  final String title;
 
-    return Expanded(
-      child: GestureDetector(
-        onTap: () {
-          setState(() {
-            selectedCharacter = label;
-          });
-        },
+  /// Set to `false` when you don’t want the title rendered.
+  final bool showTitle;
+
+  /// Whether this card is currently selected.
+  final bool isSelected;
+
+  /// Tap callback.
+  final VoidCallback onTap;
+
+  const CharacterCard({
+    Key? key,
+    required this.imagePath,
+    required this.title,
+    required this.isSelected,
+    required this.onTap,
+    this.showTitle = true, // default: show the title
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          border: isSelected ? Border.all(color: Colors.white, width: 2) : null,
+        ),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Container(
-              width: 200.h,
-              height: 200.h,
-              decoration: BoxDecoration(
-                color: const Color(0xFF8B5CF6), // Purple background
-                borderRadius: BorderRadius.circular(16.r),
-                border: Border.all(
-                  color: isSelected ? Colors.white : Colors.transparent,
-                  width: isSelected ? 3.w : 0,
-                ),
+            ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(16),
+                topRight: Radius.circular(16),
               ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(16.r),
-                child: Image.asset(
-                  imagePath,
+              child: Image.asset(
+                imagePath,
+                width: double.infinity,
+                height: 149, // your original height
+                fit: BoxFit.cover,
+                errorBuilder: (_, __, ___) => Container(
                   width: double.infinity,
-                  height: double.infinity,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    // 🔍 Debug: Print error details
-                    print('❌ Image failed to load: $imagePath');
-                    print('Error: $error');
-
-                    // Enhanced fallback UI
-                    return Container(
-                      color: const Color(0xFF8B5CF6),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            label == 'Male' ? Icons.man : Icons.woman,
-                            color: Colors.white,
-                            size: 60.sp,
-                          ),
-                          SizedBox(height: 8.h),
-                          Text(
-                            label,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(height: 4.h),
-                          Text(
-                            'Character',
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 12.sp,
-                            ),
-                          ),
-                          SizedBox(height: 8.h),
-                          // Show the attempted file path for debugging
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 8.w,
-                              vertical: 4.h,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Colors.black26,
-                              borderRadius: BorderRadius.circular(4.r),
-                            ),
-                            child: Text(
-                              'Image not found:\n${imagePath.split('/').last}',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.white60,
-                                fontSize: 8.sp,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                  frameBuilder:
-                      (context, child, frame, wasSynchronouslyLoaded) {
-                        if (wasSynchronouslyLoaded) {
-                          print('✅ Image loaded successfully: $imagePath');
-                          return child;
-                        }
-                        return AnimatedOpacity(
-                          opacity: frame == null ? 0 : 1,
-                          duration: const Duration(seconds: 1),
-                          curve: Curves.easeOut,
-                          child: child,
-                        );
-                      },
+                  height: 149,
+                  color: const Color(0xFF8B5CF6),
+                  child: const Icon(
+                    Icons.person,
+                    size: 80,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
-            SizedBox(height: 12.h),
-            Text(
-              label,
-              style: TextStyle(
-                color: isSelected ? Colors.white : Colors.grey,
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w500,
+
+            // Optional title
+            if (showTitle)
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                child: Text(
+                  title,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
               ),
-            ),
           ],
         ),
       ),
     );
-  }
-
-  // Replay Card Widget - Same as before
-  Widget _buildReplayCard(String title, String subtitle, String id) {
-    bool isSelected = selectedReplay == id;
-
-    return Expanded(
-      child: GestureDetector(
-        onTap: () {
-          setState(() {
-            selectedReplay = id;
-          });
-        },
-        child: Container(
-          height: 140.h,
-          padding: EdgeInsets.all(16.w),
-          decoration: BoxDecoration(
-            color: isSelected
-                ? const Color(0xFF8B5CF6).withOpacity(0.2)
-                : const Color(0xFF374151),
-            borderRadius: BorderRadius.circular(12.r),
-            border: Border.all(
-              color: isSelected ? const Color(0xFF8B5CF6) : Colors.transparent,
-              width: 2.w,
-            ),
-          ),
-          child: Column(
-            children: [
-              Expanded(child: _buildChatVisualization(id, isSelected)),
-              SizedBox(height: 12.h),
-              Text(
-                title,
-                style: TextStyle(
-                  color: isSelected ? Colors.white : const Color(0xFFD1D5DB),
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              Text(
-                subtitle,
-                style: TextStyle(
-                  color: isSelected
-                      ? const Color(0xFFD1D5DB)
-                      : const Color(0xFF9CA3AF),
-                  fontSize: 12.sp,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildChatVisualization(String replayId, bool isSelected) {
-    Color bubbleColor = isSelected
-        ? const Color(0xFF8B5CF6)
-        : const Color(0xFF4B5563);
-
-    if (replayId == 'interactive_story') {
-      return Column(
-        children: [
-          Row(
-            children: [
-              Container(
-                width: 16.w,
-                height: 16.h,
-                decoration: BoxDecoration(
-                  color: bubbleColor,
-                  shape: BoxShape.circle,
-                ),
-                child: Center(
-                  child: Text(
-                    'Y',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 8.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(width: 8.w),
-              Expanded(
-                child: Container(
-                  height: 8.h,
-                  decoration: BoxDecoration(
-                    color: bubbleColor.withOpacity(0.7),
-                    borderRadius: BorderRadius.circular(4.r),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 4.h),
-          Row(
-            children: [
-              SizedBox(width: 24.w),
-              Expanded(
-                child: Container(
-                  height: 6.h,
-                  decoration: BoxDecoration(
-                    color: bubbleColor.withOpacity(0.5),
-                    borderRadius: BorderRadius.circular(3.r),
-                  ),
-                ),
-              ),
-              SizedBox(width: 20.w),
-            ],
-          ),
-          SizedBox(height: 4.h),
-          Row(
-            children: [
-              SizedBox(width: 24.w),
-              Expanded(
-                child: Container(
-                  height: 6.h,
-                  decoration: BoxDecoration(
-                    color: bubbleColor.withOpacity(0.4),
-                    borderRadius: BorderRadius.circular(3.r),
-                  ),
-                ),
-              ),
-              SizedBox(width: 40.w),
-            ],
-          ),
-          SizedBox(height: 8.h),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              SizedBox(width: 30.w),
-              Expanded(
-                child: Container(
-                  height: 8.h,
-                  decoration: BoxDecoration(
-                    color: bubbleColor.withOpacity(0.3),
-                    borderRadius: BorderRadius.circular(4.r),
-                  ),
-                ),
-              ),
-              SizedBox(width: 8.w),
-              Container(
-                width: 16.w,
-                height: 16.h,
-                decoration: BoxDecoration(
-                  color: bubbleColor.withOpacity(0.6),
-                  shape: BoxShape.circle,
-                ),
-              ),
-            ],
-          ),
-        ],
-      );
-    } else {
-      return Column(
-        children: [
-          SizedBox(height: 8.h),
-          Row(
-            children: [
-              Container(
-                width: 16.w,
-                height: 16.h,
-                decoration: BoxDecoration(
-                  color: bubbleColor,
-                  shape: BoxShape.circle,
-                ),
-                child: Center(
-                  child: Text(
-                    'Y',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 8.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(width: 8.w),
-              Container(
-                width: 40.w,
-                height: 12.h,
-                decoration: BoxDecoration(
-                  color: bubbleColor.withOpacity(0.7),
-                  borderRadius: BorderRadius.circular(6.r),
-                ),
-              ),
-              Expanded(child: SizedBox()),
-            ],
-          ),
-          SizedBox(height: 16.h),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Expanded(child: SizedBox()),
-              Container(
-                width: 50.w,
-                height: 12.h,
-                decoration: BoxDecoration(
-                  color: bubbleColor.withOpacity(0.4),
-                  borderRadius: BorderRadius.circular(6.r),
-                ),
-              ),
-              SizedBox(width: 8.w),
-              Container(
-                width: 16.w,
-                height: 16.h,
-                decoration: BoxDecoration(
-                  color: bubbleColor.withOpacity(0.6),
-                  shape: BoxShape.circle,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 8.h),
-        ],
-      );
-    }
-  }
-
-  bool _isFormValid() {
-    return selectedCharacter.isNotEmpty && selectedReplay.isNotEmpty;
   }
 }
