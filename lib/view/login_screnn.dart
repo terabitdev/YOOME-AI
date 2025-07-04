@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:yoome_ai/Controllers/login_controller.dart';
 import 'package:yoome_ai/resources/colors/app_colors.dart';
 import 'package:yoome_ai/resources/components/round_button.dart';
 import 'package:yoome_ai/resources/components/custom_textfield.dart';
@@ -14,7 +16,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController emailController = TextEditingController();
+  final logincontroller = Get.put(LoginController());
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -38,23 +41,19 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(height: 34.h),
               Text('EMAIL', style: LTextStyle12400),
               SizedBox(height: 7.h),
-              CustomTextField(
-                controller: emailController,
-                title: 'Please enter your email',
-                keyboardType: TextInputType.emailAddress,
+              Obx(
+                () => CustomTextField(
+                  controller: logincontroller.emailCtrl,
+                  title: 'Please enter your email',
+                  keyboardType: TextInputType.emailAddress,
+                  errorText: logincontroller.emailError.value,
+                ),
               ),
               const Spacer(),
               RoundButton(
                 title: 'Send Code',
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => VerificationCodeScreen(),
-                    ),
-                  );
-                },
                 color: ColorConstants.buttonColor,
+                onTap: logincontroller.sendCode,
               ),
             ],
           ),

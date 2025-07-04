@@ -1,33 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:yoome_ai/Controllers/splash_controller.dart';
-import 'package:yoome_ai/resources/constants/app_style.dart';
+import 'package:yoome_ai/resources/components/gradient_background.dart';
+import '../controllers/splash_controller.dart';
+import '../resources/constants/app_style.dart';
 
-class OnboardingScreen extends StatefulWidget {
-  const OnboardingScreen({super.key});
+class OnboardingScreen extends StatelessWidget {
+  OnboardingScreen({super.key});
 
-  @override
-  State<OnboardingScreen> createState() => _OnboardingScreenState();
-}
-
-class _OnboardingScreenState extends State<OnboardingScreen> {
-  final SplashController splashController = Get.put(SplashController());
+  final splashController = Get.put(SplashController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFFA06AF9), Colors.black],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
-        width: double.infinity,
-        height: double.infinity,
+      body: GradientBackground(
+        // ← just wrap
         child: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
