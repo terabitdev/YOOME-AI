@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yoome_ai/resources/components/custom_appheader.dart';
+import 'package:yoome_ai/resources/components/custom_textfield.dart';
 import 'package:yoome_ai/resources/constants/app_images.dart';
 
 class GenerateImagesScreen extends StatefulWidget {
@@ -39,34 +40,15 @@ class _GenerateImagesScreenState extends State<GenerateImagesScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF2A2A2A),
-                        borderRadius: BorderRadius.circular(25.r),
-                      ),
-                      child: TextField(
-                        controller: _promptController,
-                        style: const TextStyle(color: Colors.white),
-                        decoration: InputDecoration(
-                          hintText: "Write Prompt...",
-                          hintStyle: TextStyle(
-                            color: Colors.grey[400],
-                            fontSize: 16,
-                          ),
-                          border: InputBorder.none,
-                          contentPadding: EdgeInsets.symmetric(
-                            horizontal: 20.r,
-                            vertical: 16.r,
-                          ),
-                          suffixIcon: Container(
-                            margin: EdgeInsets.all(8.r),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF3A3A3A),
-                              borderRadius: BorderRadius.circular(20.r),
-                            ),
-                          ),
-                        ),
-                      ),
+                    CustomTextField(
+                      title: " write a Prompt.....",
+                      controller: _promptController,
+                      keyboardType: TextInputType.text,
+                      obscureText: false,
+                      errorText: null,
+                      onTapOutside: () {
+                        FocusScope.of(context).unfocus();
+                      },
                     ),
 
                     SizedBox(height: 22.h),

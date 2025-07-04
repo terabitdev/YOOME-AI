@@ -7,7 +7,6 @@ import 'package:yoome_ai/Controllers/nav_bar_controller.dart';
 class CustomNavigationBar extends StatelessWidget {
   CustomNavigationBar({super.key});
 
-  // Inject controller once; it stays alive while the bar is in the widget tree.
   final NavController controller = Get.put(NavController());
 
   @override
@@ -15,6 +14,8 @@ class CustomNavigationBar extends StatelessWidget {
     return Obx(
       () => Scaffold(
         body: controller.pages[controller.selectedIndex.value],
+
+        // ───────── Bottom nav ─────────
         bottomNavigationBar: NavigationBar(
           backgroundColor: Colors.black,
           height: 60.h,
@@ -23,7 +24,9 @@ class CustomNavigationBar extends StatelessWidget {
           selectedIndex: controller.selectedIndex.value,
           onDestinationSelected: controller.changeTab,
           labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+
           destinations: [
+            // ─── Home ───
             NavigationDestination(
               label: '',
               icon: Image.asset(
@@ -31,7 +34,14 @@ class CustomNavigationBar extends StatelessWidget {
                 width: 30.w,
                 height: 30.h,
               ),
+              selectedIcon: Image.asset(
+                'assets/images/brighthome.png', // bright
+                width: 30.w,
+                height: 30.h,
+              ),
             ),
+
+            // ─── Generate ───
             NavigationDestination(
               label: '',
               icon: Image.asset(
@@ -39,7 +49,14 @@ class CustomNavigationBar extends StatelessWidget {
                 width: 30.w,
                 height: 30.h,
               ),
+              selectedIcon: Image.asset(
+                'assets/images/brightgenerate.png',
+                width: 30.w,
+                height: 30.h,
+              ),
             ),
+
+            // ─── Character (always same) ───
             NavigationDestination(
               label: '',
               icon: Image.asset(
@@ -48,18 +65,32 @@ class CustomNavigationBar extends StatelessWidget {
                 height: 80.h,
               ),
             ),
+
+            // ─── Chat ───
             NavigationDestination(
               label: '',
               icon: Image.asset(
-                'assets/images/dochat.png',
+                'assets/images/chat.png',
+                width: 30.w,
+                height: 30.h,
+              ),
+              selectedIcon: Image.asset(
+                'assets/images/brightchat.png',
                 width: 30.w,
                 height: 30.h,
               ),
             ),
+
+            // ─── Profile ───
             NavigationDestination(
               label: '',
               icon: Image.asset(
                 'assets/images/profile.png',
+                width: 30.w,
+                height: 30.h,
+              ),
+              selectedIcon: Image.asset(
+                'assets/images/brightprofile.png',
                 width: 30.w,
                 height: 30.h,
               ),

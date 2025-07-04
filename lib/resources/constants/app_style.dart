@@ -5,13 +5,13 @@ import 'package:google_fonts/google_fonts.dart';
 final TextStyle STextStyle52900 = GoogleFonts.outfit(
   fontSize: 52,
   fontWeight: FontWeight.w500,
-  color: Colors.black,
+  color: Colors.white,
 );
 
 final TextStyle STextStyle19400 = GoogleFonts.outfit(
   fontSize: 19,
   fontWeight: FontWeight.w400,
-  color: Colors.black,
+  color: Color(0xFF808080),
 );
 
 final TextStyle GbuttonTextStyle14500White = GoogleFonts.outfit(
@@ -121,6 +121,30 @@ final TextStyle YIBTextStyle14500 = GoogleFonts.outfit(
 
 final TextStyle HTextStyle19700 = GoogleFonts.outfit(
   fontSize: 19.sp,
+  fontWeight: FontWeight.w700,
+  color: Colors.white,
+);
+
+final TextStyle PSTextStyle15400 = GoogleFonts.outfit(
+  fontSize: 15.sp,
+  fontWeight: FontWeight.w400,
+  color: Colors.white,
+);
+
+final TextStyle PSTextStyle14400 = GoogleFonts.workSans(
+  fontSize: 14.sp,
+  fontWeight: FontWeight.w400,
+  color: Colors.white,
+);
+
+final TextStyle PSCTextStyle18600 = GoogleFonts.workSans(
+  fontSize: 18.sp,
+  fontWeight: FontWeight.w600,
+  color: Colors.white,
+);
+
+final TextStyle PSGBTextStyle14700 = GoogleFonts.inter(
+  fontSize: 14.sp,
   fontWeight: FontWeight.w700,
   color: Colors.white,
 );

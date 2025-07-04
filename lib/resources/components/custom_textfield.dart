@@ -9,6 +9,7 @@ class CustomTextField extends StatefulWidget {
   final bool obscureText;
   final String? errorText;
   final TextInputType keyboardType;
+  final VoidCallback? onTapOutside;
 
   CustomTextField({
     super.key,
@@ -17,6 +18,7 @@ class CustomTextField extends StatefulWidget {
     this.obscureText = false,
     this.errorText,
     this.keyboardType = TextInputType.text,
+    this.onTapOutside,
   });
 
   @override
@@ -36,6 +38,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     return TextField(
       controller: widget.controller,
+      style: LTextStyle14500.copyWith(color: ColorConstants.textColor),
       obscureText: isObscured,
       keyboardType: widget.keyboardType,
       decoration: InputDecoration(

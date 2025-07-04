@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:yoome_ai/Controllers/splash_controller.dart';
-
+import 'package:yoome_ai/resources/constants/app_style.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -36,24 +36,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               RichText(
                 text: TextSpan(
                   text: 'YOOME ',
-                  style: TextStyle(
-                    fontSize: 52.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                  children: const [
+                  style: STextStyle52900,
+                  children: [
                     TextSpan(
                       text: 'AI',
-                      style: TextStyle(color: Color(0xFFA259FF)),
+                      style: STextStyle52900.copyWith(color: Color(0xFFB56AFF)),
                     ),
                   ],
                 ),
               ),
               SizedBox(height: 18.h),
-              Text(
-                'Unlimited Chat with AI',
-                style: TextStyle(fontSize: 19.sp, color: Color(0xFF808080)),
-              ),
+              Text('Unlimited Chat with AI', style: STextStyle19400),
             ],
           ),
         ),

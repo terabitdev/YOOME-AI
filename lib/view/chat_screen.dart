@@ -1,21 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yoome_ai/Controllers/chat_screen_controller.dart';
+import 'package:yoome_ai/resources/colors/app_colors.dart';
 import 'package:yoome_ai/resources/components/custom_appheader.dart';
-
-class ChatScreenStateful extends StatefulWidget {
-  const ChatScreenStateful({super.key});
-
-  @override
-  State<ChatScreenStateful> createState() => _ChatScreenStateful();
-}
-
-class _ChatScreenStateful extends State<ChatScreenStateful> {
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
-  }
-}
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({Key? key}) : super(key: key);
@@ -28,125 +15,164 @@ class ChatScreen extends StatelessWidget {
       backgroundColor: const Color(0xFF0A0A0A),
       body: Column(
         children: [
+          // ───────── App Header ─────────
           const CustomAppHeader(title: "Trending"),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 24),
-            padding: const EdgeInsets.all(4),
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-              borderRadius: BorderRadius.circular(25),
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Obx(
-                    () => GestureDetector(
-                      onTap: () => controller.changeTab(0),
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        decoration: BoxDecoration(
-                          color: controller.selectedTab.value == 0
-                              ? const Color(0xFF7C3AED)
-                              : Colors.transparent,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Text(
-                          "Chats",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: controller.selectedTab.value == 0
-                                ? Colors.white
-                                : Colors.grey,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Obx(
-                    () => GestureDetector(
-                      onTap: () => controller.changeTab(1),
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        decoration: BoxDecoration(
-                          color: controller.selectedTab.value == 1
-                              ? const Color(0xFF7C3AED)
-                              : Colors.transparent,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Text(
-                          "Following",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: controller.selectedTab.value == 1
-                                ? Colors.white
-                                : Colors.grey,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 24),
+
+          // ───────── Black Rounded Container ─────────
           Expanded(
             child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 24),
-              child: ListView.separated(
-                itemCount: controller.chats.length,
-                separatorBuilder: (context, index) =>
-                    const SizedBox(height: 12),
-                itemBuilder: (context, index) {
-                  return Container(
+              decoration: const BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(26)),
+                border: Border(
+                  top: BorderSide(color: ColorConstants.lightGrey, width: 1),
+                ),
+              ),
+              child: Column(
+                children: [
+                  const SizedBox(height: 20),
+
+                  // ───────── Tab Bar ─────────
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 24),
+                    padding: const EdgeInsets.all(4),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF1A1A1A),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: ListTile(
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 8,
-                      ),
-                      leading: CircleAvatar(
-                        radius: 24,
-                        backgroundImage: AssetImage(
-                          'assets/images/generateimage.png',
-                        ),
-                      ),
-                      title: Text(
-                        'Daniyal',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      subtitle: Text(
-                        'What\'s up?',
-                        style: const TextStyle(
-                          color: Colors.grey,
-                          fontSize: 14,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      trailing: Text(
-                        '2h ago',
-                        style: const TextStyle(
-                          color: Colors.grey,
-                          fontSize: 12,
-                        ),
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.circular(25),
+                      border: Border.all(
+                        color: ColorConstants.lightGrey.withOpacity(0.25),
+                        width: 1,
                       ),
                     ),
-                  );
-                },
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Obx(
+                            () => GestureDetector(
+                              onTap: () => controller.changeTab(0),
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 12,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: controller.selectedTab.value == 0
+                                      ? const Color(0xFF7C3AED)
+                                      : Colors.transparent,
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Text(
+                                  "Chats",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: controller.selectedTab.value == 0
+                                        ? Colors.white
+                                        : Colors.grey,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Obx(
+                            () => GestureDetector(
+                              onTap: () => controller.changeTab(1),
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 12,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: controller.selectedTab.value == 1
+                                      ? const Color(0xFF7C3AED)
+                                      : Colors.transparent,
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Text(
+                                  "Following",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: controller.selectedTab.value == 1
+                                        ? Colors.white
+                                        : Colors.grey,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  const SizedBox(height: 24),
+
+                  // ───────── Chat List ─────────
+                  Expanded(
+                    child: ListView.separated(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      itemCount: controller.chats.length,
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(height: 12),
+                      itemBuilder: (context, index) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            color: const Color.fromARGB(
+                              65,
+                              3,
+                              26,
+                              104,
+                            ), // semi-transparent
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(
+                              color: const Color(0xFF7B59FF).withOpacity(0.5),
+                              width: 1,
+                            ),
+                          ),
+                          child: ListTile(
+                            contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 8,
+                            ),
+                            leading: const CircleAvatar(
+                              radius: 24,
+                              backgroundImage: AssetImage(
+                                'assets/images/imagegenerate.png',
+                              ),
+                            ),
+                            title: const Text(
+                              'Daniyal',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            subtitle: const Text(
+                              'What\'s up?',
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 14,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            trailing: const Text(
+                              '2h ago',
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
           ),

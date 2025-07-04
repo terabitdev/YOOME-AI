@@ -19,6 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.black,
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 54.h),
@@ -40,6 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
               CustomTextField(
                 controller: emailController,
                 title: 'Please enter your email',
+                keyboardType: TextInputType.emailAddress,
               ),
               const Spacer(),
               RoundButton(
