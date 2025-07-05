@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:yoome_ai/resources/constants/app_images.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
+import 'package:yoome_ai/view/character_setting_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -45,7 +47,12 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('For You', style: HTextStyle19700),
-                Icon(Icons.search, color: Colors.white, size: 24),
+                InkWell(
+                  child: Icon(Icons.search, color: Colors.white, size: 24),
+                  onTap: () {
+                    Get.offAll(const CharacterSettingScreen());
+                  },
+                ),
               ],
             ),
           ),

@@ -148,3 +148,61 @@ final TextStyle PSGBTextStyle14700 = GoogleFonts.inter(
   fontWeight: FontWeight.w700,
   color: Colors.white,
 );
+
+final TextStyle CSSTextStyle185001 = GoogleFonts.outfit(
+  fontSize: 18.sp,
+  fontWeight: FontWeight.w500,
+  color: Colors.white,
+);
+
+final TextStyle CSSTextStyle144002 = GoogleFonts.outfit(
+  fontSize: 14.sp,
+  fontWeight: FontWeight.w400,
+  color: Colors.white,
+);
+
+final TextStyle CSSTextStyle124003 = GoogleFonts.workSans(
+  fontSize: 12.sp,
+  fontWeight: FontWeight.w400,
+  color: Colors.white,
+);
+
+final TextStyle CSSTextStyle126004 = GoogleFonts.outfit(
+  fontSize: 12.sp,
+  fontWeight: FontWeight.w600,
+  color: Color(0xFF7B2CBF),
+);
+
+final TextStyle VTPSTextStyle205001 = GoogleFonts.outfit(
+  fontSize: 20.sp,
+  fontWeight: FontWeight.w500,
+  color: Colors.white,
+);
+final TextStyle VTPSTextStyle115002 = GoogleFonts.outfit(
+  fontSize: 11.sp,
+  fontWeight: FontWeight.w500,
+  color: Colors.white.withOpacity(0.7),
+);
+final TextStyle VTPSTextStyle124003 = GoogleFonts.workSans(
+  fontSize: 12.sp,
+  fontWeight: FontWeight.w400,
+  color: Colors.white,
+);
+
+final TextStyle VTPSTextStyle126004 = GoogleFonts.outfit(
+  fontSize: 12.sp,
+  fontWeight: FontWeight.w600,
+  color: Colors.white,
+);
+
+final TextStyle VTPSTextStyle145005 = GoogleFonts.outfit(
+  fontSize: 14.sp,
+  fontWeight: FontWeight.w500,
+  color: Colors.white,
+);
+
+final TextStyle VTPSTextStyle124006 = GoogleFonts.workSans(
+  fontSize: 12.sp,
+  fontWeight: FontWeight.w400,
+  color: Colors.white,
+);

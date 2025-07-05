@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/utils.dart';
+import 'package:yoome_ai/resources/components/setting_toggle_card_widget.dart';
+import 'package:yoome_ai/resources/components/settings_card_widget.dart';
+import 'package:yoome_ai/resources/constants/app_style.dart';
+import 'package:yoome_ai/view/alias_screen.dart';
+import 'package:yoome_ai/view/view_profile_screen.dart';
 
 class CharacterSettingScreen extends StatefulWidget {
   const CharacterSettingScreen({super.key});
@@ -9,20 +16,19 @@ class CharacterSettingScreen extends StatefulWidget {
 }
 
 class _CharacterSettingScreenState extends State<CharacterSettingScreen> {
+  bool autoPlayVoice = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          // Background Image - Full Screen
           SizedBox.expand(
             child: Image.asset(
-              'assets/images/backimage.png', // Use your anime character image
+              'assets/images/csbackimage.png', // Use your anime character image
               fit: BoxFit.cover,
             ),
           ),
-
-          // Top App Bar
           Positioned(
             top: MediaQuery.of(context).padding.top + 10,
             left: 20,
@@ -45,16 +51,80 @@ class _CharacterSettingScreenState extends State<CharacterSettingScreen> {
                     onPressed: () => Navigator.pop(context),
                   ),
                 ),
-                const SizedBox(width: 16),
-                Text(
-                  'Create',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24.sp,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
               ],
+            ),
+          ),
+
+          // Main Content
+          Positioned.fill(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.fromLTRB(
+                20,
+                MediaQuery.of(context).size.height * 0.35,
+                20,
+                30,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Character settings', style: CSSTextStyle185001),
+                  SizedBox(height: 30.h),
+                  Text('Character', style: CSSTextStyle144002),
+                  SizedBox(height: 12.h),
+                  SettingsCard(
+                    title: 'View the profile',
+                    onTap: () {
+                      Get.offAll(const ViewProfileScreen());
+                    },
+                  ),
+                  SizedBox(height: 12.h),
+                  SettingsCard(
+                    title: 'Alias',
+                    onTap: () {
+                      Get.offAll(const AliasScreen());
+                    },
+                  ),
+                  SizedBox(height: 30.h),
+                  // Chat Section
+                  Text('Chat', style: CSSTextStyle144002),
+                  SizedBox(height: 12.h),
+                  SettingsCard(
+                    title: 'Restart chat',
+                    onTap: () {
+                      // Handle restart chat
+                    },
+                  ),
+                  SizedBox(height: 12.h),
+                  SettingsCard(
+                    title: 'Chat history',
+                    onTap: () {
+                      // Handle chat history
+                    },
+                  ),
+                  SizedBox(height: 12.h),
+                  SettingsToggleCard(
+                    title: 'Auto-play voice',
+                    badgeText: 'Plus',
+                    isToggled: autoPlayVoice,
+                    onToggle: (value) {},
+                  ),
+                  SizedBox(height: 12.h),
+                  SettingsCard(
+                    title: 'Background setting',
+                    onTap: () {
+                      // Handle background setting
+                    },
+                  ),
+                  SizedBox(height: 12.h),
+                  SettingsCard(
+                    title: 'Report',
+                    onTap: () {
+                      // Handle report
+                    },
+                  ),
+                  SizedBox(height: 20.h),
+                ],
+              ),
             ),
           ),
         ],
