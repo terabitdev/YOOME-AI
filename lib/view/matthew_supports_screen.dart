@@ -10,33 +10,49 @@ import 'package:yoome_ai/view/report_screen.dart';
 import 'package:yoome_ai/view/reset_screen.dart';
 import 'package:yoome_ai/view/share_screen.dart';
 
-// 5️⃣  THE SCREEN ITSELF
 class MatthewSupportsScreen extends StatelessWidget {
   const MatthewSupportsScreen({super.key});
-  // List of image paths and corresponding destination screens
+
+  // List of image paths, labels and corresponding destination screens
   static List<Map<String, dynamic>> _imageData = [
     {
       'imageUrl': 'assets/images/enhanced.png',
+      'label': 'Enhanced\nmemory',
       'screen': EnhancedMemoryScreen(),
     },
-    {'imageUrl': 'assets/images/persona.png', 'screen': PersonaScreen()},
-    {'imageUrl': 'assets/images/reset.png', 'screen': ResetScreen()},
-    {'imageUrl': 'assets/images/share.png', 'screen': ShareScreen()},
-    {'imageUrl': 'assets/images/report.png', 'screen': ReportScreen()},
+    {
+      'imageUrl': 'assets/images/persona.png',
+      'label': 'Persona',
+      'screen': PersonaScreen(),
+    },
+    {
+      'imageUrl': 'assets/images/reset.png',
+      'label': 'Reset',
+      'screen': ResetScreen(),
+    },
+    {
+      'imageUrl': 'assets/images/share.png',
+      'label': 'Share',
+      'screen': ShareScreen(),
+    },
+    {
+      'imageUrl': 'assets/images/report.png',
+      'label': 'Report',
+      'screen': ReportScreen(),
+    },
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:
-          Colors.transparent, // the gradient sits behind via our wrapper
+      backgroundColor: Colors.transparent,
       body: GradientBackground(
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Top‑bar icons ───────────────────────────────────────────────
+              // Top-bar icons
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -46,46 +62,79 @@ class MatthewSupportsScreen extends StatelessWidget {
               ),
               SizedBox(height: 20.h),
 
-              // Long text container ────────────────────────────────────────
+              // First large text container
               GradientBox(
                 child: Text(
-                  _dummyLorem,
+                  _firstTextBlock,
                   style: TextStyle(
                     fontSize: 13.sp,
-                    height: 1.35,
+                    height: 1.4,
                     color: Colors.white,
                   ),
                 ),
               ),
-              SizedBox(height: 16.h),
+              SizedBox(height: 12.h),
 
-              // Small play/share container ────────────────────────────────
-              GradientBox(
-                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'No Audio',
-                      style: TextStyle(fontSize: 12.sp, color: Colors.white60),
-                    ),
-                    Row(
-                      children: [
-                        Icon(Icons.share, color: Colors.white, size: 20.sp),
-                        SizedBox(width: 12.w),
-                        Icon(
-                          Icons.play_arrow_rounded,
-                          color: Colors.white,
-                          size: 24.sp,
-                        ),
-                      ],
-                    ),
-                  ],
+              // Second small "No Audio" container (compact size and width)
+              Align(
+                alignment: Alignment.centerLeft,
+                child: GradientBox(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 16.w,
+                    vertical: 8.h,
+                  ),
+                  child: Text(
+                    'No Audio',
+                    style: TextStyle(fontSize: 11.sp, color: Colors.white60),
+                  ),
                 ),
+              ),
+
+              // Third text container (attached to No Audio container) with floating icons
+              Stack(
+                children: [
+                  GradientBox(
+                    child: Text(
+                      _secondTextBlock,
+                      style: TextStyle(
+                        fontSize: 13.sp,
+                        height: 1.4,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  // Floating share and play icons
+                  Positioned(
+                    bottom: 12.h,
+                    right: 12.w,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 12.w,
+                        vertical: 8.h,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.3),
+                        borderRadius: BorderRadius.circular(20.r),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.share, color: Colors.white, size: 18.sp),
+                          SizedBox(width: 12.w),
+                          Icon(
+                            Icons.play_arrow_rounded,
+                            color: Colors.white,
+                            size: 22.sp,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
               SizedBox(height: 16.h),
 
-              // Label + subtext + button row ───────────────────────────────
+              // Character info row
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -112,22 +161,27 @@ class MatthewSupportsScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Switch(
-                    value: true,
-                    onChanged: (_) {},
-                    activeColor: const Color(0xFF8466FF),
-                  ),
-                  SizedBox(width: 4.w),
-                  Icon(
-                    Icons.people_alt_rounded,
-                    color: Colors.white,
-                    size: 20.sp,
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.people_alt_rounded,
+                        color: Colors.white,
+                        size: 20.sp,
+                      ),
+                      SizedBox(width: 8.w),
+                      Switch(
+                        value: true,
+                        onChanged: (_) {},
+                        activeColor: const Color(0xFF8466FF),
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
+                    ],
                   ),
                 ],
               ),
               SizedBox(height: 20.h),
 
-              // Reusable text field ───────────────────────────────────────
+              // Message input field
               ReusableTextField(
                 hint: 'Message Ayato Hiroshi | Cold Prince',
                 suffixIcons: const [
@@ -137,19 +191,20 @@ class MatthewSupportsScreen extends StatelessWidget {
               ),
               SizedBox(height: 24.h),
 
-              // Row of image boxes ────────────────────────────────────────
+              // Bottom action buttons row
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: List.generate(5, (index) {
-                  return _imageCard(
+                  return _actionButton(
                     imageUrl: _imageData[index]['imageUrl']!,
+                    label: _imageData[index]['label']!,
                     onTap: () {
                       Get.to(_imageData[index]['screen']);
                     },
                   );
                 }),
               ),
-              SizedBox(height: 24.h),
+              SizedBox(height: 20.h),
             ],
           ),
         ),
@@ -169,39 +224,58 @@ class MatthewSupportsScreen extends StatelessWidget {
     );
   }
 
-  // Helper to create the small dark‑purple card with an image
-  Widget _imageCard({required String imageUrl, required VoidCallback onTap}) {
+  // Helper to create the circular action button with image and label
+  Widget _actionButton({
+    required String imageUrl,
+    required String label,
+    required VoidCallback onTap,
+  }) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        width: 45.w,
-        height: 45.h,
-        padding: EdgeInsets.all(
-          2.w,
-        ), // Padding between image and container border
-        decoration: BoxDecoration(
-          color: const Color(0xFF25104A),
-          borderRadius: BorderRadius.circular(12.r),
-        ),
-        child: Image.asset(
-          height: 21.h,
-          width: 21.w,
-          imageUrl,
-
-          errorBuilder: (context, error, stackTrace) => Image.asset(
-            'assets/images/nocharacter.png', // Fallback image
-            fit: BoxFit.cover,
+      child: Column(
+        children: [
+          Container(
+            width: 48.w,
+            height: 48.h,
+            padding: EdgeInsets.all(8.w),
+            decoration: BoxDecoration(
+              color: const Color(0xFF25104A),
+              shape: BoxShape.circle,
+            ),
+            child: Image.asset(
+              imageUrl,
+              fit: BoxFit.contain,
+              errorBuilder: (context, error, stackTrace) => Image.asset(
+                'assets/images/nocharacter.png',
+                fit: BoxFit.contain,
+              ),
+            ),
           ),
-        ),
+          SizedBox(height: 6.h),
+          Text(
+            label,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 10.sp,
+              color: Colors.white70,
+              height: 1.2,
+            ),
+          ),
+        ],
       ),
     );
   }
 }
 
-// Sample lorem text so the widget has something to render
-const String _dummyLorem =
+// Sample text blocks to match the screenshot
+const String _firstTextBlock =
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ipsum dolor sit amet, consectetur adipiscing elit, sed do dolor sit amet, consectetur adipiscing elit, sed do dolor sit amet, consectetur adipiscing.'
     '\n\n'
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ipsum dolor sit amet, consectetur adipiscing elit, sed do dolor sit amet, consectetur adipiscing elit, sed do dolor sit amet, consectetur adipiscing.'
     '\n\n'
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ipsum dolor sit amet, consectetur adipiscing elit, sed do dolor sit amet, consectetur adipiscing elit, sed do dolor sit amet, consectetur adipiscing.';
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ipsum dolor sit amet, consectetur adipiscing elit, sed do dolor sit amet, consectetur adipiscing elit, sed do dolor sit amet, consectetur adipiscing.'
+    '\n\n'
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ipsum dolor sit amet.';
+
+const String _secondTextBlock =
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ipsum dolor sit amet, consectetur adipiscing elit, sed do dolor sit amet, consectetur adipiscing elit, sed do dolor sit amet, consectetur adipiscing elit, sed do dolor sit amet, consectetur adipiscing.';

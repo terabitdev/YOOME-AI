@@ -206,3 +206,26 @@ final TextStyle VTPSTextStyle124006 = GoogleFonts.workSans(
   fontWeight: FontWeight.w400,
   color: Colors.white,
 );
+
+final TextStyle EPSTextStyle185001 = GoogleFonts.outfit(
+  fontSize: 18.sp,
+  fontWeight: FontWeight.w500,
+  color: Colors.white,
+);
+final TextStyle EPSTextStyle124002 = GoogleFonts.workSans(
+  fontSize: 12.sp,
+  fontWeight: FontWeight.w400,
+  color: Colors.white54,
+);
+
+final TextStyle EPSTextStyle145003 = GoogleFonts.outfit(
+  fontSize: 14.sp,
+  fontWeight: FontWeight.w500,
+  color: Colors.white,
+);
+
+final TextStyle EPSTextStyle145004 = GoogleFonts.outfit(
+  fontSize: 14.sp,
+  fontWeight: FontWeight.w500,
+  color: Colors.white,
+);

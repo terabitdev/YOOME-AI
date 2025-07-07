@@ -18,34 +18,22 @@ class _AliasScreenState extends State<AliasScreen> {
 
   /* bottom‑sheet trigger */
   void _showMore() {
-    ActionSheet.show(
+    CardActionSheet.show(
       context,
-      title:
-          'The Alias will place the original name of the character in the chat',
-      items: [
-        SheetAction(
-          label: 'Caden',
-          onTap: () {
-            /* share */
-          },
+      title: 'This Alias will replace the original name.',
+      content: TextField(
+        decoration: const InputDecoration(
+          hintText: 'Caden',
+          border: InputBorder.none,
         ),
-        SheetActionGroup([
-          SheetAction(
-            label: 'Cancel',
-            onTap: () {
-              /* handle Cancel */
-            },
-            flex: 1, // optional, defaults to 1
-          ),
-          SheetAction(
-            label: 'Save',
-            onTap: () {
-              /* handle Save */
-            },
-            flex: 1,
-          ),
-        ]),
-      ],
+        style: VTPSTextStyle124006,
+      ),
+      onConfirm: () {
+        // do something with the entered alias…
+      },
+      onCancel: () {
+        // optional – extra logic if Cancel is pressed
+      },
     );
   }
 
