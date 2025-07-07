@@ -35,8 +35,8 @@ class _EditPersonaScreen2State extends State<EditPersonaScreen2> {
             child: Row(
               children: [
                 Container(
-                  width: 40,
-                  height: 40,
+                  width: 40.w,
+                  height: 40.h,
                   decoration: BoxDecoration(
                     color: Colors.black.withOpacity(0.3),
                     borderRadius: BorderRadius.circular(12),
@@ -50,7 +50,7 @@ class _EditPersonaScreen2State extends State<EditPersonaScreen2> {
                     onPressed: () => Navigator.pop(context),
                   ),
                 ),
-                const SizedBox(width: 16),
+                SizedBox(width: 16.w),
                 Text('Edit Persona', style: EPSTextStyle185001),
               ],
             ),

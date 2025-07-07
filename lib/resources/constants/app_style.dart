@@ -229,3 +229,15 @@ final TextStyle EPSTextStyle145004 = GoogleFonts.outfit(
   fontWeight: FontWeight.w500,
   color: Colors.white,
 );
+
+final TextStyle SSTextStyle18500 = GoogleFonts.outfit(
+  fontSize: 18.sp,
+  fontWeight: FontWeight.w500,
+  color: Colors.white,
+);
+
+final TextStyle SSTextStyle14400 = GoogleFonts.outfit(
+  fontSize: 14.sp,
+  fontWeight: FontWeight.w400,
+  color: Colors.white,
+);

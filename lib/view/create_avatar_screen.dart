@@ -34,16 +34,7 @@ class _CreateAvatarScreenState extends State<CreateAvatarScreen> {
                     child: const Icon(Icons.arrow_back, color: Colors.white),
                   ),
                   SizedBox(width: 10.w),
-                  Text(
-                    'Create avatar',
-                    style:
-                        LTextStyle18500 ??
-                        const TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                        ),
-                  ),
+                  Text('Create avatar', style: LTextStyle18500),
                 ],
               ),
 
