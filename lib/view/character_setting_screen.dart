@@ -8,6 +8,7 @@ import 'package:yoome_ai/resources/constants/app_style.dart';
 import 'package:yoome_ai/view/alias_screen.dart';
 import 'package:yoome_ai/view/background_setting_screen.dart';
 import 'package:yoome_ai/view/matthew_supports_screen.dart';
+import 'package:yoome_ai/view/report_screen.dart';
 import 'package:yoome_ai/view/subscribe_screen.dart';
 import 'package:yoome_ai/view/view_profile_screen.dart';
 
@@ -46,10 +47,15 @@ class _CharacterSettingScreenState extends State<CharacterSettingScreen> {
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: IconButton(
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      color: Colors.white,
-                      size: 20,
+                    icon: InkWell(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: const Icon(
+                        Icons.arrow_back,
+                        color: Colors.white,
+                        size: 20,
+                      ),
                     ),
                     onPressed: () {
                       Get.to(MatthewSupportsScreen());
@@ -79,14 +85,14 @@ class _CharacterSettingScreenState extends State<CharacterSettingScreen> {
                   SettingsCard(
                     title: 'View the profile',
                     onTap: () {
-                      Get.offAll(const ViewProfileScreen());
+                      Get.to(const ViewProfileScreen());
                     },
                   ),
                   SizedBox(height: 12.h),
                   SettingsCard(
                     title: 'Alias',
                     onTap: () {
-                      Get.offAll(const AliasScreen());
+                      Get.to(const AliasScreen());
                     },
                   ),
                   SizedBox(height: 30.h),
@@ -126,7 +132,7 @@ class _CharacterSettingScreenState extends State<CharacterSettingScreen> {
                   SettingsCard(
                     title: 'Report',
                     onTap: () {
-                      // Handle report
+                      Get.to(ReportScreen());
                     },
                   ),
                   SizedBox(height: 20.h),

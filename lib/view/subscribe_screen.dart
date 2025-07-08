@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:gradient_borders/gradient_borders.dart';
 import 'package:yoome_ai/resources/colors/app_colors.dart';
 import 'package:yoome_ai/resources/components/round_button.dart';
 import 'package:yoome_ai/resources/components/tab_button_widget.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
+import 'package:yoome_ai/view/wallet_screen.dart';
 
 class SubscribeScreen extends StatefulWidget {
   const SubscribeScreen({super.key});
@@ -18,22 +20,56 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
   bool newMessageVibration = true;
   bool autoPlayVoice = false;
   var isSelected = 'Plus';
-  String isSelectedPlan = 'month'; // 'month', '3months', 'year'
+  String isSelectedPlan = 'month';
+
+  LinearGradient getGradient(String plan) {
+    switch (plan) {
+      case 'month':
+        return const LinearGradient(
+          colors: [
+            Color(0xFFFFB8E0),
+            Color(0xFFBE9EFF),
+            Color(0xFF88C0FC),
+            Color(0xFF86FF99),
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        );
+      case '3months':
+        return const LinearGradient(
+          colors: [
+            Color(0xFFFFB8E0),
+            Color(0xFFBE9EFF),
+            Color(0xFF88C0FC),
+            Color(0xFF86FF99),
+          ],
+        );
+      case 'year':
+        return const LinearGradient(
+          colors: [
+            Color(0xFFFFB8E0),
+            Color(0xFFBE9EFF),
+            Color(0xFF88C0FC),
+            Color(0xFF86FF99),
+          ],
+        );
+      default:
+        return const LinearGradient(colors: [Colors.grey, Colors.grey]);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       body: Column(
         children: [
-          // App Bar
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 52.h),
             child: Row(
               children: [
                 InkWell(
-                  onTap: () {
-                    Get.back();
-                  },
+                  onTap: () => Get.back(),
                   child: Icon(Icons.arrow_back, color: Colors.white, size: 24),
                 ),
                 SizedBox(width: 16.w),
@@ -48,12 +84,12 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    // Tab selection
+                    // Tabs
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25),
                         border: Border.all(
-                          color: Colors.blue.withOpacity(0.3),
+                          color: Colors.white.withOpacity(0.3),
                           width: 1,
                         ),
                       ),
@@ -63,22 +99,14 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                             title: 'Plus',
                             isFirst: true,
                             isSelected: isSelected == 'Plus',
-                            onTap: () {
-                              setState(() {
-                                isSelected = 'Plus';
-                              });
-                            },
+                            onTap: () => setState(() => isSelected = 'Plus'),
                             isMiddle: false,
                           ),
                           SegmentedTabButton(
                             title: 'Ultra',
                             isMiddle: true,
                             isSelected: isSelected == 'Ultra',
-                            onTap: () {
-                              setState(() {
-                                isSelected = 'Ultra';
-                              });
-                            },
+                            onTap: () => setState(() => isSelected = 'Ultra'),
                           ),
                         ],
                       ),
@@ -86,21 +114,20 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
 
                     SizedBox(height: 16.h),
 
-                    // Pricing Row
+                    // Plan Containers
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 25.w),
+                      padding: EdgeInsets.symmetric(horizontal: 4.w),
                       child: Row(
-                        children: [
-                          // Per Month
-                          Expanded(
+                        children: ['month', '3months', 'year'].map((plan) {
+                          final bool selected = isSelectedPlan == plan;
+                          final gradient = getGradient(plan);
+
+                          return Expanded(
                             child: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  isSelectedPlan = 'month';
-                                });
-                              },
+                              onTap: () => setState(() {
+                                isSelectedPlan = plan;
+                              }),
                               child: Container(
-                                width: double.infinity,
                                 height: 102.h,
                                 padding: EdgeInsets.symmetric(
                                   vertical: 18.h,
@@ -108,202 +135,80 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                                 ),
                                 margin: EdgeInsets.symmetric(horizontal: 6.w),
                                 decoration: BoxDecoration(
-                                  gradient: isSelectedPlan == 'month'
-                                      ? LinearGradient(
-                                          colors: [
-                                            Color(0xFFB16CEA),
-                                            Color(0xFFFF5E69),
-                                            Color(0xFFFF8A56),
-                                            Color(0xFFFFC56F),
-                                          ],
-                                          begin: Alignment.topLeft,
-                                          end: Alignment.bottomRight,
-                                        )
-                                      : null,
-                                  color: isSelectedPlan == 'month'
-                                      ? null
-                                      : Colors.transparent,
+                                  gradient: selected ? gradient : null,
+                                  color: selected ? null : Colors.transparent,
                                   borderRadius: BorderRadius.circular(16.r),
-                                  border: Border.all(
-                                    color: isSelectedPlan == 'month'
-                                        ? Colors.white
-                                        : Colors.white.withOpacity(0.3),
+                                  border: GradientBoxBorder(
+                                    gradient: gradient,
                                     width: 2,
                                   ),
                                 ),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Row(
-                                      children: [
-                                        if (isSelectedPlan == 'month')
-                                          Icon(
-                                            Icons.check_circle,
-                                            color: Colors.white,
-                                            size: 20,
-                                          ),
-                                      ],
-                                    ),
+                                    if (selected)
+                                      Icon(
+                                        Icons.check_circle,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    SizedBox(height: 4.h),
                                     Text(
-                                      'Per Months',
+                                      plan == 'month'
+                                          ? 'Per Month'
+                                          : plan == '3months'
+                                          ? 'Per 3 Months'
+                                          : 'Per Year',
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 5.sp,
+                                        fontSize: 6.sp,
                                       ),
                                     ),
                                     SizedBox(height: 4.h),
                                     Text(
-                                      'USD 8.99',
+                                      plan == 'month'
+                                          ? 'USD 8.99'
+                                          : plan == '3months'
+                                          ? 'USD 35.99'
+                                          : 'USD 1295.99',
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.w600,
-                                        fontSize: 10.sp,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          // Per 3 Months
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  isSelectedPlan = '3months';
-                                });
-                              },
-                              child: Container(
-                                width: 103.7.w,
-                                height: 102.h,
-                                padding: EdgeInsets.symmetric(
-                                  vertical: 18.h,
-                                  horizontal: 8.w,
-                                ),
-                                margin: EdgeInsets.symmetric(horizontal: 6.w),
-                                decoration: BoxDecoration(
-                                  color: isSelectedPlan == '3months'
-                                      ? Color.fromARGB(255, 55, 53, 107)
-                                      : Colors.transparent,
-                                  borderRadius: BorderRadius.circular(16.r),
-                                  border: Border.all(
-                                    color: isSelectedPlan == '3months'
-                                        ? Colors.blue
-                                        : Colors.blue.withOpacity(0.3),
-                                    width: 2,
-                                  ),
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Per 3 Months',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 10.sp,
-                                      ),
-                                    ),
-                                    SizedBox(height: 4.h),
-                                    Text(
-                                      'USD 35.99',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 5.sp,
-                                      ),
-                                    ),
-                                    SizedBox(height: 2.h),
-                                    Text(
-                                      'USD 12 / Months',
-                                      style: TextStyle(
-                                        color: Colors.white.withOpacity(0.7),
-                                        fontSize: 5.sp,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          // Per Year
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  isSelectedPlan = 'year';
-                                });
-                              },
-                              child: Container(
-                                width: 103.7.w,
-                                height: 102.h,
-                                padding: EdgeInsets.symmetric(
-                                  vertical: 18.h,
-                                  horizontal: 8.w,
-                                ),
-                                margin: EdgeInsets.symmetric(horizontal: 6.w),
-                                decoration: BoxDecoration(
-                                  color: isSelectedPlan == 'year'
-                                      ? Color(0xFF23223C)
-                                      : Colors.transparent,
-                                  borderRadius: BorderRadius.circular(16.r),
-                                  border: Border.all(
-                                    color: isSelectedPlan == 'year'
-                                        ? Colors.white
-                                        : Colors.white.withOpacity(0.3),
-                                    width: 2,
-                                  ),
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Per Year',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 10.sp,
-                                      ),
-                                    ),
-                                    SizedBox(height: 4.h),
-                                    Text(
-                                      'USD 1295.99',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 10.sp,
-                                      ),
-                                    ),
-                                    SizedBox(height: 2.h),
-                                    Text(
-                                      'USD 11 / Months',
-                                      style: TextStyle(
-                                        color: Colors.white.withOpacity(0.7),
                                         fontSize: 7.sp,
                                       ),
                                     ),
+                                    if (plan != 'month') ...[
+                                      SizedBox(height: 2.h),
+                                      Text(
+                                        plan == '3months'
+                                            ? 'USD 12 / Months'
+                                            : 'USD 11 / Months',
+                                        style: TextStyle(
+                                          color: Colors.white.withOpacity(0.7),
+                                          fontSize: 5.sp,
+                                        ),
+                                      ),
+                                    ],
                                   ],
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          );
+                        }).toList(),
                       ),
                     ),
 
                     SizedBox(height: 18.h),
 
-                    // Info text
                     Text(
                       'Secured with App Store, Cancel Anytime',
-                      style: SSTextStyle18500.copyWith(fontSize: 16.sp),
+                      style: SSTextStyle14400,
                       textAlign: TextAlign.center,
                     ),
 
                     SizedBox(height: 21.h),
 
-                    // Image
                     ClipRRect(
                       borderRadius: BorderRadius.circular(20.r),
                       child: Image.asset(
@@ -316,13 +221,11 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
 
                     SizedBox(height: 24.h),
 
-                    // Send Code Button
                     RoundButton(
-                      title: 'Subscribe ',
+                      title: 'Subscribe',
                       color: ColorConstants.buttonColor,
                       onTap: () {
-                        // Handle subscribe action
-                        print('Subscribe tapped');
+                        Get.to(WalletScreen());
                       },
                     ),
 

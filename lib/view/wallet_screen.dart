@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/utils.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 import 'package:yoome_ai/resources/components/round_button.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
+import 'package:yoome_ai/view/yoome_bill_screen.dart';
 
 class WalletScreen extends StatefulWidget {
   const WalletScreen({super.key});
@@ -87,93 +90,101 @@ class _WalletScreenState extends State<WalletScreen> {
               padding: EdgeInsets.symmetric(horizontal: 24.w),
               child: Column(
                 children: [
-                  /// 🔧 Balance Card
-                  Container(
-                    width: double.infinity,
-                    height: 140.h,
-                    margin: EdgeInsets.only(bottom: 24.h),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      image: const DecorationImage(
-                        image: AssetImage('assets/images/wallet5.png'),
-                        fit: BoxFit.cover,
-                      ),
+                  /// 🔧 Balance Card - Edge-to-edge with top rounded corners only
+                  ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(16),
+                      topRight: Radius.circular(16),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 12,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 161.h,
+                      margin: EdgeInsets.only(bottom: 24.h),
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/images/wallet5.png'),
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                      child: Stack(
-                        children: [
-                          Positioned(
-                            top: 0,
-                            left: 0,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  'assets/images/wallet3.png',
-                                  width: 56.w,
-                                  height: 27.h,
-                                ),
-                                SizedBox(width: 6.h),
-                              ],
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 12,
+                        ),
+                        child: Stack(
+                          children: [
+                            /// Top-left: emoji image
+                            Positioned(
+                              top: 0,
+                              left: 0,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    'assets/images/wallet3.png',
+                                    width: 56.w,
+                                    height: 27.h,
+                                  ),
+                                  SizedBox(width: 6.h),
+                                ],
+                              ),
                             ),
-                          ),
 
-                          // Top-right: X140000
-                          Positioned(
-                            top: 0,
-                            right: 50,
-                            child: Text(
-                              'X140000',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 24.sp,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                            top: 15,
-                            right: 180,
-                            child: Image.asset(
-                              'assets/images/wallet4.png',
-                              width: 50.w,
-                              height: 50.h,
-                            ),
-                          ),
-
-                          // Bottom-right: bonus badge
-                          Positioned(
-                            bottom: 12,
-                            right: 50,
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 12,
-                                vertical: 6,
-                              ),
-                              decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.2),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
+                            /// Top-right: X140000
+                            Positioned(
+                              top: 0,
+                              right: 50,
                               child: Text(
-                                '1st purchase bonus +400',
+                                'X140000',
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.w500,
+                                  fontSize: 24.sp,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+
+                            /// Center image
+                            Positioned(
+                              top: 15,
+                              right: 140,
+                              child: Image.asset(
+                                'assets/images/wallet4.png',
+                                width: 50.w,
+                                height: 50.h,
+                              ),
+                            ),
+
+                            /// Bottom-right: bonus badge
+                            Positioned(
+                              bottom: 12,
+                              right: 80,
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12,
+                                  vertical: 6,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.2),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Text(
+                                  '1st purchase bonus +400',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
 
-                  /// Rest of your content (no change)
+                  /// 🔽 Rest of your content
                   GridView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -207,6 +218,7 @@ class _WalletScreenState extends State<WalletScreen> {
                   RoundButton(
                     title: 'Get it for PKR 27800',
                     onTap: () {
+                      Get.to(YoomeBillScreen());
                       print(
                         'Purchase selected: ${packages[selectedPackageIndex]}',
                       );
@@ -229,6 +241,17 @@ class _WalletScreenState extends State<WalletScreen> {
     final isSelected = selectedPackageIndex == index;
     final isSpecial = package['isSpecial'] ?? false;
 
+    final gradient = const LinearGradient(
+      colors: [
+        Color(0xFFFFB8E0),
+        Color(0xFFBE9EFF),
+        Color(0xFF88C0FC),
+        Color(0xFF86FF99),
+      ],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    );
+
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -237,21 +260,10 @@ class _WalletScreenState extends State<WalletScreen> {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.transparent,
           borderRadius: BorderRadius.circular(16),
-          border: GradientBoxBorder(
-            gradient: LinearGradient(
-              colors: isSelected
-                  ? [Color(0xFFA259FF), Color.fromARGB(255, 39, 28, 49)]
-                  : [
-                      Colors.white.withOpacity(0.4),
-                      Colors.white.withOpacity(0.2),
-                    ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            width: 2,
-          ),
+          gradient: isSelected ? gradient : null,
+          color: isSelected ? null : Colors.transparent,
+          border: GradientBoxBorder(gradient: gradient, width: 2),
         ),
         padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 12.w),
         child: Column(
@@ -262,7 +274,7 @@ class _WalletScreenState extends State<WalletScreen> {
               package['bonus'],
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: isSpecial ? Colors.white : const Color(0xFFA259FF),
+                color: Colors.white,
                 fontSize: 16.sp,
                 fontWeight: FontWeight.bold,
               ),
@@ -297,7 +309,6 @@ class _WalletScreenState extends State<WalletScreen> {
                 ),
               ],
             ),
-
             SizedBox(height: 10.h),
 
             // Price text

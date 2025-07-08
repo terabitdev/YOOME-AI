@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:yoome_ai/view/onboarding_screen.dart';
+import 'package:yoome_ai/view/subscribe_screen.dart';
 import 'package:yoome_ai/view/wallet_screen.dart';
 
 void main() {
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: WalletScreen(), // Change this to your initial screen
+          home: OnboardingScreen(), // Change this to your initial screen
         );
       },
     );

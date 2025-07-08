@@ -141,9 +141,6 @@ class _BackgroundSettingScreenState extends State<BackgroundSettingScreen> {
                   onLeftTap: () => Navigator.pop(context),
                   onRightTap: () {
                     Get.to(CreateAvatarScreen());
-                    // Handle confirm action
-                    print('Selected background option: $selectedIndex');
-                    Navigator.pop(context);
                   },
                 ),
               ),

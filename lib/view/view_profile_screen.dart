@@ -78,7 +78,7 @@ class _ViewProfileScreenState extends State<ViewProfileScreen> {
                 _toolbarButton(
                   icon: Icons.arrow_back,
                   onTap: () {
-                    Get.back();
+                    Navigator.pop(context);
                   },
                 ),
                 const Spacer(),
