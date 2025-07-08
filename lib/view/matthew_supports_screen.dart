@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:yoome_ai/resources/components/gradient_scaffold_background.dart';
-import 'package:yoome_ai/resources/components/gradient_textbox.dart';
 import 'package:yoome_ai/resources/components/reuseable_textfield.dart';
 import 'package:yoome_ai/view/enhanced_memory_screen.dart';
 import 'package:yoome_ai/view/persona_screen.dart';
@@ -10,10 +9,14 @@ import 'package:yoome_ai/view/report_screen.dart';
 import 'package:yoome_ai/view/reset_screen.dart';
 import 'package:yoome_ai/view/share_screen.dart';
 
-class MatthewSupportsScreen extends StatelessWidget {
-  const MatthewSupportsScreen({super.key});
+class MatthewSupportsScreen extends StatefulWidget {
+  @override
+  _MatthewSupportsScreenState createState() => _MatthewSupportsScreenState();
+}
 
-  // List of image paths, labels and corresponding destination screens
+class _MatthewSupportsScreenState extends State<MatthewSupportsScreen> {
+  final TextEditingController _messageController = TextEditingController();
+
   static List<Map<String, dynamic>> _imageData = [
     {
       'imageUrl': 'assets/images/enhanced.png',
@@ -23,188 +26,239 @@ class MatthewSupportsScreen extends StatelessWidget {
     {
       'imageUrl': 'assets/images/persona.png',
       'label': 'Persona',
-      'screen': PersonaScreen(),
+      'screen': const PersonaScreen(),
     },
     {
       'imageUrl': 'assets/images/reset.png',
       'label': 'Reset',
-      'screen': ResetScreen(),
+      'screen': const ResetScreen(),
     },
     {
       'imageUrl': 'assets/images/share.png',
       'label': 'Share',
-      'screen': ShareScreen(),
+      'screen': const ShareScreen(),
     },
     {
       'imageUrl': 'assets/images/report.png',
       'label': 'Report',
-      'screen': ReportScreen(),
+      'screen': const ReportScreen(),
     },
   ];
 
   @override
   Widget build(BuildContext context) {
+    bool? isToggled = false;
+
     return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: GradientBackground(
-        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
-        child: SingleChildScrollView(
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Color(0xFF2D1B69), Color(0xFF1A0E3D)],
+          ),
+        ),
+        child: SafeArea(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Top-bar icons
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _circleIcon(Icons.arrow_back_ios_new_rounded),
-                  _circleIcon(Icons.menu_rounded),
-                ],
-              ),
-              SizedBox(height: 20.h),
-
-              // First large text container
-              GradientBox(
-                child: Text(
-                  _firstTextBlock,
-                  style: TextStyle(
-                    fontSize: 13.sp,
-                    height: 1.4,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              SizedBox(height: 12.h),
-
-              // Second small "No Audio" container (compact size and width)
-              Align(
-                alignment: Alignment.centerLeft,
-                child: GradientBox(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 16.w,
-                    vertical: 8.h,
-                  ),
-                  child: Text(
-                    'No Audio',
-                    style: TextStyle(fontSize: 11.sp, color: Colors.white60),
-                  ),
+              // 🔧 Fixed AppBar (not scrollable)
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Image.asset(
+                      'assets/images/arrow_back.png',
+                      width: 23,
+                      height: 23,
+                    ),
+                    Image.asset(
+                      'assets/images/menu.png',
+                      width: 23,
+                      height: 23,
+                    ),
+                  ],
                 ),
               ),
 
-              // Third text container (attached to No Audio container) with floating icons
-              Stack(
-                children: [
-                  GradientBox(
-                    child: Text(
-                      _secondTextBlock,
-                      style: TextStyle(
-                        fontSize: 13.sp,
-                        height: 1.4,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                  // Floating share and play icons
-                  Positioned(
-                    bottom: 12.h,
-                    right: 12.w,
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 12.w,
-                        vertical: 8.h,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.3),
-                        borderRadius: BorderRadius.circular(20.r),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(Icons.share, color: Colors.white, size: 18.sp),
-                          SizedBox(width: 12.w),
-                          Icon(
-                            Icons.play_arrow_rounded,
-                            color: Colors.white,
-                            size: 22.sp,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 16.h),
-
-              // Character info row
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
+              // 🔧 Scrollable area starts here
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                    ), // 🔧 Unified padding
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'Ayato Hiroshi | Cold Prince',
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white,
+                        // Chat Bubble
+                        Container(
+                          width: double.infinity,
+                          padding: EdgeInsets.all(20),
+                          margin: EdgeInsets.only(bottom: 20),
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.3),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              _buildMessageText(),
+                              SizedBox(height: 15),
+                              _buildMessageText(),
+                              SizedBox(height: 15),
+                              _buildMessageText(),
+                              SizedBox(height: 15),
+                              Text(
+                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ipsum dolor sit amet.',
+                                style: TextStyle(
+                                  color: Colors.white.withOpacity(0.8),
+                                  fontSize: 14,
+                                  height: 1.4,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        SizedBox(height: 4.h),
-                        Text(
-                          '@Elara',
-                          style: TextStyle(
-                            fontSize: 12.sp,
-                            color: Colors.white54,
+
+                        // No Audio
+                        Container(
+                          width: double.infinity,
+                          padding: EdgeInsets.symmetric(
+                            vertical: 8,
+                            horizontal: 12,
+                          ),
+                          margin: EdgeInsets.only(bottom: 20),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Text(
+                            'No Audio',
+                            style: TextStyle(
+                              color: Colors.white.withOpacity(0.6),
+                              fontSize: 12,
+                            ),
                           ),
                         ),
+
+                        // Media Controls
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 6,
+                                vertical: 4,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.grey[600],
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  _buildMediaControlButton(Icons.refresh),
+                                  const SizedBox(width: 6),
+                                  _buildMediaControlButton(Icons.play_arrow),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 20),
+
+                        // Character Info
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Ayato Hiroshi | Cold Prince',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                Text(
+                                  '@Elara',
+                                  style: TextStyle(
+                                    color: Colors.white.withOpacity(0.6),
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Image.asset(
+                                  'assets/images/shareicon.png',
+                                  width: 27,
+                                  height: 27,
+                                ),
+                                SizedBox(width: 15),
+                                StatefulBuilder(
+                                  builder: (context, setStateSwitch) {
+                                    return Switch(
+                                      value: isToggled!,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          isToggled = value;
+                                        });
+                                        setStateSwitch(() {});
+                                      },
+                                      activeColor: Colors.purple,
+                                      activeTrackColor: Colors.purple,
+                                      inactiveThumbColor: Colors.purple,
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 16),
+
+                        // Reusable Text Field
+                        ReusableTextField(
+                          hint: 'Message Ayato Hiroshi | Cold Prince',
+                          suffixWidgets: [
+                            Image.asset(
+                              'assets/images/textfieldimage.png',
+                              width: 24,
+                              height: 24,
+                            ),
+                            Image.asset(
+                              'assets/images/text.png',
+                              width: 24,
+                              height: 24,
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 24.h),
+
+                        // Action Buttons
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: List.generate(5, (index) {
+                            return _actionButton(
+                              imageUrl: _imageData[index]['imageUrl']!,
+                              label: _imageData[index]['label']!,
+                              onTap: () {
+                                Get.to(_imageData[index]['screen']);
+                              },
+                            );
+                          }),
+                        ),
+                        SizedBox(height: 20.h),
                       ],
                     ),
                   ),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.people_alt_rounded,
-                        color: Colors.white,
-                        size: 20.sp,
-                      ),
-                      SizedBox(width: 8.w),
-                      Switch(
-                        value: true,
-                        onChanged: (_) {},
-                        activeColor: const Color(0xFF8466FF),
-                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      ),
-                    ],
-                  ),
-                ],
+                ),
               ),
-              SizedBox(height: 20.h),
-
-              // Message input field
-              ReusableTextField(
-                hint: 'Message Ayato Hiroshi | Cold Prince',
-                suffixIcons: const [
-                  Icons.mic_none_rounded,
-                  Icons.grid_view_rounded,
-                ],
-              ),
-              SizedBox(height: 24.h),
-
-              // Bottom action buttons row
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: List.generate(5, (index) {
-                  return _actionButton(
-                    imageUrl: _imageData[index]['imageUrl']!,
-                    label: _imageData[index]['label']!,
-                    onTap: () {
-                      Get.to(_imageData[index]['screen']);
-                    },
-                  );
-                }),
-              ),
-              SizedBox(height: 20.h),
             ],
           ),
         ),
@@ -212,15 +266,29 @@ class MatthewSupportsScreen extends StatelessWidget {
     );
   }
 
-  // Helper to create a round icon with subtle translucent fill
-  Widget _circleIcon(IconData icon) {
-    return Container(
-      padding: EdgeInsets.all(8.w),
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.05),
-        shape: BoxShape.circle,
+  Widget _buildMessageText() {
+    return RichText(
+      text: TextSpan(
+        style: TextStyle(
+          color: Colors.white.withOpacity(0.8),
+          fontSize: 14,
+          height: 1.4,
+        ),
+        children: [
+          TextSpan(
+            text:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ipsum dolor sit amet, ',
+          ),
+          TextSpan(
+            text: 'consectetur adipiscing elit',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          TextSpan(
+            text:
+                ', sed do dolor sit amet, consectetur adipiscing elit, sed do dolor sit amet, consectetur adipiscing.',
+          ),
+        ],
       ),
-      child: Icon(icon, color: Colors.white, size: 16.sp),
     );
   }
 
@@ -267,15 +335,14 @@ class MatthewSupportsScreen extends StatelessWidget {
   }
 }
 
-// Sample text blocks to match the screenshot
-const String _firstTextBlock =
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ipsum dolor sit amet, consectetur adipiscing elit, sed do dolor sit amet, consectetur adipiscing elit, sed do dolor sit amet, consectetur adipiscing.'
-    '\n\n'
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ipsum dolor sit amet, consectetur adipiscing elit, sed do dolor sit amet, consectetur adipiscing elit, sed do dolor sit amet, consectetur adipiscing.'
-    '\n\n'
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ipsum dolor sit amet, consectetur adipiscing elit, sed do dolor sit amet, consectetur adipiscing elit, sed do dolor sit amet, consectetur adipiscing.'
-    '\n\n'
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ipsum dolor sit amet.';
-
-const String _secondTextBlock =
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ipsum dolor sit amet, consectetur adipiscing elit, sed do dolor sit amet, consectetur adipiscing elit, sed do dolor sit amet, consectetur adipiscing elit, sed do dolor sit amet, consectetur adipiscing.';
+Widget _buildMediaControlButton(IconData icon) {
+  return Container(
+    width: 34,
+    height: 34,
+    decoration: BoxDecoration(
+      color: Colors.white.withOpacity(0.2),
+      shape: BoxShape.circle,
+    ),
+    child: Icon(icon, size: 20, color: Colors.white),
+  );
+}

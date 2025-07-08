@@ -26,7 +26,7 @@ class DualActionButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final primaryColor = theme.colorScheme.primary;
+    final primaryColor = Color.fromARGB(255, 114, 69, 187);
     final overlayColor = primaryColor.withOpacity(0.08);
 
     Widget _buildFilled(String text, VoidCallback onTap) {
@@ -49,7 +49,9 @@ class DualActionButtons extends StatelessWidget {
       return OutlinedButton(
         style: OutlinedButton.styleFrom(
           foregroundColor: Colors.white,
-          side: BorderSide(color: Colors.white.withOpacity(.3)),
+          side: BorderSide(
+            color: const Color.fromARGB(255, 161, 138, 226).withOpacity(.3),
+          ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(cornerRadius),
           ),

@@ -241,3 +241,21 @@ final TextStyle SSTextStyle14400 = GoogleFonts.outfit(
   fontWeight: FontWeight.w400,
   color: Colors.white,
 );
+
+final TextStyle RSTextStyle18500 = GoogleFonts.outfit(
+  fontSize: 18.sp,
+  fontWeight: FontWeight.w500,
+  color: Colors.white,
+);
+
+final TextStyle RSTextStyle16500 = GoogleFonts.outfit(
+  fontSize: 16.sp,
+  fontWeight: FontWeight.w500,
+  color: Colors.grey[400]!.withOpacity(0.7),
+);
+
+final TextStyle RSTextStyle12400 = GoogleFonts.outfit(
+  fontSize: 12.sp,
+  fontWeight: FontWeight.w400,
+  color: Colors.white,
+);
