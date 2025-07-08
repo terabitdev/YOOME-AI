@@ -100,7 +100,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     SettingsCard(
                       title: 'Content Preferences',
                       onTap: () {
-                        Get.offAll(const ContentPreferences());
+                        Get.to(const ContentPreferences());
                       },
                     ),
                     SizedBox(height: 8.h),

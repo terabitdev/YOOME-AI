@@ -1,8 +1,11 @@
 // ────────────────── HEADER ──────────────────
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/utils.dart';
 import 'package:yoome_ai/resources/colors/app_colors.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
+import 'package:yoome_ai/view/setting_screen.dart';
 
 class HeaderRow extends StatelessWidget {
   const HeaderRow({
@@ -36,10 +39,15 @@ class HeaderRow extends StatelessWidget {
                   height: 16.h,
                 ),
                 SizedBox(width: 8.w),
-                Image.asset(
-                  'assets/images/settings.png',
-                  width: 14.w,
-                  height: 14.h,
+                InkWell(
+                  onTap: () {
+                    Get.to(SettingScreen());
+                  },
+                  child: Image.asset(
+                    'assets/images/settings.png',
+                    width: 14.w,
+                    height: 14.h,
+                  ),
                 ),
               ],
             ),
