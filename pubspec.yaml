@@ -39,6 +39,7 @@ dependencies:
   get: ^4.7.2
   google_fonts: ^6.2.1
   dotted_border: ^3.1.0
+  gradient_borders: ^1.0.1
 
 dev_dependencies:
   flutter_test:

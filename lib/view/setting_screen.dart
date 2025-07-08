@@ -24,10 +24,10 @@ class _SettingScreenState extends State<SettingScreen> {
   void _showMore() {
     CardActionSheet.show(
       context,
-      title: 'This Alias will replace the original name.',
+      title: 'Invitation Code',
       content: TextField(
         decoration: const InputDecoration(
-          hintText: 'Caden',
+          hintText: 'Enter your code',
           border: InputBorder.none,
         ),
         style: VTPSTextStyle124006,
