@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yoome_ai/resources/components/dual_action_button_widget.dart';
+import 'package:yoome_ai/view/edit_persona_screen_2.dart';
 import 'package:yoome_ai/view/login_screnn.dart';
 import 'package:get/get.dart';
 
@@ -161,7 +162,7 @@ class EditPersonaScreen extends StatelessWidget {
                       onRightTap: () {
                         // Handle confirm action
                         print('Confirm tapped');
-                        Get.to(() => LoginScreen());
+                        Get.to(EditPersonaScreen2());
                       },
                     ),
 

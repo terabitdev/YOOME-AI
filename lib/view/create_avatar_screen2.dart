@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:yoome_ai/resources/colors/app_colors.dart';
 import 'package:yoome_ai/resources/components/bio_textfield_widget.dart';
 import 'package:yoome_ai/resources/components/round_button.dart';
 import 'package:yoome_ai/resources/components/tab_button_widget.dart';
 import 'package:yoome_ai/resources/components/upload_section_widget.dart';
+import 'package:yoome_ai/view/edit_screen.dart';
 
 class CreateAvatarScreen2 extends StatefulWidget {
   const CreateAvatarScreen2({super.key});
@@ -140,6 +143,7 @@ class _CreateAvatarScreen2State extends State<CreateAvatarScreen2> {
                       onTap: () {
                         print('Character: ${_characterController.text}');
                         print('Selected Style: $selectedImageStyle');
+                        Get.to(EditScreen());
                       },
                     ),
 

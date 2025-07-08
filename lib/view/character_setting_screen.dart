@@ -6,6 +6,9 @@ import 'package:yoome_ai/resources/components/setting_toggle_card_widget.dart';
 import 'package:yoome_ai/resources/components/settings_card_widget.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
 import 'package:yoome_ai/view/alias_screen.dart';
+import 'package:yoome_ai/view/background_setting_screen.dart';
+import 'package:yoome_ai/view/matthew_supports_screen.dart';
+import 'package:yoome_ai/view/subscribe_screen.dart';
 import 'package:yoome_ai/view/view_profile_screen.dart';
 
 class CharacterSettingScreen extends StatefulWidget {
@@ -48,7 +51,9 @@ class _CharacterSettingScreenState extends State<CharacterSettingScreen> {
                       color: Colors.white,
                       size: 20,
                     ),
-                    onPressed: () => Navigator.pop(context),
+                    onPressed: () {
+                      Get.to(MatthewSupportsScreen());
+                    },
                   ),
                 ),
               ],
@@ -106,13 +111,15 @@ class _CharacterSettingScreenState extends State<CharacterSettingScreen> {
                     title: 'Auto-play voice',
                     badgeText: 'Plus',
                     isToggled: autoPlayVoice,
-                    onToggle: (value) {},
+                    onToggle: (value) {
+                      Get.to(SubscribeScreen());
+                    },
                   ),
                   SizedBox(height: 12.h),
                   SettingsCard(
                     title: 'Background setting',
                     onTap: () {
-                      // Handle background setting
+                      Get.to(BackgroundSettingScreen());
                     },
                   ),
                   SizedBox(height: 12.h),

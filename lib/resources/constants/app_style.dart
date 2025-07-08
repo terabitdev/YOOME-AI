@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 final TextStyle STextStyle52900 = GoogleFonts.outfit(
   fontSize: 52,
-  fontWeight: FontWeight.w500,
+  fontWeight: FontWeight.w900,
   color: Colors.white,
 );
 

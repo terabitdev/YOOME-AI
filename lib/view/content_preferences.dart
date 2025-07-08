@@ -43,7 +43,16 @@ class _ContentPreferencesState extends State<ContentPreferences> {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.arrow_back, color: Colors.white, size: 24.sp),
+                      InkWell(
+                        onTap: () {
+                          Get.back();
+                        },
+                        child: Icon(
+                          Icons.arrow_back,
+                          color: Colors.white,
+                          size: 24.sp,
+                        ),
+                      ),
                       SizedBox(width: 16.w),
                       Text('Content Preferences', style: SSTextStyle18500),
                     ],

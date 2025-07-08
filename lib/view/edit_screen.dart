@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/instance_manager.dart';
 import 'package:yoome_ai/resources/colors/app_colors.dart';
 import 'package:yoome_ai/resources/components/bio_textfield_widget.dart';
 import 'package:yoome_ai/resources/components/round_button.dart';
+import 'package:yoome_ai/view/edit_persona_screen.dart';
+import 'package:yoome_ai/view/edit_persona_screen_2.dart';
 
 class EditScreen extends StatefulWidget {
   const EditScreen({super.key});
@@ -178,7 +182,9 @@ class _EditScreenState extends State<EditScreen> {
                     RoundButton(
                       title: 'Save',
                       color: ColorConstants.buttonColor,
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(EditPersonaScreen());
+                      },
                     ),
 
                     SizedBox(height: MediaQuery.of(context).padding.bottom),

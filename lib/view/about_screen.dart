@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:yoome_ai/resources/components/dual_action_button_widget.dart';
 import 'package:yoome_ai/resources/components/settings_card_widget.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
@@ -28,7 +29,16 @@ class _AboutScreenState extends State<AboutScreen> {
             padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 52.h),
             child: Row(
               children: [
-                Icon(Icons.arrow_back, color: Colors.white, size: 24.sp),
+                InkWell(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                    size: 24.sp,
+                  ),
+                ),
                 SizedBox(width: 16.w),
                 Text('About', style: SSTextStyle18500),
               ],

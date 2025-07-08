@@ -3,10 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:yoome_ai/resources/components/reuseable_textfield.dart';
+import 'package:yoome_ai/view/character_setting_screen.dart';
 import 'package:yoome_ai/view/enhanced_memory_screen.dart';
 import 'package:yoome_ai/view/persona_screen.dart';
 import 'package:yoome_ai/view/report_screen.dart';
 import 'package:yoome_ai/view/reset_screen.dart';
+import 'package:yoome_ai/view/setting_screen.dart';
 import 'package:yoome_ai/view/share_screen.dart';
 
 class MatthewSupportsScreen extends StatefulWidget {
@@ -31,7 +33,7 @@ class _MatthewSupportsScreenState extends State<MatthewSupportsScreen> {
     {
       'imageUrl': 'assets/images/reset.png',
       'label': 'Reset',
-      'screen': const ResetScreen(),
+      'screen': const SettingScreen(),
     },
     {
       'imageUrl': 'assets/images/share.png',
@@ -72,10 +74,15 @@ class _MatthewSupportsScreenState extends State<MatthewSupportsScreen> {
                       width: 23,
                       height: 23,
                     ),
-                    Image.asset(
-                      'assets/images/menu.png',
-                      width: 23,
-                      height: 23,
+                    InkWell(
+                      onTap: () {
+                        Get.to(const CharacterSettingScreen());
+                      },
+                      child: Image.asset(
+                        'assets/images/menu.png',
+                        width: 23,
+                        height: 23,
+                      ),
                     ),
                   ],
                 ),

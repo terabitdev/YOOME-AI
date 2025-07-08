@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:yoome_ai/resources/colors/app_colors.dart';
 import 'package:yoome_ai/resources/components/round_button.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
+import 'package:yoome_ai/view/yoome_bill_screen.dart';
 
 class EditPersonaScreen2 extends StatefulWidget {
   const EditPersonaScreen2({super.key});
@@ -162,6 +165,15 @@ class _EditPersonaScreen2State extends State<EditPersonaScreen2> {
                       title: 'Save',
                       color: ColorConstants.buttonColor,
                       onTap: () {
+                        Get.to(YoomeBillScreen());
+                        Get.showSnackbar(
+                          GetSnackBar(
+                            message: 'Persona saved successfully!',
+                            duration: const Duration(seconds: 2),
+                            backgroundColor: Colors.deepPurpleAccent,
+                            snackPosition: SnackPosition.TOP,
+                          ),
+                        );
                         // Handle save action
                         print('Save tapped');
                         // You can add your save logic here

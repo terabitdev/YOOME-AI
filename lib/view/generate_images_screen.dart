@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yoome_ai/resources/components/custom_appheader.dart';
 import 'package:yoome_ai/resources/components/custom_textfield.dart';
+import 'package:yoome_ai/resources/components/reuseable_textfield.dart';
 import 'package:yoome_ai/resources/constants/app_images.dart';
 
 class GenerateImagesScreen extends StatefulWidget {
@@ -40,15 +41,15 @@ class _GenerateImagesScreenState extends State<GenerateImagesScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
                   children: [
-                    CustomTextField(
-                      title: " write a Prompt.....",
-                      controller: _promptController,
-                      keyboardType: TextInputType.text,
-                      obscureText: false,
-                      errorText: null,
-                      onTapOutside: () {
-                        FocusScope.of(context).unfocus();
-                      },
+                    ReusableTextField(
+                      hint: 'Write your prompt....',
+                      suffixWidgets: [
+                        Image.asset(
+                          'assets/images/textfieldimage.png',
+                          width: 24,
+                          height: 24,
+                        ),
+                      ],
                     ),
 
                     SizedBox(height: 22.h),

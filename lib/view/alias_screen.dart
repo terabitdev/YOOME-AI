@@ -37,6 +37,26 @@ class _AliasScreenState extends State<AliasScreen> {
     );
   }
 
+  void _More() {
+    CardActionSheet.show(
+      context,
+      title: 'This Alias will replace the original name.',
+      content: TextField(
+        decoration: const InputDecoration(
+          hintText: 'Caden',
+          border: InputBorder.none,
+        ),
+        style: VTPSTextStyle124006,
+      ),
+      onConfirm: () {
+        // do something with the entered alias…
+      },
+      onCancel: () {
+        // optional – extra logic if Cancel is pressed
+      },
+    );
+  }
+
   /* ─────────────────────────── UI ─────────────────────────── */
 
   @override
@@ -82,7 +102,12 @@ class _AliasScreenState extends State<AliasScreen> {
 
                   Text('Chat', style: CSSTextStyle144002),
                   SizedBox(height: 12.h),
-                  SettingsCard(title: 'Restart chat', onTap: () {}),
+                  SettingsCard(
+                    title: 'Restart chat',
+                    onTap: () {
+                      _More();
+                    },
+                  ),
                   SizedBox(height: 12.h),
                   SettingsCard(title: 'Chat history', onTap: () {}),
                   SizedBox(height: 12.h),

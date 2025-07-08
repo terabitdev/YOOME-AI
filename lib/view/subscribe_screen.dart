@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:yoome_ai/resources/colors/app_colors.dart';
 import 'package:yoome_ai/resources/components/round_button.dart';
 import 'package:yoome_ai/resources/components/tab_button_widget.dart';
@@ -29,7 +30,12 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
             padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 52.h),
             child: Row(
               children: [
-                const Icon(Icons.arrow_back, color: Colors.white, size: 24),
+                InkWell(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Icon(Icons.arrow_back, color: Colors.white, size: 24),
+                ),
                 SizedBox(width: 16.w),
                 Text('Subscribe', style: SSTextStyle18500),
               ],

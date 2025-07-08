@@ -23,7 +23,7 @@ class ReusableTextField extends StatelessWidget {
         fillColor: const Color(0xFF242424),
         contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.r),
+          borderRadius: BorderRadius.circular(30.r),
           borderSide: BorderSide.none,
         ),
         suffixIcon: suffixWidgets.isEmpty

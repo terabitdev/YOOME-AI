@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:yoome_ai/resources/constants/app_images.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
 import 'package:yoome_ai/view/character_setting_screen.dart';
+import 'package:yoome_ai/view/matthew_supports_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -83,16 +84,21 @@ class _HomeScreenState extends State<HomeScreen> {
                     onSelected: (_) => setState(() => selectedFilter = option),
                     showCheckmark: false, // ✨ hides tick icon
                     backgroundColor: const Color.fromARGB(
-                      87,
-                      48,
-                      43,
-                      82,
+                      60,
+                      139,
+                      92,
+                      246,
                     ), // not‑selected colour
                     selectedColor: const Color(0xFF8B5CF6), // selected colour
                     side: BorderSide(
                       color: isSelected
                           ? const Color(0xFF8B5CF6)
-                          : Colors.grey.withOpacity(0.3),
+                          : const Color.fromARGB(
+                              255,
+                              13,
+                              14,
+                              63,
+                            ).withOpacity(0.3),
                     ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(60), // 60 px radius
@@ -119,9 +125,15 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               itemCount: gridImages.length,
               itemBuilder: (_, index) {
-                return ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: Image.asset(gridImages[index], fit: BoxFit.cover),
+                return InkWell(
+                  onTap: () {
+                    // Handle image tap
+                    Get.to(MatthewSupportsScreen());
+                  },
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Image.asset(gridImages[index], fit: BoxFit.cover),
+                  ),
                 );
               },
             ),

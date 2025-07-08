@@ -5,6 +5,7 @@ import 'package:yoome_ai/resources/colors/app_colors.dart';
 import 'package:yoome_ai/resources/components/gradient_button.dart';
 import 'package:yoome_ai/resources/components/profile_header.dart';
 import 'package:yoome_ai/resources/components/profile_helpers.dart';
+import 'package:yoome_ai/view/create_character_screen_2.dart';
 import 'package:yoome_ai/view/matthew_supports_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -73,7 +74,7 @@ class ProfileScreen extends StatelessWidget {
                             label: 'Create',
                             onPressed: () {
                               Get.to(
-                                () => MatthewSupportsScreen(),
+                                () => CreateCharacterScreen2(),
                                 transition: Transition.rightToLeft,
                               );
                             },

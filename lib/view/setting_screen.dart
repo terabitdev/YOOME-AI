@@ -56,7 +56,16 @@ class _SettingScreenState extends State<SettingScreen> {
             padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 52.h),
             child: Row(
               children: [
-                Icon(Icons.arrow_back, color: Colors.white, size: 24.sp),
+                InkWell(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                    size: 24.sp,
+                  ),
+                ),
                 SizedBox(width: 16.w),
                 Text('Setting', style: SSTextStyle18500),
               ],

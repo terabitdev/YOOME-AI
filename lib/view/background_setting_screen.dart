@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/utils.dart';
 import 'package:yoome_ai/resources/components/dual_action_button_widget.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
+import 'package:yoome_ai/view/create_avatar_screen.dart';
+import 'package:yoome_ai/view/create_avatar_screen2.dart';
 
 class BackgroundSettingScreen extends StatefulWidget {
   const BackgroundSettingScreen({super.key});
@@ -30,6 +34,7 @@ class _BackgroundSettingScreenState extends State<BackgroundSettingScreen> {
                     Row(
                       children: [
                         InkWell(
+                          onTap: () => Navigator.pop(context),
                           child: const Icon(
                             Icons.arrow_back,
                             color: Colors.white,
@@ -135,6 +140,7 @@ class _BackgroundSettingScreenState extends State<BackgroundSettingScreen> {
                   leftIsPrimary: false,
                   onLeftTap: () => Navigator.pop(context),
                   onRightTap: () {
+                    Get.to(CreateAvatarScreen());
                     // Handle confirm action
                     print('Selected background option: $selectedIndex');
                     Navigator.pop(context);
