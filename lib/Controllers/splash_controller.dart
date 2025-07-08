@@ -9,8 +9,8 @@ class SplashController extends GetxController {
   void onInit() {
     super.onInit();
 
-    // Wait 5 seconds then navigate
-    Timer(const Duration(seconds: 5), () {
+    // Wait 100 seconds then navigate
+    Timer(const Duration(minutes: 100), () {
       isLoading.value = false;
       Get.offAll(() => SignInScreen());
     });

@@ -7,9 +7,10 @@ class GradientBackground extends StatelessWidget {
   final Widget child;
 
   static const _gradient = LinearGradient(
-    colors: [Color(0xFFA06AF9), Colors.black],
+    colors: [Color.fromARGB(255, 102, 43, 197), Colors.black],
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
+    stops: [],
   );
 
   @override
