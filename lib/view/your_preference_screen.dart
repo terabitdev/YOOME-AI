@@ -89,7 +89,7 @@ class _YourPreferenceScreenState extends State<YourPreferenceScreen> {
                           Expanded(
                             child: CharacterCard(
                               title: '',
-                              imagePath: 'assets/images/Card.png',
+                              imagePath: 'assets/images/c_card.png',
                               showTitle: false,
                               isSelected: selectedReplay == 'long',
                               onTap: () =>

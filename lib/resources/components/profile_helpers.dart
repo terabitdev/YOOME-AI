@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
+import 'package:yoome_ai/view/persona_screen.dart';
+import 'package:yoome_ai/view/subscribe_screen.dart';
 import 'package:yoome_ai/view/wallet_screen.dart';
 
 class Subtitle extends StatelessWidget {
@@ -36,7 +38,9 @@ class ActionRow extends StatelessWidget {
       _ActionSquare(
         icon: Image.asset('assets/images/yoome.png', height: 30.h, width: 30.w),
         label: 'YOOME+',
-        onTap: () {}, // Optional action
+        onTap: () {
+          Get.to(SubscribeScreen());
+        }, // Optional action
       ),
       _ActionSquare(
         icon: Image.asset(
@@ -59,7 +63,9 @@ class ActionRow extends StatelessWidget {
           width: 30.w,
         ),
         label: 'Persona',
-        onTap: () {}, // Optional action
+        onTap: () {
+          Get.to(PersonaScreen());
+        }, // Optional action
       ),
     ],
   );

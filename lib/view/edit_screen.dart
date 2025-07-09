@@ -203,7 +203,11 @@ class _EditScreenState extends State<EditScreen> {
     final isSelected = selectedGender == gender;
 
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        setState(() {
+          selectedGender = gender;
+        });
+      },
       child: Container(
         width: 100.w,
         height: 40.h,

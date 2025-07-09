@@ -4,6 +4,7 @@ import 'package:yoome_ai/Controllers/chat_screen_controller.dart';
 import 'package:yoome_ai/resources/colors/app_colors.dart';
 import 'package:yoome_ai/resources/components/custom_appheader.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
+import 'package:yoome_ai/view/matthew_supports_screen.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({Key? key}) : super(key: key);
@@ -134,29 +135,34 @@ class ChatScreen extends StatelessWidget {
                             ), // semi-transparent
                             borderRadius: BorderRadius.circular(16),
                           ),
-                          child: ListTile(
-                            contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 8,
-                            ),
-                            leading: const CircleAvatar(
-                              radius: 24,
-                              backgroundImage: AssetImage(
-                                'assets/images/imagegenerate.png',
+                          child: InkWell(
+                            onTap: () {
+                              Get.to(MatthewSupportsScreen());
+                            },
+                            child: ListTile(
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 8,
                               ),
-                            ),
-                            title: Text('Daniyal', style: CSTextStyle15400),
-                            subtitle: Text(
-                              'What\'s up?',
-                              style: CSTextStyle10500,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            trailing: const Text(
-                              '2h ago',
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 12,
+                              leading: const CircleAvatar(
+                                radius: 24,
+                                backgroundImage: AssetImage(
+                                  'assets/images/imagegenerate.png',
+                                ),
+                              ),
+                              title: Text('Daniyal', style: CSTextStyle15400),
+                              subtitle: Text(
+                                'What\'s up?',
+                                style: CSTextStyle10500,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              trailing: const Text(
+                                '2h ago',
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 12,
+                                ),
                               ),
                             ),
                           ),

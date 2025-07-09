@@ -7,6 +7,7 @@ import 'package:yoome_ai/resources/components/character_setting_toggle_card_widg
 import 'package:yoome_ai/resources/components/confirmation_dialog.dart';
 import 'package:yoome_ai/resources/components/setting_toggle_card_widget.dart';
 import 'package:yoome_ai/resources/components/settings_card_widget.dart';
+import 'package:yoome_ai/resources/components/textfield_dialog_box.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
 import 'package:yoome_ai/view/background_setting_screen.dart';
 import 'package:yoome_ai/view/matthew_supports_screen.dart';
@@ -103,7 +104,22 @@ class _AliasScreenState extends State<AliasScreen> {
 
                   Text('Character', style: CSSTextStyle144002),
                   SizedBox(height: 12.h),
-                  CharacterSettingsCard(title: 'Alias', onTap: () {}),
+                  CharacterSettingsCard(
+                    title: 'Alias',
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (_) => InputDialog(
+                          title: 'Enter alias name',
+                          confirmText: 'Save',
+                          onConfirm: (aliasValue) {
+                            print('Alias entered: $aliasValue');
+                            // You can now update your state or controller
+                          },
+                        ),
+                      );
+                    },
+                  ),
                   SizedBox(height: 30.h),
 
                   Text('Chat', style: CSSTextStyle144002),

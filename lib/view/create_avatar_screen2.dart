@@ -1,16 +1,12 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:yoome_ai/resources/colors/app_colors.dart';
 import 'package:yoome_ai/resources/components/bio_textfield_widget.dart';
 import 'package:yoome_ai/resources/components/round_button.dart';
-import 'package:yoome_ai/resources/components/tab_button_widget.dart';
 import 'package:yoome_ai/resources/components/upload_section_widget.dart';
 import 'package:yoome_ai/view/edit_screen.dart';
 
@@ -25,12 +21,12 @@ class _CreateAvatarScreen2State extends State<CreateAvatarScreen2> {
   final TextEditingController _characterController = TextEditingController();
   String selectedImageStyle = 'Tinder Style';
   File? selectedImage;
+  String selectedGender = 'Female';
 
-  // Image style data
   final List<Map<String, String>> imageStyles = [
-    {'image': 'assets/images/imagestyle1.png'},
-    {'image': 'assets/images/imagestyle2.png'},
-    {'image': 'assets/images/imagestyle3.png'},
+    {'image': 'assets/images/imagestyle1.png', 'name': 'Tinder Style'},
+    {'image': 'assets/images/imagestyle2.png', 'name': 'Anime Style'},
+    {'image': 'assets/images/imagestyle3.png', 'name': 'Cartoon Style'},
   ];
 
   Future<void> requestStoragePermission() async {
@@ -44,10 +40,8 @@ class _CreateAvatarScreen2State extends State<CreateAvatarScreen2> {
 
   Future<void> _pickImage() async {
     await requestStoragePermission();
-
     final ImagePicker picker = ImagePicker();
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-
     if (image != null) {
       setState(() {
         selectedImage = File(image.path);
@@ -65,7 +59,6 @@ class _CreateAvatarScreen2State extends State<CreateAvatarScreen2> {
       body: SafeArea(
         child: Column(
           children: [
-            // Header
             Padding(
               padding: EdgeInsets.fromLTRB(24.w, 52.h, 24.w, 0),
               child: Row(
@@ -90,16 +83,13 @@ class _CreateAvatarScreen2State extends State<CreateAvatarScreen2> {
                 ],
               ),
             ),
-
             SizedBox(height: 24.h),
-
             Expanded(
               child: SingleChildScrollView(
                 padding: EdgeInsets.symmetric(horizontal: 24.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Character definition section
                     Text(
                       'Reference Image',
                       style: TextStyle(
@@ -108,10 +98,7 @@ class _CreateAvatarScreen2State extends State<CreateAvatarScreen2> {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-
                     SizedBox(height: 20.h),
-
-                    // Upload section with dashed border
                     GestureDetector(
                       onTap: _pickImage,
                       child: UploadSection(selectedImage: selectedImage),
@@ -129,12 +116,9 @@ class _CreateAvatarScreen2State extends State<CreateAvatarScreen2> {
                     SizedBox(height: 20.h),
                     BorderedMultilineInput(
                       controller: _characterController,
-                      hint: 'Describe a Content of the Avatar.....',
+                      hint: 'Describe the content of the Avatar.....',
                     ),
-
                     SizedBox(height: 20.h),
-
-                    // Image Style section
                     Text(
                       'Image Style',
                       style: TextStyle(
@@ -144,8 +128,6 @@ class _CreateAvatarScreen2State extends State<CreateAvatarScreen2> {
                       ),
                     ),
                     SizedBox(height: 12.h),
-
-                    // Horizontal scrollable image styles
                     SizedBox(
                       height: 160.h,
                       child: ListView.builder(
@@ -156,7 +138,6 @@ class _CreateAvatarScreen2State extends State<CreateAvatarScreen2> {
                         },
                       ),
                     ),
-
                     SizedBox(height: 12.h),
                     Center(
                       child: Text(
@@ -168,8 +149,6 @@ class _CreateAvatarScreen2State extends State<CreateAvatarScreen2> {
                       ),
                     ),
                     SizedBox(height: 8.h),
-
-                    // Continue Button
                     RoundButton(
                       title: 'Continue',
                       color: ColorConstants.buttonColor,
@@ -179,7 +158,6 @@ class _CreateAvatarScreen2State extends State<CreateAvatarScreen2> {
                         // Get.to(EditScreen());
                       },
                     ),
-
                     SizedBox(height: 30.h),
                   ],
                 ),
@@ -221,7 +199,6 @@ class _CreateAvatarScreen2State extends State<CreateAvatarScreen2> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
-
                   image: DecorationImage(
                     image: AssetImage(style['image']!),
                     fit: BoxFit.cover,
@@ -229,42 +206,39 @@ class _CreateAvatarScreen2State extends State<CreateAvatarScreen2> {
                 ),
               ),
             ),
-
-            // Label container
           ],
         ),
       ),
     );
   }
-}
 
-Widget _buildGenderOption(String gender) {
-  var selectedGender = 'Male';
-  final isSelected = selectedGender == gender;
+  Widget _buildGenderOption(String gender) {
+    final isSelected = selectedGender == gender;
 
-  return GestureDetector(
-    onTap: () {
-      selectedGender = gender;
-    },
-    child: Container(
-      width: 100.w,
-      height: 40.h,
-      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(9),
-        border: Border.all(
-          color: isSelected
-              ? const Color(0xFFA259FF)
-              : Colors.white.withOpacity(0.3),
-          width: 1,
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          selectedGender = gender;
+        });
+      },
+      child: Container(
+        width: 100.w,
+        height: 40.h,
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+        decoration: BoxDecoration(
+          color: isSelected ? const Color(0xFFA259FF) : Colors.transparent,
+          borderRadius: BorderRadius.circular(7),
+          border: Border.all(
+            color: isSelected
+                ? const Color(0xFFA259FF)
+                : Colors.white.withOpacity(0.3),
+            width: 1,
+          ),
         ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Flexible(
-            child: Text(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
               gender,
               style: TextStyle(
                 color: Colors.white,
@@ -272,22 +246,28 @@ Widget _buildGenderOption(String gender) {
                 fontWeight: FontWeight.w500,
               ),
             ),
-          ),
-          const SizedBox(width: 4),
-          Container(
-            width: 12,
-            height: 12,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: isSelected ? Colors.white : Colors.transparent,
-              border: Border.all(color: Colors.white, width: 1),
+            const SizedBox(width: 6),
+            Container(
+              width: 12,
+              height: 12,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: isSelected ? Colors.white : Colors.transparent,
+                border: Border.all(color: Colors.white, width: 1),
+              ),
+              child: isSelected
+                  ? const Icon(Icons.check, size: 8, color: Color(0xFFA259FF))
+                  : null,
             ),
-            child: isSelected
-                ? const Icon(Icons.check, size: 8, color: Color(0xFFA259FF))
-                : null,
-          ),
-        ],
+          ],
+        ),
       ),
-    ),
-  );
+    );
+  }
+
+  @override
+  void dispose() {
+    _characterController.dispose();
+    super.dispose();
+  }
 }
