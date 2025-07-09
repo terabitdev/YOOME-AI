@@ -47,15 +47,7 @@ class ProfileScreen extends StatelessWidget {
                   SizedBox(height: 22.h),
                   StatsRow(),
                   SizedBox(height: 28.h),
-                  InkWell(
-                    onTap: () {
-                      Get.to(
-                        () => WalletScreen(),
-                        transition: Transition.rightToLeft,
-                      );
-                    },
-                    child: const ActionRow(),
-                  ),
+                  const ActionRow(),
                   SizedBox(height: 32.h),
 
                   // purple sub‑panel

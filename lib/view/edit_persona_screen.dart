@@ -205,7 +205,7 @@ class EditPersonaScreen extends StatelessWidget {
       height: 88,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.white.withOpacity(0.3), width: 2),
+        border: Border.all(color: const Color(0xFFA259FF), width: 2),
       ),
       child: DashedBorder(
         color: Colors.white.withOpacity(0.5),

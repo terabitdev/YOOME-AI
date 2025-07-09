@@ -24,7 +24,7 @@ class CreateCharacterSheet extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            border: Border.all(color: outline, width: 1),
+            border: Border.all(color: Color(0xFFA06AF9), width: 1),
             borderRadius: BorderRadius.circular(26),
           ),
           child: Column(
@@ -95,9 +95,9 @@ class _ModeTile extends StatelessWidget {
           height: 56,
           padding: const EdgeInsets.symmetric(horizontal: 16),
           decoration: BoxDecoration(
-            color: tileBg,
+            color: Color(0xFF18003A),
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: outline, width: 1.w),
+            border: Border.all(color: Color(0xFF5E3F93), width: 1.w),
           ),
           child: Row(
             children: [

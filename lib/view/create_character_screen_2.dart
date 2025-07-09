@@ -1,8 +1,9 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/utils.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:yoome_ai/resources/colors/app_colors.dart';
 import 'package:yoome_ai/resources/components/bio_textfield_widget.dart';
 import 'package:yoome_ai/resources/components/round_button.dart';
@@ -20,13 +21,35 @@ class CreateCharacterScreen2 extends StatefulWidget {
 class _CreateCharacterScreen2State extends State<CreateCharacterScreen2> {
   final TextEditingController _characterController = TextEditingController();
   String selectedImageStyle = 'Tinder Style';
+  int selectedTab = 0; // 0 = Reference Images, 1 = Upload
+  File? selectedImage;
 
-  // Image style data
   final List<Map<String, String>> imageStyles = [
-    {'image': 'assets/images/imagestyle1.png'},
-    {'image': 'assets/images/imagestyle2.png'},
-    {'image': 'assets/images/imagestyle3.png'},
+    {'image': 'assets/images/imagestyle1.png', 'name': 'Tinder Style'},
+    {'image': 'assets/images/imagestyle2.png', 'name': 'Anime Style'},
+    {'image': 'assets/images/imagestyle3.png', 'name': 'Cartoon Style'},
   ];
+
+  Future<void> requestStoragePermission() async {
+    if (await Permission.storage.request().isGranted ||
+        await Permission.photos.request().isGranted) {
+      print("Permission granted");
+    } else {
+      print("Permission denied");
+    }
+  }
+
+  Future<void> _pickImage() async {
+    await requestStoragePermission();
+
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      print('Selected image path: ${image.path}');
+    } else {
+      print('No image selected.');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +58,6 @@ class _CreateCharacterScreen2State extends State<CreateCharacterScreen2> {
       body: SafeArea(
         child: Column(
           children: [
-            // Header
             Padding(
               padding: EdgeInsets.fromLTRB(24.w, 52.h, 24.w, 0),
               child: Row(
@@ -60,16 +82,13 @@ class _CreateCharacterScreen2State extends State<CreateCharacterScreen2> {
                 ],
               ),
             ),
-
             SizedBox(height: 24.h),
-
             Expanded(
               child: SingleChildScrollView(
                 padding: EdgeInsets.symmetric(horizontal: 24.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Character definition section
                     Text(
                       'Character definition',
                       style: TextStyle(
@@ -79,66 +98,55 @@ class _CreateCharacterScreen2State extends State<CreateCharacterScreen2> {
                       ),
                     ),
                     SizedBox(height: 12.h),
-
-                    // Bio Text Field
                     BorderedMultilineInput(
                       controller: _characterController,
                       hint: 'Describe a Character you wish to create',
                     ),
-
                     SizedBox(height: 20.h),
-
-                    // Reference Images and Upload buttons
                     Row(
                       children: [
                         SegmentedTabButton(
                           title: 'Reference Images',
-                          isSelected: true,
-                          onTap: () {},
+                          isSelected: selectedTab == 0,
+                          onTap: () => setState(() => selectedTab = 0),
                           isMiddle: false,
                         ),
                         SegmentedTabButton(
                           title: 'Upload',
-                          isSelected: false,
-                          onTap: () {},
+                          isSelected: selectedTab == 1,
+                          onTap: () => setState(() => selectedTab = 1),
                           isMiddle: false,
                         ),
                       ],
                     ),
-
                     SizedBox(height: 20.h),
-
-                    // Upload section with dashed border
-                    UploadSection(),
-
-                    SizedBox(height: 24.h),
-
-                    // Image Style section
-                    Text(
-                      'Image Style',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w500,
-                      ),
+                    GestureDetector(
+                      onTap: _pickImage,
+                      child: UploadSection(selectedImage: selectedImage),
                     ),
-                    SizedBox(height: 12.h),
-
-                    // Horizontal scrollable image styles
-                    SizedBox(
-                      height: 160.h,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: imageStyles.length,
-                        itemBuilder: (context, index) {
-                          return _buildImageStyleCard(index);
-                        },
-                      ),
-                    ),
-
                     SizedBox(height: 24.h),
-
-                    // Continue Button
+                    if (selectedTab == 0) ...[
+                      Text(
+                        'Image Style',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      SizedBox(height: 12.h),
+                      SizedBox(
+                        height: 160.h,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: imageStyles.length,
+                          itemBuilder: (context, index) {
+                            return _buildImageStyleCard(index);
+                          },
+                        ),
+                      ),
+                      SizedBox(height: 24.h),
+                    ],
                     RoundButton(
                       title: 'Continue',
                       color: ColorConstants.buttonColor,
@@ -148,7 +156,6 @@ class _CreateCharacterScreen2State extends State<CreateCharacterScreen2> {
                         Get.to(CreateAvatarScreen2());
                       },
                     ),
-
                     SizedBox(height: 30.h),
                   ],
                 ),
@@ -184,23 +191,9 @@ class _CreateCharacterScreen2State extends State<CreateCharacterScreen2> {
             width: isSelected ? 2 : 1,
           ),
         ),
-        child: Column(
-          children: [
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-
-                  image: DecorationImage(
-                    image: AssetImage(style['image']!),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            ),
-
-            // Label container
-          ],
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: Image.asset(style['image']!, fit: BoxFit.cover),
         ),
       ),
     );

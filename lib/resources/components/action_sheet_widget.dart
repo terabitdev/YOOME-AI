@@ -14,7 +14,7 @@ class CardActionSheet extends StatelessWidget {
     this.confirmLabel = 'Confirm',
     this.sheetColor = Colors.black,
     this.cardColor = const Color(0xFF2D1B5B),
-    this.strokeColor = const Color.fromARGB(255, 121, 73, 167),
+    this.strokeColor = const Color(0xFF5E3F93),
   });
 
   /// Text shown at the very top of the sheet.

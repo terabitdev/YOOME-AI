@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/utils.dart';
+import 'package:yoome_ai/resources/components/character_setting_card_widget.dart';
+import 'package:yoome_ai/resources/components/character_setting_toggle_card_widget.dart';
 import 'package:yoome_ai/resources/components/setting_toggle_card_widget.dart';
 import 'package:yoome_ai/resources/components/settings_card_widget.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
@@ -39,28 +41,11 @@ class _CharacterSettingScreenState extends State<CharacterSettingScreen> {
             right: 20,
             child: Row(
               children: [
-                Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.3),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: IconButton(
-                    icon: InkWell(
-                      onTap: () {
-                        Get.back();
-                      },
-                      child: const Icon(
-                        Icons.arrow_back,
-                        color: Colors.white,
-                        size: 20,
-                      ),
-                    ),
-                    onPressed: () {
-                      Get.to(MatthewSupportsScreen());
-                    },
-                  ),
+                _toolbarButton(
+                  icon: Icons.arrow_back,
+                  onTap: () {
+                    Get.back();
+                  },
                 ),
               ],
             ),
@@ -82,14 +67,14 @@ class _CharacterSettingScreenState extends State<CharacterSettingScreen> {
                   SizedBox(height: 30.h),
                   Text('Character', style: CSSTextStyle144002),
                   SizedBox(height: 12.h),
-                  SettingsCard(
+                  CharacterSettingsCard(
                     title: 'View the profile',
                     onTap: () {
                       Get.to(const ViewProfileScreen());
                     },
                   ),
                   SizedBox(height: 12.h),
-                  SettingsCard(
+                  CharacterSettingsCard(
                     title: 'Alias',
                     onTap: () {
                       Get.to(const AliasScreen());
@@ -99,21 +84,21 @@ class _CharacterSettingScreenState extends State<CharacterSettingScreen> {
                   // Chat Section
                   Text('Chat', style: CSSTextStyle144002),
                   SizedBox(height: 12.h),
-                  SettingsCard(
+                  CharacterSettingsCard(
                     title: 'Restart chat',
                     onTap: () {
                       // Handle restart chat
                     },
                   ),
                   SizedBox(height: 12.h),
-                  SettingsCard(
+                  CharacterSettingsCard(
                     title: 'Chat history',
                     onTap: () {
                       // Handle chat history
                     },
                   ),
                   SizedBox(height: 12.h),
-                  SettingsToggleCard(
+                  CharacterSettingsToggleCard(
                     title: 'Auto-play voice',
                     badgeText: 'Plus',
                     isToggled: autoPlayVoice,
@@ -122,14 +107,14 @@ class _CharacterSettingScreenState extends State<CharacterSettingScreen> {
                     },
                   ),
                   SizedBox(height: 12.h),
-                  SettingsCard(
+                  CharacterSettingsCard(
                     title: 'Background setting',
                     onTap: () {
                       Get.to(BackgroundSettingScreen());
                     },
                   ),
                   SizedBox(height: 12.h),
-                  SettingsCard(
+                  CharacterSettingsCard(
                     title: 'Report',
                     onTap: () {
                       Get.to(ReportScreen());
@@ -145,3 +130,20 @@ class _CharacterSettingScreenState extends State<CharacterSettingScreen> {
     );
   }
 }
+
+Widget _toolbarButton({required IconData icon, required VoidCallback onTap}) =>
+    Container(
+      width: 40.h,
+      height: 40.w,
+      decoration: BoxDecoration(
+        color: Colors.black.withOpacity(.3),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: IconButton(
+        icon: Icon(icon, color: Colors.white, size: 20),
+        onPressed: () {
+          print('Toolbar button pressed');
+          onTap();
+        },
+      ),
+    );

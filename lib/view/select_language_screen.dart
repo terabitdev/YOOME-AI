@@ -134,10 +134,14 @@ class _SelectLanguageScreenState extends State<SelectLanguageScreen> {
         width: double.infinity,
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
         decoration: BoxDecoration(
-          color: isSelected ? Color(0xFF6B46C1) : Color(0xFF2D1B69),
+          color: isSelected
+              ? Color.fromRGBO(65, 7, 161, 0.36)
+              : Color.fromRGBO(65, 7, 161, 0.62),
           borderRadius: BorderRadius.circular(12.r),
           border: Border.all(
-            color: isSelected ? Color(0xFF8B5DFF) : Color(0xFF6B46C1),
+            color: isSelected
+                ? Color(0xFF8B5DFF)
+                : Colors.white.withOpacity(0.3),
             width: 1,
           ),
         ),

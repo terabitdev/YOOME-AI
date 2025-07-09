@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:yoome_ai/resources/components/action_sheet_widget.dart';
+import 'package:yoome_ai/resources/components/character_setting_card_widget.dart';
+import 'package:yoome_ai/resources/components/character_setting_toggle_card_widget.dart';
 import 'package:yoome_ai/resources/components/setting_toggle_card_widget.dart';
 import 'package:yoome_ai/resources/components/settings_card_widget.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
@@ -89,7 +91,7 @@ class _AliasScreenState extends State<AliasScreen> {
 
                   Text('General', style: CSSTextStyle144002),
                   SizedBox(height: 12.h),
-                  SettingsCard(
+                  CharacterSettingsCard(
                     title: 'Model settings',
                     onTap: () => Get.offAll(const ViewProfileScreen()),
                   ),
@@ -97,30 +99,33 @@ class _AliasScreenState extends State<AliasScreen> {
 
                   Text('Character', style: CSSTextStyle144002),
                   SizedBox(height: 12.h),
-                  SettingsCard(title: 'Alias', onTap: () {}),
+                  CharacterSettingsCard(title: 'Alias', onTap: () {}),
                   SizedBox(height: 30.h),
 
                   Text('Chat', style: CSSTextStyle144002),
                   SizedBox(height: 12.h),
-                  SettingsCard(
+                  CharacterSettingsCard(
                     title: 'Restart chat',
                     onTap: () {
                       _More();
                     },
                   ),
                   SizedBox(height: 12.h),
-                  SettingsCard(title: 'Chat history', onTap: () {}),
+                  CharacterSettingsCard(title: 'Chat history', onTap: () {}),
                   SizedBox(height: 12.h),
-                  SettingsToggleCard(
+                  CharacterSettingsToggleCard(
                     title: 'Auto-play voice',
                     badgeText: 'Plus',
                     isToggled: autoPlayVoice,
                     onToggle: (v) => setState(() => autoPlayVoice = v),
                   ),
                   SizedBox(height: 12.h),
-                  SettingsCard(title: 'Background setting', onTap: () {}),
+                  CharacterSettingsCard(
+                    title: 'Background setting',
+                    onTap: () {},
+                  ),
                   SizedBox(height: 12.h),
-                  SettingsCard(title: 'Report', onTap: () {}),
+                  CharacterSettingsCard(title: 'Report', onTap: () {}),
                   SizedBox(height: 20.h),
                 ],
               ),

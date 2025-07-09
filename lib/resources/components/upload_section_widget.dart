@@ -1,11 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-/// ----------------------------------------------------------------------------
-/// Reusable upload‑area widget that exactly matches the design shown
-/// in the screenshot: a dashed outer card and a dashed inner square with
-/// an icon + label, followed by an optional description.
-/// ----------------------------------------------------------------------------
 class UploadSection extends StatelessWidget {
   const UploadSection({
     super.key,
@@ -18,31 +15,18 @@ class UploadSection extends StatelessWidget {
     this.dashColor = const Color(0xFFA259FF),
     this.squareFill = const Color(0x33A259FF),
     this.icon = Icons.upload,
+    this.selectedImage,
   });
 
-  /// Callback when the inner square is tapped.
   final VoidCallback? onTap;
-
-  /// Text underneath the icon inside the square.
   final String label;
-
-  /// Helper text shown to the right.
   final String description;
-
-  /// Overall container height *before* `.h` conversion.
   final double height;
-
-  /// Size of the inner dashed square *before* `.w/.h` conversion.
   final double squareSize;
-
-  /// Stroke color for both dashed borders.
   final Color dashColor;
-
-  /// Fill colour for the square behind the icon (uses 0x33 = 20 % opacity).
   final Color squareFill;
-
-  /// Icon displayed in the square.
   final IconData icon;
+  final File? selectedImage;
 
   @override
   Widget build(BuildContext context) {
@@ -51,68 +35,74 @@ class UploadSection extends StatelessWidget {
       height: height.h,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.white.withOpacity(.3)),
+        border: Border.all(color: const Color(0xFF5E3F93), width: 1.w),
       ),
-      child: _DashedBorder(
-        color: dashColor,
-        child: Padding(
-          padding: EdgeInsets.all(16.w),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // ───────────────────────── inner square ──────────────────────
-              GestureDetector(
-                onTap: onTap,
-                child: _DashedBorder(
-                  color: dashColor,
-                  child: Container(
-                    height: 111.h,
-                    width: 94.w,
-                    decoration: BoxDecoration(
-                      color: squareFill,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(icon, color: dashColor, size: 30),
-                        SizedBox(height: 4.h),
-                        Text(
-                          label,
-                          style: TextStyle(
-                            color: Colors.white.withOpacity(.7),
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w500,
+      child: Padding(
+        padding: EdgeInsets.all(16.w),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // ──────── Dashed Inner Upload Square ────────
+            GestureDetector(
+              onTap: onTap,
+              child: _DashedBorder(
+                color: dashColor,
+                child: Container(
+                  height: 111.h,
+                  width: 94.w,
+                  decoration: BoxDecoration(
+                    color: squareFill,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: selectedImage != null
+                      ? ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: Image.file(
+                            selectedImage!,
+                            width: 94.w,
+                            height: 111.h,
+                            fit: BoxFit.cover,
                           ),
+                        )
+                      : Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(icon, color: dashColor, size: 30),
+                            SizedBox(height: 4.h),
+                            Text(
+                              label,
+                              style: TextStyle(
+                                color: Colors.white.withOpacity(.7),
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ),
                 ),
               ),
-              SizedBox(width: 12.w),
-              // ───────────────────────── description ───────────────────────
-              Expanded(
-                child: Text(
-                  description,
-                  style: TextStyle(
-                    color: Colors.white.withOpacity(.5),
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w400,
-                  ),
+            ),
+            SizedBox(width: 12.w),
+
+            // ──────── Description Text ────────
+            Expanded(
+              child: Text(
+                description,
+                style: TextStyle(
+                  color: Colors.white.withOpacity(.5),
+                  fontSize: 12.sp,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
   }
 }
 
-// ----------------------------------------------------------------------------
-// Private dashed border helper; keeps this widget self‑contained.
-// ----------------------------------------------------------------------------
+// ──────── Dashed Border Decoration ────────
 class _DashedBorder extends StatelessWidget {
   const _DashedBorder({
     required this.child,

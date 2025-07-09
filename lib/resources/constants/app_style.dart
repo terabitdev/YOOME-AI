@@ -259,3 +259,9 @@ final TextStyle RSTextStyle12400 = GoogleFonts.outfit(
   fontWeight: FontWeight.w400,
   color: Colors.white,
 );
+
+final TextStyle MSTextStyle13500 = GoogleFonts.outfit(
+  fontSize: 13.sp,
+  fontWeight: FontWeight.w500,
+  color: Colors.white,
+);
