@@ -25,12 +25,15 @@ class _SettingScreenState extends State<SettingScreen> {
     CardActionSheet.show(
       context,
       title: 'Invitation Code',
-      content: TextField(
-        decoration: const InputDecoration(
-          hintText: 'Enter your code',
-          border: InputBorder.none,
+      content: SizedBox(
+        height: 48.h,
+        child: TextField(
+          decoration: const InputDecoration(
+            hintText: 'Enter your code',
+            border: InputBorder.none,
+          ),
+          style: VTPSTextStyle124006,
         ),
-        style: VTPSTextStyle124006,
       ),
       onConfirm: () {
         // do something with the entered alias…
@@ -161,13 +164,6 @@ class _SettingScreenState extends State<SettingScreen> {
                       title: 'Bug report',
                       onTap: () {
                         Get.to(const BugReportScreen());
-                      },
-                    ),
-                    SizedBox(height: 8.h),
-                    SettingsCard(
-                      title: 'Join discord',
-                      onTap: () {
-                        // Handle join discord
                       },
                     ),
 

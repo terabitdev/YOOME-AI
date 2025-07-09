@@ -265,3 +265,14 @@ final TextStyle MSTextStyle13500 = GoogleFonts.outfit(
   fontWeight: FontWeight.w500,
   color: Colors.white,
 );
+
+final TextStyle CSTextStyle10500 = GoogleFonts.inter(
+  fontSize: 10.sp,
+  fontWeight: FontWeight.w400,
+  color: Colors.white,
+);
+final TextStyle CSTextStyle15400 = GoogleFonts.outfit(
+  fontSize: 15.sp,
+  fontWeight: FontWeight.w400,
+  color: Colors.white,
+);

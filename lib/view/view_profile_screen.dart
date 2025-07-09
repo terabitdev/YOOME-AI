@@ -10,6 +10,7 @@ import 'package:yoome_ai/resources/components/button_action_sheet.dart';
 import 'package:yoome_ai/resources/components/comment_item_widget.dart';
 import 'package:yoome_ai/resources/components/round_button.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
+import 'package:yoome_ai/view/matthew_supports_screen.dart';
 
 class ViewProfileScreen extends StatefulWidget {
   const ViewProfileScreen({super.key});
@@ -133,7 +134,9 @@ class _ProfileContent extends StatelessWidget {
             child: RoundButton(
               title: 'Chat',
               color: ColorConstants.buttonColor,
-              onTap: () {},
+              onTap: () {
+                Get.to(MatthewSupportsScreen());
+              },
             ),
           ),
           SizedBox(width: 16.w),
@@ -156,7 +159,7 @@ class _CommentsCard extends StatelessWidget {
     decoration: BoxDecoration(
       color: Colors.black.withOpacity(.6),
       borderRadius: BorderRadius.circular(16),
-      border: Border.all(color: const Color(0xFFA06AF9)),
+      border: Border.all(color: const Color.fromRGBO(160, 106, 249, 1)),
     ),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,

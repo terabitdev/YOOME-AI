@@ -36,7 +36,7 @@ class _MatthewSupportsScreenState extends State<MatthewSupportsScreen> {
     {
       'imageUrl': 'assets/images/reset.png',
       'label': 'Reset',
-      'screen': const SettingScreen(),
+      'screen': MatthewSupportsScreen(),
     },
     {
       'imageUrl': 'assets/images/share.png',
@@ -250,12 +250,11 @@ class _MatthewSupportsScreenState extends State<MatthewSupportsScreen> {
                             StatefulBuilder(
                               builder: (context, setStateSwitch) {
                                 return CustomToggleSwitch(
-                                  value: isToggled!,
+                                  value: isToggled ?? true,
                                   onChanged: (value) {
-                                    setState(() {
+                                    setStateSwitch(() {
                                       isToggled = value;
                                     });
-                                    setStateSwitch(() {});
                                   },
                                 );
                               },
@@ -283,8 +282,8 @@ class _MatthewSupportsScreenState extends State<MatthewSupportsScreen> {
                           },
                           child: Image.asset(
                             'assets/images/text.png',
-                            width: 24,
-                            height: 24,
+                            width: 20,
+                            height: 20,
                           ),
                         ),
                       ],

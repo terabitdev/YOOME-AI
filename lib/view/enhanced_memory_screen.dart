@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/instance_manager.dart';
 import 'package:yoome_ai/resources/colors/app_colors.dart';
 import 'package:yoome_ai/resources/components/round_button.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
+import 'package:yoome_ai/view/subscribe_screen.dart';
 
 class EnhancedMemoryScreen extends StatefulWidget {
   EnhancedMemoryScreen({super.key});
@@ -64,7 +67,12 @@ class _EnhancedMemoryScreenState extends State<EnhancedMemoryScreen> {
                 ),
               ),
               SizedBox(height: 24.h),
-              Image.asset('assets/images/inform progress board.png'),
+              InkWell(
+                onTap: () {
+                  Get.to(SubscribeScreen());
+                },
+                child: Image.asset('assets/images/inform progress board.png'),
+              ),
               const Spacer(),
               RoundButton(
                 title: 'Confirm',

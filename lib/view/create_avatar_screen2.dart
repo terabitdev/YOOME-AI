@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:yoome_ai/resources/colors/app_colors.dart';
 import 'package:yoome_ai/resources/components/bio_textfield_widget.dart';
 import 'package:yoome_ai/resources/components/round_button.dart';
@@ -20,6 +24,7 @@ class CreateAvatarScreen2 extends StatefulWidget {
 class _CreateAvatarScreen2State extends State<CreateAvatarScreen2> {
   final TextEditingController _characterController = TextEditingController();
   String selectedImageStyle = 'Tinder Style';
+  File? selectedImage;
 
   // Image style data
   final List<Map<String, String>> imageStyles = [
@@ -27,6 +32,31 @@ class _CreateAvatarScreen2State extends State<CreateAvatarScreen2> {
     {'image': 'assets/images/imagestyle2.png'},
     {'image': 'assets/images/imagestyle3.png'},
   ];
+
+  Future<void> requestStoragePermission() async {
+    if (await Permission.storage.request().isGranted ||
+        await Permission.photos.request().isGranted) {
+      print("Permission granted");
+    } else {
+      print("Permission denied");
+    }
+  }
+
+  Future<void> _pickImage() async {
+    await requestStoragePermission();
+
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+
+    if (image != null) {
+      setState(() {
+        selectedImage = File(image.path);
+      });
+      print('Selected image path: ${image.path}');
+    } else {
+      print('No image selected.');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +112,10 @@ class _CreateAvatarScreen2State extends State<CreateAvatarScreen2> {
                     SizedBox(height: 20.h),
 
                     // Upload section with dashed border
-                    UploadSection(),
+                    GestureDetector(
+                      onTap: _pickImage,
+                      child: UploadSection(selectedImage: selectedImage),
+                    ),
                     SizedBox(height: 20.h),
                     Row(
                       children: [
@@ -143,7 +176,7 @@ class _CreateAvatarScreen2State extends State<CreateAvatarScreen2> {
                       onTap: () {
                         print('Character: ${_characterController.text}');
                         print('Selected Style: $selectedImageStyle');
-                        Get.to(EditScreen());
+                        // Get.to(EditScreen());
                       },
                     ),
 

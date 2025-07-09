@@ -4,9 +4,13 @@ import 'package:get/get.dart';
 import 'package:yoome_ai/resources/components/action_sheet_widget.dart';
 import 'package:yoome_ai/resources/components/character_setting_card_widget.dart';
 import 'package:yoome_ai/resources/components/character_setting_toggle_card_widget.dart';
+import 'package:yoome_ai/resources/components/confirmation_dialog.dart';
 import 'package:yoome_ai/resources/components/setting_toggle_card_widget.dart';
 import 'package:yoome_ai/resources/components/settings_card_widget.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
+import 'package:yoome_ai/view/background_setting_screen.dart';
+import 'package:yoome_ai/view/matthew_supports_screen.dart';
+import 'package:yoome_ai/view/report_screen.dart';
 import 'package:yoome_ai/view/view_profile_screen.dart';
 
 class AliasScreen extends StatefulWidget {
@@ -107,7 +111,17 @@ class _AliasScreenState extends State<AliasScreen> {
                   CharacterSettingsCard(
                     title: 'Restart chat',
                     onTap: () {
-                      _More();
+                      showDialog(
+                        context: context,
+                        builder: (_) => ConfirmationDialog(
+                          title: 'Do you want to restart the chat?',
+                          confirmText: 'New Chat',
+                          onConfirm: () {
+                            // Your action here
+                            Get.to(MatthewSupportsScreen());
+                          },
+                        ),
+                      );
                     },
                   ),
                   SizedBox(height: 12.h),
@@ -122,10 +136,17 @@ class _AliasScreenState extends State<AliasScreen> {
                   SizedBox(height: 12.h),
                   CharacterSettingsCard(
                     title: 'Background setting',
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(const BackgroundSettingScreen());
+                    },
                   ),
                   SizedBox(height: 12.h),
-                  CharacterSettingsCard(title: 'Report', onTap: () {}),
+                  CharacterSettingsCard(
+                    title: 'Report',
+                    onTap: () {
+                      Get.to(const ReportScreen());
+                    },
+                  ),
                   SizedBox(height: 20.h),
                 ],
               ),

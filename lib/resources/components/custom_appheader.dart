@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yoome_ai/resources/constants/app_style.dart';
 
 class CustomAppHeader extends StatelessWidget {
   final String title;
@@ -24,14 +25,7 @@ class CustomAppHeader extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 12),
-          Text(
-            title,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
+          Text(title, style: SSTextStyle18500),
         ],
       ),
     );

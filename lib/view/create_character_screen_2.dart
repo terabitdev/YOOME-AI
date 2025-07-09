@@ -44,7 +44,11 @@ class _CreateCharacterScreen2State extends State<CreateCharacterScreen2> {
 
     final ImagePicker picker = ImagePicker();
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+
     if (image != null) {
+      setState(() {
+        selectedImage = File(image.path);
+      });
       print('Selected image path: ${image.path}');
     } else {
       print('No image selected.');
@@ -153,7 +157,7 @@ class _CreateCharacterScreen2State extends State<CreateCharacterScreen2> {
                       onTap: () {
                         print('Character: ${_characterController.text}');
                         print('Selected Style: $selectedImageStyle');
-                        Get.to(CreateAvatarScreen2());
+                        // Get.to(CreateAvatarScreen2());
                       },
                     ),
                     SizedBox(height: 30.h),

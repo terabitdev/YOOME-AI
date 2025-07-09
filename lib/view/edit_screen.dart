@@ -7,6 +7,7 @@ import 'package:yoome_ai/resources/components/bio_textfield_widget.dart';
 import 'package:yoome_ai/resources/components/round_button.dart';
 import 'package:yoome_ai/view/edit_persona_screen.dart';
 import 'package:yoome_ai/view/edit_persona_screen_2.dart';
+import 'package:yoome_ai/view/matthew_supports_screen.dart';
 
 class EditScreen extends StatefulWidget {
   const EditScreen({super.key});
@@ -183,7 +184,7 @@ class _EditScreenState extends State<EditScreen> {
                       title: 'Save',
                       color: ColorConstants.buttonColor,
                       onTap: () {
-                        Get.to(EditPersonaScreen());
+                        Get.to(MatthewSupportsScreen());
                       },
                     ),
 

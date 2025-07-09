@@ -6,6 +6,7 @@ import 'package:yoome_ai/resources/components/dual_action_button_widget.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
 import 'package:yoome_ai/view/create_avatar_screen.dart';
 import 'package:yoome_ai/view/create_avatar_screen2.dart';
+import 'package:yoome_ai/view/matthew_supports_screen.dart';
 
 class BackgroundSettingScreen extends StatefulWidget {
   const BackgroundSettingScreen({super.key});
@@ -140,7 +141,7 @@ class _BackgroundSettingScreenState extends State<BackgroundSettingScreen> {
                   leftIsPrimary: false,
                   onLeftTap: () => Navigator.pop(context),
                   onRightTap: () {
-                    Get.to(CreateAvatarScreen());
+                    Get.to(MatthewSupportsScreen());
                   },
                 ),
               ),

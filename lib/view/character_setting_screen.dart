@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get/utils.dart';
 import 'package:yoome_ai/resources/components/character_setting_card_widget.dart';
 import 'package:yoome_ai/resources/components/character_setting_toggle_card_widget.dart';
+import 'package:yoome_ai/resources/components/confirmation_dialog.dart';
 import 'package:yoome_ai/resources/components/setting_toggle_card_widget.dart';
 import 'package:yoome_ai/resources/components/settings_card_widget.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
@@ -44,7 +45,7 @@ class _CharacterSettingScreenState extends State<CharacterSettingScreen> {
                 _toolbarButton(
                   icon: Icons.arrow_back,
                   onTap: () {
-                    Get.back();
+                    Navigator.pop(context);
                   },
                 ),
               ],
@@ -87,7 +88,17 @@ class _CharacterSettingScreenState extends State<CharacterSettingScreen> {
                   CharacterSettingsCard(
                     title: 'Restart chat',
                     onTap: () {
-                      // Handle restart chat
+                      showDialog(
+                        context: context,
+                        builder: (_) => ConfirmationDialog(
+                          title: 'Do you want to restart the chat?',
+                          confirmText: 'New Chat',
+                          onConfirm: () {
+                            // Your action here
+                            Get.to(MatthewSupportsScreen());
+                          },
+                        ),
+                      );
                     },
                   ),
                   SizedBox(height: 12.h),
@@ -103,7 +114,9 @@ class _CharacterSettingScreenState extends State<CharacterSettingScreen> {
                     badgeText: 'Plus',
                     isToggled: autoPlayVoice,
                     onToggle: (value) {
-                      Get.to(SubscribeScreen());
+                      setState(() {
+                        autoPlayVoice = value;
+                      });
                     },
                   ),
                   SizedBox(height: 12.h),

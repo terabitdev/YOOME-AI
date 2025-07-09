@@ -196,7 +196,7 @@ class ShareScreen extends StatelessWidget {
                             child: TextButton(
                               onPressed: () {
                                 // Handle share action
-                                Get.to(() => LoginScreen());
+                                // Get.to(() => LoginScreen());
                               },
                               child: Text(
                                 'Share',

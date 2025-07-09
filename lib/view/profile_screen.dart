@@ -74,10 +74,10 @@ class ProfileScreen extends StatelessWidget {
                           GradientButton(
                             label: 'Create',
                             onPressed: () {
-                              Get.to(
-                                () => CreateCharacterScreen2(),
-                                transition: Transition.rightToLeft,
-                              );
+                              // Get.to(
+                              //   // () => CreateCharacterScreen2(),
+                              //   // transition: Transition.rightToLeft,
+                              // );
                             },
                           ),
                         ],

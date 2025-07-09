@@ -82,12 +82,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     selected: isSelected,
                     onSelected: (_) => setState(() => selectedFilter = option),
                     showCheckmark: false, // ✨ hides tick icon
-                    backgroundColor: const Color.fromRGBO(
-                      160,
-                      106,
-                      249,
-                      0.22,
-                    ), // not‑selected colour
+                    backgroundColor: const Color.fromARGB(51, 56, 39, 92),
+
                     selectedColor: const Color(0xFF8B5CF6), // selected colour
                     side: BorderSide(
                       color: isSelected

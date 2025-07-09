@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:yoome_ai/resources/components/dual_action_button_widget.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
+import 'package:yoome_ai/view/matthew_supports_screen.dart';
 
 class ReportScreen extends StatefulWidget {
   const ReportScreen({super.key});
@@ -185,11 +187,7 @@ class _ReportScreenState extends State<ReportScreen> {
                             Navigator.pop(context);
                           },
                           onRightTap: () {
-                            if (selectedReport != null) {
-                              print('Submit tapped: $selectedReport');
-                              // Handle submit action with selected report
-                            }
-                            Navigator.pop(context);
+                            Get.to(MatthewSupportsScreen());
                           },
                         ),
                       ),

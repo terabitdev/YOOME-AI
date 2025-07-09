@@ -13,7 +13,7 @@ class CardActionSheet extends StatelessWidget {
     this.cancelLabel = 'Cancel',
     this.confirmLabel = 'Confirm',
     this.sheetColor = Colors.black,
-    this.cardColor = const Color(0xFF2D1B5B),
+    this.cardColor = Colors.black,
     this.strokeColor = const Color(0xFF5E3F93),
   });
 

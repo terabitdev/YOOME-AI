@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:yoome_ai/Controllers/chat_screen_controller.dart';
 import 'package:yoome_ai/resources/colors/app_colors.dart';
 import 'package:yoome_ai/resources/components/custom_appheader.dart';
+import 'package:yoome_ai/resources/constants/app_style.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({Key? key}) : super(key: key);
@@ -37,15 +38,17 @@ class ChatScreen extends StatelessWidget {
                     margin: const EdgeInsets.symmetric(horizontal: 24),
                     padding: const EdgeInsets.all(4),
                     decoration: BoxDecoration(
-                      color: Colors.transparent,
+                      color: const Color.fromRGBO(
+                        36,
+                        4,
+                        89,
+                        1,
+                      ), // Unselected tab bg
                       borderRadius: BorderRadius.circular(25),
-                      border: Border.all(
-                        color: ColorConstants.lightGrey.withOpacity(0.25),
-                        width: 1,
-                      ),
                     ),
                     child: Row(
                       children: [
+                        // ───── Tab 1: Chats ─────
                         Expanded(
                           child: Obx(
                             () => GestureDetector(
@@ -56,8 +59,9 @@ class ChatScreen extends StatelessWidget {
                                 ),
                                 decoration: BoxDecoration(
                                   color: controller.selectedTab.value == 0
-                                      ? const Color(0xFF7C3AED)
-                                      : Colors.transparent,
+                                      ? const Color(0xFF7C3AED) // Selected
+                                      : Colors
+                                            .transparent, // Transparent inside container
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 child: Text(
@@ -75,6 +79,8 @@ class ChatScreen extends StatelessWidget {
                             ),
                           ),
                         ),
+
+                        // ───── Tab 2: Following ─────
                         Expanded(
                           child: Obx(
                             () => GestureDetector(
@@ -127,10 +133,6 @@ class ChatScreen extends StatelessWidget {
                               104,
                             ), // semi-transparent
                             borderRadius: BorderRadius.circular(16),
-                            border: Border.all(
-                              color: const Color(0xFF7B59FF).withOpacity(0.5),
-                              width: 1,
-                            ),
                           ),
                           child: ListTile(
                             contentPadding: const EdgeInsets.symmetric(
@@ -143,20 +145,10 @@ class ChatScreen extends StatelessWidget {
                                 'assets/images/imagegenerate.png',
                               ),
                             ),
-                            title: const Text(
-                              'Daniyal',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            subtitle: const Text(
+                            title: Text('Daniyal', style: CSTextStyle15400),
+                            subtitle: Text(
                               'What\'s up?',
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 14,
-                              ),
+                              style: CSTextStyle10500,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),

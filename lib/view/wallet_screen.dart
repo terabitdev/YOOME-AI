@@ -57,16 +57,18 @@ class _WalletScreenState extends State<WalletScreen> {
                 SizedBox(width: 16.w),
                 Text('Wallet', style: SSTextStyle18500),
                 const Spacer(),
-                Image.asset(
-                  'assets/images/wallet1.png',
-                  width: 19.w,
-                  height: 16.h,
-                ),
-                SizedBox(width: 8.w),
-                Image.asset(
-                  'assets/images/wallet2.png',
-                  width: 19.w,
-                  height: 16.h,
+                InkWell(
+                  onTap: () {
+                    Get.to(
+                      () => YoomeBillScreen(),
+                      transition: Transition.rightToLeft,
+                    );
+                  },
+                  child: Image.asset(
+                    'assets/images/wallet1.png',
+                    width: 19.w,
+                    height: 16.h,
+                  ),
                 ),
               ],
             ),
@@ -208,7 +210,7 @@ class _WalletScreenState extends State<WalletScreen> {
                         RoundButton(
                           title: 'Get it for PKR 27800',
                           onTap: () {
-                            Get.to(YoomeBillScreen());
+                            // Get.to(YoomeBillScreen());
                           },
                           color: const Color(0xFFA259FF),
                         ),

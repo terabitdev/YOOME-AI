@@ -79,7 +79,11 @@ class _YoomeBillScreenState extends State<YoomeBillScreen> {
                               title: 'All',
                               isFirst: true,
                               isSelected: selectedTab == 'All',
-                              onTap: () {},
+                              onTap: () {
+                                setState(() {
+                                  selectedTab = 'All';
+                                });
+                              },
                               isMiddle: false,
                             ),
                             SegmentedTabButton(
