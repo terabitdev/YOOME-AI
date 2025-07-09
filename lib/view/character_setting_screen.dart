@@ -36,21 +36,21 @@ class _CharacterSettingScreenState extends State<CharacterSettingScreen> {
               fit: BoxFit.cover,
             ),
           ),
-          Positioned(
-            top: MediaQuery.of(context).padding.top + 10,
-            left: 20,
-            right: 20,
-            child: Row(
-              children: [
-                _toolbarButton(
-                  icon: Icons.arrow_back,
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ],
-            ),
-          ),
+          // Positioned(
+          //   top: MediaQuery.of(context).padding.top + 10,
+          //   left: 20,
+          //   right: 20,
+          //   child: Row(
+          //     children: [
+          //       _toolbarButton(
+          //         icon: Icons.arrow_back,
+          //         onTap: () {
+          //           Navigator.pop(context);
+          //         },
+          //       ),
+          //     ],
+          //   ),
+          // ),
 
           // Main Content
           Positioned.fill(
@@ -136,6 +136,19 @@ class _CharacterSettingScreenState extends State<CharacterSettingScreen> {
                   SizedBox(height: 20.h),
                 ],
               ),
+            ),
+          ),
+          Positioned(
+            top: MediaQuery.of(context).padding.top + 10,
+            left: 20,
+            right: 20,
+            child: Row(
+              children: [
+                _toolbarButton(
+                  icon: Icons.arrow_back,
+                  onTap: () => Navigator.pop(context),
+                ),
+              ],
             ),
           ),
         ],
