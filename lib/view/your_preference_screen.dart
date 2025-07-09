@@ -1,6 +1,7 @@
 // lib/view/your_preference_screen.dart - Debug Version
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/utils.dart';
 import 'package:yoome_ai/resources/colors/app_colors.dart';
@@ -78,6 +79,7 @@ class _YourPreferenceScreenState extends State<YourPreferenceScreen> {
                             child: CharacterCard(
                               title: '',
                               imagePath: 'assets/images/Card.png',
+                              showTitle: false,
                               isSelected: selectedReplay == 'casual',
                               onTap: () =>
                                   setState(() => selectedReplay = 'casual'),
@@ -88,6 +90,7 @@ class _YourPreferenceScreenState extends State<YourPreferenceScreen> {
                             child: CharacterCard(
                               title: '',
                               imagePath: 'assets/images/Card.png',
+                              showTitle: false,
                               isSelected: selectedReplay == 'long',
                               onTap: () =>
                                   setState(() => selectedReplay = 'long'),
@@ -153,19 +156,10 @@ class _YourPreferenceScreenState extends State<YourPreferenceScreen> {
 }
 
 class CharacterCard extends StatelessWidget {
-  /// Full asset path, e.g. 'assets/images/animal.png'
   final String imagePath;
-
-  /// Text you might want under the image (“Male”, “Female”, etc.)
   final String title;
-
-  /// Set to `false` when you don’t want the title rendered.
   final bool showTitle;
-
-  /// Whether this card is currently selected.
   final bool isSelected;
-
-  /// Tap callback.
   final VoidCallback onTap;
 
   const CharacterCard({
@@ -174,7 +168,7 @@ class CharacterCard extends StatelessWidget {
     required this.title,
     required this.isSelected,
     required this.onTap,
-    this.showTitle = true, // default: show the title
+    this.showTitle = true,
   }) : super(key: key);
 
   @override
@@ -182,41 +176,51 @@ class CharacterCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        height: 190, // total fixed height
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           border: isSelected ? Border.all(color: Colors.white, width: 2) : null,
         ),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           children: [
-            ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(16),
-                topRight: Radius.circular(16),
-              ),
-              child: Image.asset(
-                imagePath,
-                width: double.infinity,
-                height: 149, // your original height
-                fit: BoxFit.cover,
-                errorBuilder: (_, __, ___) => Container(
+            // Image takes most of the space
+            Expanded(
+              flex: 3,
+              child: ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(16),
+                  topRight: Radius.circular(16),
+                ),
+                child: Image.asset(
+                  imagePath,
                   width: double.infinity,
-                  height: 149,
-                  color: const Color(0xFF8B5CF6),
-                  child: const Icon(
-                    Icons.person,
-                    size: 80,
-                    color: Colors.white,
+                  fit: BoxFit.cover,
+                  errorBuilder: (_, __, ___) => Container(
+                    color: const Color(0xFF8B5CF6),
+                    child: const Icon(
+                      Icons.person,
+                      size: 80,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
             ),
-
-            // Optional title
+            // Title (optional)
             if (showTitle)
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                child: Text(title, style: YPMFTextStyle15400),
+              Expanded(
+                flex: 1,
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: Text(
+                      title,
+                      style: YPMFTextStyle15400,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
               ),
           ],
         ),

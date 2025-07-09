@@ -1,6 +1,7 @@
 // lib/widgets/custom_navigation_bar.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:yoome_ai/Controllers/nav_bar_controller.dart';
 
@@ -29,13 +30,13 @@ class CustomNavigationBar extends StatelessWidget {
             // ─── Home ───
             NavigationDestination(
               label: '',
-              icon: Image.asset(
-                'assets/images/home.png',
+              icon: SvgPicture.asset(
+                'assets/images/home.svg',
                 width: 30.w,
                 height: 30.h,
               ),
-              selectedIcon: Image.asset(
-                'assets/images/brighthome.png', // bright
+              selectedIcon: SvgPicture.asset(
+                'assets/images/brighthome.svg', // bright
                 width: 30.w,
                 height: 30.h,
               ),

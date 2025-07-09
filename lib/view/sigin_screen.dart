@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoome_ai/resources/components/google_roundbutton.dart';
 import 'package:yoome_ai/resources/components/reuseable_social_button.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -36,9 +37,7 @@ class SignInScreen extends StatelessWidget {
                   children: [
                     GoogleRoundButton(
                       title: " Continue with Google",
-                      onTap: () {
-                        Get.to(() => LoginScreen());
-                      },
+                      onTap: () {},
                       color: const Color(0xFF1A1A1A),
                       loading: false,
                     ),
@@ -72,7 +71,9 @@ class SignInScreen extends StatelessWidget {
                         ),
                         SocialButton(
                           imagePath: AppImages.appleLogo,
-                          onTap: () {},
+                          onTap: () {
+                            Get.to(() => LoginScreen());
+                          },
                           bgColor: Color(0x80000000),
                         ),
                       ],

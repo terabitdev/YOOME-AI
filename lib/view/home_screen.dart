@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:yoome_ai/resources/constants/app_images.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
@@ -50,9 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Text('For You', style: HTextStyle19700),
                 InkWell(
                   child: Icon(Icons.search, color: Colors.white, size: 24),
-                  onTap: () {
-                    Get.offAll(const CharacterSettingScreen());
-                  },
+                  onTap: () {},
                 ),
               ],
             ),

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:yoome_ai/resources/components/reuseable_textfield.dart';
+import 'package:yoome_ai/resources/components/toggle_button.dart';
 import 'package:yoome_ai/view/character_setting_screen.dart';
 import 'package:yoome_ai/view/enhanced_memory_screen.dart';
 import 'package:yoome_ai/view/persona_screen.dart';
@@ -18,6 +19,7 @@ class MatthewSupportsScreen extends StatefulWidget {
 
 class _MatthewSupportsScreenState extends State<MatthewSupportsScreen> {
   final TextEditingController _messageController = TextEditingController();
+  bool _showActionButtons = false;
 
   static List<Map<String, dynamic>> _imageData = [
     {
@@ -57,7 +59,13 @@ class _MatthewSupportsScreenState extends State<MatthewSupportsScreen> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Color(0xFF2D1B69), Color(0xFF1A0E3D)],
+            colors: [
+              Colors.black,
+              Color(0xFF5E3F93),
+              Colors.black,
+              Colors.black,
+            ],
+            // stops: [0.0, 0.5, 1.0, 1.0],
           ),
         ),
         child: SafeArea(
@@ -129,23 +137,47 @@ class _MatthewSupportsScreenState extends State<MatthewSupportsScreen> {
                         ),
 
                         // No Audio
+                        Padding(
+                          padding: EdgeInsets.only(right: 15),
+                          child: Container(
+                            width: 70.w,
+                            height: 30.h,
+                            padding: EdgeInsets.symmetric(
+                              vertical: 8,
+                              horizontal: 12,
+                            ),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF090017).withOpacity(0.3),
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10.r),
+                                bottomRight: Radius.circular(10.r),
+                                topRight: Radius.circular(10.r),
+                              ),
+                            ),
+                            child: Text(
+                              'No Audio',
+                              style: TextStyle(
+                                color: Colors.white.withOpacity(0.6),
+                                fontSize: 10,
+                              ),
+                            ),
+                          ),
+                        ),
                         Container(
                           width: double.infinity,
-                          padding: EdgeInsets.symmetric(
-                            vertical: 8,
-                            horizontal: 12,
-                          ),
+                          padding: EdgeInsets.all(20),
                           margin: EdgeInsets.only(bottom: 20),
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Text(
-                            'No Audio',
-                            style: TextStyle(
-                              color: Colors.white.withOpacity(0.6),
-                              fontSize: 12,
+                            color: Colors.black.withOpacity(0.3),
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(10.r),
+                              bottomRight: Radius.circular(10.r),
+                              topRight: Radius.circular(10.r),
                             ),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [_buildMessageText()],
                           ),
                         ),
 
@@ -165,9 +197,13 @@ class _MatthewSupportsScreenState extends State<MatthewSupportsScreen> {
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  _buildMediaControlButton(Icons.refresh),
+                                  _buildMediaControlButton(
+                                    'assets/images/refresh.png',
+                                  ),
                                   const SizedBox(width: 6),
-                                  _buildMediaControlButton(Icons.play_arrow),
+                                  _buildMediaControlButton(
+                                    'assets/images/pause.png',
+                                  ),
                                 ],
                               ),
                             ),
@@ -209,7 +245,7 @@ class _MatthewSupportsScreenState extends State<MatthewSupportsScreen> {
                                 SizedBox(width: 15),
                                 StatefulBuilder(
                                   builder: (context, setStateSwitch) {
-                                    return Switch(
+                                    return CustomToggleSwitch(
                                       value: isToggled!,
                                       onChanged: (value) {
                                         setState(() {
@@ -217,9 +253,6 @@ class _MatthewSupportsScreenState extends State<MatthewSupportsScreen> {
                                         });
                                         setStateSwitch(() {});
                                       },
-                                      activeColor: Colors.purple,
-                                      activeTrackColor: Colors.purple,
-                                      inactiveThumbColor: Colors.purple,
                                     );
                                   },
                                 ),
@@ -238,28 +271,36 @@ class _MatthewSupportsScreenState extends State<MatthewSupportsScreen> {
                               width: 24,
                               height: 24,
                             ),
-                            Image.asset(
-                              'assets/images/text.png',
-                              width: 24,
-                              height: 24,
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  _showActionButtons = !_showActionButtons;
+                                });
+                              },
+                              child: Image.asset(
+                                'assets/images/text.png',
+                                width: 24,
+                                height: 24,
+                              ),
                             ),
                           ],
                         ),
                         SizedBox(height: 24.h),
 
                         // Action Buttons
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: List.generate(5, (index) {
-                            return _actionButton(
-                              imageUrl: _imageData[index]['imageUrl']!,
-                              label: _imageData[index]['label']!,
-                              onTap: () {
-                                Get.to(_imageData[index]['screen']);
-                              },
-                            );
-                          }),
-                        ),
+                        if (_showActionButtons)
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: List.generate(5, (index) {
+                              return _actionButton(
+                                imageUrl: _imageData[index]['imageUrl']!,
+                                label: _imageData[index]['label']!,
+                                onTap: () {
+                                  Get.to(_imageData[index]['screen']);
+                                },
+                              );
+                            }),
+                          ),
                         SizedBox(height: 20.h),
                       ],
                     ),
@@ -315,7 +356,7 @@ class _MatthewSupportsScreenState extends State<MatthewSupportsScreen> {
             padding: EdgeInsets.all(8.w),
             decoration: BoxDecoration(
               color: const Color(0xFF25104A),
-              shape: BoxShape.circle,
+              borderRadius: BorderRadius.circular(12.r),
             ),
             child: Image.asset(
               imageUrl,
@@ -342,14 +383,9 @@ class _MatthewSupportsScreenState extends State<MatthewSupportsScreen> {
   }
 }
 
-Widget _buildMediaControlButton(IconData icon) {
-  return Container(
-    width: 34,
-    height: 34,
-    decoration: BoxDecoration(
-      color: Colors.white.withOpacity(0.2),
-      shape: BoxShape.circle,
-    ),
-    child: Icon(icon, size: 20, color: Colors.white),
+Widget _buildMediaControlButton(String imagePath) {
+  return Padding(
+    padding: EdgeInsets.all(8.0),
+    child: Image.asset(imagePath, width: 19, height: 19),
   );
 }

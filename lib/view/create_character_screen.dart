@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
+import 'package:yoome_ai/view/create_avatar_screen2.dart';
+import 'package:yoome_ai/view/create_character_screen_2.dart';
 
 /// Call this inside `showModalBottomSheet` or `Get.bottomSheet`.
 class CreateCharacterSheet extends StatelessWidget {
@@ -52,15 +55,14 @@ class CreateCharacterSheet extends StatelessWidget {
               _ModeTile(
                 title: 'Quick mode',
                 onTap: () {
-                  Navigator.pop(context);
+                  Get.to(CreateCharacterScreen2());
                 },
               ),
               const SizedBox(height: 16),
               _ModeTile(
                 title: 'Expert mode',
                 onTap: () {
-                  Navigator.pop(context);
-                  // TODO: navigate to expert‑mode flow
+                  Get.to(CreateAvatarScreen2());
                 },
               ),
               SizedBox(height: 32.h),

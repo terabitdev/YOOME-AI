@@ -29,9 +29,6 @@ class _YourInterestScreenState extends State<YourInterestScreen> {
       'Possessiveness',
       'Helpless',
       'Hate You',
-      'Possessiveness',
-      'Helpless',
-      'Hate You',
       'Quiet/Shy',
       'Bully',
       'Secretly Loves You',
@@ -49,7 +46,7 @@ class _YourInterestScreenState extends State<YourInterestScreen> {
     'Relationship': [
       'Schoolmate', 'Villain', 'Husband',
       'Stranger', 'Sibling', 'Cousin',
-      'Lover', 'Roommate', 'Roommate', // Duplicate as shown
+      'Lover', 'Roommate', // Duplicate as shown
       'Enemy', 'Tough Guy', 'Boss',
       'Non-Human', 'Friend', 'Childhood Friend',
       'Ex', 'Celebrity', 'Father', 'Servant',

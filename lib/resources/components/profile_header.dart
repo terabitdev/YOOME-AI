@@ -35,13 +35,13 @@ class HeaderRow extends StatelessWidget {
               children: [
                 Image.asset(
                   'assets/images/discord2.png',
-                  width: 16.w,
-                  height: 16.h,
+                  width: 19.w,
+                  height: 19.h,
                 ),
                 SizedBox(width: 8.w),
                 InkWell(
                   onTap: () {
-                    Get.to(SettingScreen());
+                    // Get.to(SettingScreen());
                   },
                   child: Image.asset(
                     'assets/images/settings.png',

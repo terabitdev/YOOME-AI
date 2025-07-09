@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoome_ai/resources/constants/app_images.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
 
@@ -37,8 +38,8 @@ class GoogleRoundButton extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     // Google Icon
-                    Image.asset(
-                      AppImages.googleLogo,
+                    SvgPicture.asset(
+                      AppImages.google,
                       height: 24.h, // Adjust the size of the Google icon
                       width: 24.w,
                     ),

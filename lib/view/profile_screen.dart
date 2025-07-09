@@ -7,6 +7,7 @@ import 'package:yoome_ai/resources/components/profile_header.dart';
 import 'package:yoome_ai/resources/components/profile_helpers.dart';
 import 'package:yoome_ai/view/create_character_screen_2.dart';
 import 'package:yoome_ai/view/matthew_supports_screen.dart';
+import 'package:yoome_ai/view/wallet_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -44,9 +45,17 @@ class ProfileScreen extends StatelessWidget {
                   SizedBox(height: 14.h),
                   const Subtitle('Tell us a bit about yourself'),
                   SizedBox(height: 22.h),
-                  const StatsRow(),
+                  StatsRow(),
                   SizedBox(height: 28.h),
-                  const ActionRow(),
+                  InkWell(
+                    onTap: () {
+                      Get.to(
+                        () => WalletScreen(),
+                        transition: Transition.rightToLeft,
+                      );
+                    },
+                    child: const ActionRow(),
+                  ),
                   SizedBox(height: 32.h),
 
                   // purple sub‑panel

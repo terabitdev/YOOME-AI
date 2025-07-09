@@ -11,4 +11,6 @@ class AppImages {
   static const String grid5 = 'assets/images/grid5.png';
   static const String grid6 = 'assets/images/grid6.png';
   static const String generateimage = 'assets/images/imagegenerate.png';
+  static const String discord = 'assets/images/discord.svg';
+  static const String google = 'assets/images/google.svg';
 }
