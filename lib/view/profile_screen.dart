@@ -72,12 +72,7 @@ class ProfileScreen extends StatelessWidget {
                           SizedBox(height: 24.h),
                           const Subtitle('No Character yet'),
                           SizedBox(height: 36.h),
-                          GradientButton(
-                            label: 'Create',
-                            onPressed: () {
-                              Get.to(CreateCharacterSheet());
-                            },
-                          ),
+                          GradientButton(label: 'Create', onPressed: () {}),
                         ],
                       ),
                     ),
