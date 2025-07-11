@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "353818779194",
+    "project_id": "yoome-ai",
+    "storage_bucket": "yoome-ai.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:353818779194:android:08b8a89c04ffb1f9c05f03",
+        "android_client_info": {
+          "package_name": "com.example.yoome_ai"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5AdIj0X0zXp1cHVIkB3HfOaSQo_VM17w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

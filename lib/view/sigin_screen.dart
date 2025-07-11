@@ -7,6 +7,7 @@ import 'package:yoome_ai/resources/constants/app_images.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
 import 'package:yoome_ai/view/login_screnn.dart';
 import 'package:get/get.dart';
+import 'package:yoome_ai/view/signup_screen.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
