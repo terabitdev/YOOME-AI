@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:yoome_ai/config/splash_services.dart';
 import 'package:yoome_ai/resources/components/action_sheet_widget.dart';
 import 'package:yoome_ai/resources/components/setting_toggle_card_widget.dart';
 import 'package:yoome_ai/resources/components/settings_card_widget.dart';
@@ -175,7 +176,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     SettingsCard(
                       title: 'Logout',
                       onTap: () {
-                        // Handle logout
+                        SessionHelper.logoutUser();
                       },
                     ),
                     SizedBox(height: 8.h),

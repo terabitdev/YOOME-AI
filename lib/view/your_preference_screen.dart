@@ -1,36 +1,26 @@
-// lib/view/your_preference_screen.dart - Debug Version
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get/utils.dart';
 import 'package:yoome_ai/resources/colors/app_colors.dart';
 import 'package:yoome_ai/resources/components/progress_bar.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
 import 'package:yoome_ai/view/your_interest_screen.dart';
+import '../Controllers/welcome_screen_controller.dart';
 
-class YourPreferenceScreen extends StatefulWidget {
+class YourPreferenceScreen extends StatelessWidget {
   const YourPreferenceScreen({Key? key}) : super(key: key);
 
   @override
-  State<YourPreferenceScreen> createState() => _YourPreferenceScreenState();
-}
-
-class _YourPreferenceScreenState extends State<YourPreferenceScreen> {
-  String selectedCharacter = '';
-  String selectedReplay = '';
-
-  @override
   Widget build(BuildContext context) {
+    final WelcomeController controller = Get.find();
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
         child: Column(
           children: [
-            // ─── Progress bar stays full‑width ───
             const ProgressBarWidget(currentStep: 2, totalSteps: 3),
 
-            // ─── Everything else gets ONE horizontal padding of 24 ───
             Expanded(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -45,73 +35,79 @@ class _YourPreferenceScreenState extends State<YourPreferenceScreen> {
                       Text('Character Preferences', style: YPTextStyle214500),
 
                       SizedBox(height: 20.h),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: CharacterCard(
-                              title: 'Male',
-                              imagePath: 'assets/images/animal.png',
-                              isSelected: selectedCharacter == 'male',
-                              onTap: () =>
-                                  setState(() => selectedCharacter = 'male'),
+                      Obx(
+                        () => Row(
+                          children: [
+                            Expanded(
+                              child: CharacterCard(
+                                title: 'Male',
+                                imagePath: 'assets/images/animal.png',
+                                isSelected:
+                                    controller.selectedCharacter.value ==
+                                    'male',
+                                onTap: () => controller.selectCharacter('male'),
+                              ),
                             ),
-                          ),
-                          const SizedBox(width: 16),
-                          Expanded(
-                            child: CharacterCard(
-                              title: 'Female',
-                              imagePath: 'assets/images/cat.png',
-                              isSelected: selectedCharacter == 'female',
-                              onTap: () =>
-                                  setState(() => selectedCharacter = 'female'),
+                            const SizedBox(width: 16),
+                            Expanded(
+                              child: CharacterCard(
+                                title: 'Female',
+                                imagePath: 'assets/images/cat.png',
+                                isSelected:
+                                    controller.selectedCharacter.value ==
+                                    'female',
+                                onTap: () =>
+                                    controller.selectCharacter('female'),
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
 
                       SizedBox(height: 40.h),
                       Text('Character Replay', style: YPMFTextStyle15400),
 
                       SizedBox(height: 20.h),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: CharacterCard(
-                              title: '',
-                              imagePath: 'assets/images/Card.png',
-                              showTitle: false,
-                              isSelected: selectedReplay == 'casual',
-                              onTap: () =>
-                                  setState(() => selectedReplay = 'casual'),
+                      Obx(
+                        () => Row(
+                          children: [
+                            Expanded(
+                              child: CharacterCard(
+                                title: '',
+                                imagePath: 'assets/images/Card.png',
+                                showTitle: false,
+                                isSelected:
+                                    controller.selectedReplay.value == 'casual',
+                                onTap: () => controller.selectReplay('casual'),
+                              ),
                             ),
-                          ),
-                          const SizedBox(width: 16),
-                          Expanded(
-                            child: CharacterCard(
-                              title: '',
-                              imagePath: 'assets/images/c_card.png',
-                              showTitle: false,
-                              isSelected: selectedReplay == 'long',
-                              onTap: () =>
-                                  setState(() => selectedReplay = 'long'),
+                            const SizedBox(width: 16),
+                            Expanded(
+                              child: CharacterCard(
+                                title: '',
+                                imagePath: 'assets/images/c_card.png',
+                                showTitle: false,
+                                isSelected:
+                                    controller.selectedReplay.value == 'long',
+                                onTap: () => controller.selectReplay('long'),
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
 
-                      SizedBox(height: 60.h), // space above buttons
+                      SizedBox(height: 60.h),
                     ],
                   ),
                 ),
               ),
             ),
 
-            // ─── Bottom buttons also live in the same Padding ───
+            // Bottom Buttons
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 24.w),
               child: Row(
                 children: [
-                  // Skip
                   Expanded(
                     child: OutlinedButton(
                       style: OutlinedButton.styleFrom(
@@ -127,7 +123,6 @@ class _YourPreferenceScreenState extends State<YourPreferenceScreen> {
                     ),
                   ),
                   SizedBox(width: 16.w),
-                  // Enter YOOME
                   Expanded(
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
@@ -138,7 +133,7 @@ class _YourPreferenceScreenState extends State<YourPreferenceScreen> {
                         minimumSize: Size.fromHeight(50.h),
                       ),
                       onPressed: () {
-                        Get.to(() => const YourInterestScreen());
+                        controller.onNextFromPreference();
                       },
                       child: Text('Enter YOOME', style: YPBTextStyle14700),
                     ),

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -19,7 +20,7 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  final TextEditingController emailController = TextEditingController();
+  final User? user = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -30,67 +31,50 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              minHeight:
-                  MediaQuery.of(context).size.height -
-                  MediaQuery.of(context).padding.top -
-                  MediaQuery.of(context).padding.bottom,
-            ),
-            child: IntrinsicHeight(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const ProgressBarWidget(currentStep: 1, totalSteps: 3),
-                  SizedBox(height: 23.h),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const ProgressBarWidget(currentStep: 1, totalSteps: 3),
+              SizedBox(height: 23.h),
 
-                  Text('Welcome YOOME AI!', style: WTextStyle19700),
-                  SizedBox(height: 61.h),
+              Text('Welcome YOOME AI!', style: WTextStyle19700),
+              SizedBox(height: 61.h),
 
-                  Text('YOUR NAME', style: LTextStyle12400),
-                  SizedBox(height: 7.h),
+              Text('YOUR EMAIL', style: LTextStyle12400),
+              SizedBox(height: 7.h),
 
-                  CustomTextField(
-                    title: 'Please enter your name',
-                    controller: emailController,
-                  ),
-                  SizedBox(height: 35.h),
-
-                  Obx(
-                    () => GenderSelectionWidget(
-                      genderOptions: controller.genderOptions,
-                      selectedGender: controller.selectedGender.value,
-                      onGenderSelected: controller.selectGender,
-                    ),
-                  ),
-                  SizedBox(height: 35.h),
-
-                  Obx(
-                    () => AgeSelectionWidget(
-                      ageOptions: controller.ageOptions,
-                      selectedAge: controller.selectedAge.value,
-                      onAgeSelected: controller.selectAge,
-                    ),
-                  ),
-
-                  const Spacer(),
-
-                  RoundButton(
-                    title: 'Next',
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const YourPreferenceScreen(),
-                        ),
-                      );
-                    },
-                    color: ColorConstants.buttonColor,
-                  ),
-                  SizedBox(height: 30.h),
-                ],
+              CustomTextField(
+                title: 'Please enter your email',
+                controller: controller.emailCtrl,
               ),
-            ),
+              SizedBox(height: 35.h),
+
+              Obx(
+                () => GenderSelectionWidget(
+                  genderOptions: controller.genderOptions,
+                  selectedGender: controller.selectedGender.value,
+                  onGenderSelected: controller.selectGender,
+                ),
+              ),
+              SizedBox(height: 35.h),
+
+              Obx(
+                () => AgeSelectionWidget(
+                  ageOptions: controller.ageOptions,
+                  selectedAge: controller.selectedAge.value,
+                  onAgeSelected: controller.selectAge,
+                ),
+              ),
+
+              SizedBox(height: 50.h),
+
+              RoundButton(
+                title: 'Next',
+                onTap: controller.onNextFromWelcome,
+                color: ColorConstants.buttonColor,
+              ),
+              SizedBox(height: 30.h),
+            ],
           ),
         ),
       ),
