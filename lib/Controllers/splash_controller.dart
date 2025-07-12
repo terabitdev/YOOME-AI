@@ -16,34 +16,34 @@ class SplashController extends GetxController {
 
   Future<void> _navigateUser() async {
     try {
-      await Future.delayed(const Duration(seconds: 3));
+      await Future.delayed(const Duration(seconds: 2));
+      print("✅ Splash delay complete");
 
-      final user = FirebaseAuth.instance.currentUser;
+      final user = await FirebaseAuth.instance.authStateChanges().first;
+      print("👤 Firebase user: ${user?.uid}");
 
       if (user == null) {
-        Get.offAll(() => const SignInScreen());
-        return;
-      }
-
-      // 🔁 Try refreshing user to validate
-      await user.reload();
-      final refreshedUser = FirebaseAuth.instance.currentUser;
-
-      if (refreshedUser == null) {
-        await SessionHelper.clearSession(); // clear any saved flags
+        print("🔒 No user found. Redirecting to SignInScreen");
+        await SessionHelper.clearSession();
         Get.offAll(() => const SignInScreen());
         return;
       }
 
       final isComplete = await SessionHelper.isProfileComplete();
+      print("📦 isProfileComplete: $isComplete");
+
       if (isComplete) {
+        print("✅ Profile complete. Going to Home.");
         Get.offAll(() => CustomNavigationBar());
       } else {
+        print("👋 Profile incomplete. Going to Welcome.");
         Get.offAll(() => const WelcomeScreen());
       }
+
+      await SessionHelper.debugPrintPrefs();
     } catch (e) {
-      print('Splash Error: $e');
-      await SessionHelper.clearSession(); // fallback
+      print('❌ Splash Error: $e');
+      await SessionHelper.clearSession();
       Get.offAll(() => const SignInScreen());
     }
   }

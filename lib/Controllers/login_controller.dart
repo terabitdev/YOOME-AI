@@ -2,6 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yoome_ai/config/splash_services.dart';
+import 'package:yoome_ai/nav_bar.dart';
+import 'package:yoome_ai/view/login_screnn.dart';
 import 'package:yoome_ai/view/welcome_screen.dart';
 
 class LoginController extends GetxController {
@@ -49,31 +52,43 @@ class LoginController extends GetxController {
     isLoading.value = true;
 
     try {
-      // Sign in with Firebase Auth
       final UserCredential userCredential = await _auth
           .signInWithEmailAndPassword(
             email: emailCtrl.text.trim(),
             password: passwordCtrl.text.trim(),
           );
 
-      // Fetch user data from Firestore
       final uid = userCredential.user!.uid;
       final userDoc = await _firestore.collection('users').doc(uid).get();
       final userData = userDoc.data();
 
-      // Optional: Do something with userData here (e.g., store in GetStorage)
+      bool hasProfile = false;
 
-      // Show success message
+      if (userData != null) {
+        hasProfile =
+            userData.containsKey('gender') &&
+            userData.containsKey('character') &&
+            userData.containsKey('chatType') &&
+            userData.containsKey('age');
+      }
+
+      // 🔐 Update the SharedPreferences session flag
+      await SessionHelper.setProfileComplete(hasProfile);
+      print("✅ Profile completion updated: $hasProfile");
+
       Get.snackbar(
         'Success',
         'Login successful!',
         snackPosition: SnackPosition.TOP,
-        backgroundColor: Color(0xFFB56AFF),
+        backgroundColor: const Color(0xFFB56AFF),
         colorText: Colors.white,
       );
 
-      // Navigate to Welcome Screen
-      Get.to(() => const WelcomeScreen());
+      if (hasProfile) {
+        Get.offAll(() => CustomNavigationBar());
+      } else {
+        Get.offAll(() => const WelcomeScreen());
+      }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         emailError.value = 'No user found for that email.';
@@ -92,7 +107,7 @@ class LoginController extends GetxController {
       Get.snackbar(
         'Error',
         'Something went wrong: $e',
-        snackPosition: SnackPosition.BOTTOM,
+        snackPosition: SnackPosition.TOP,
         backgroundColor: Colors.red,
         colorText: Colors.white,
       );

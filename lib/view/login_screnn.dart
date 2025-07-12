@@ -77,13 +77,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Already have an account? ',
+                    'Don\'t have an account? ',
                     style: LTextStyle14500.copyWith(color: Colors.white70),
                   ),
                   InkWell(
                     onTap: () => Get.offAll(SignupScreen()),
                     child: Text(
-                      'Login',
+                      'Sign Up',
                       style: LTextStyle14500.copyWith(
                         color: ColorConstants.buttonColor,
                         fontWeight: FontWeight.bold,

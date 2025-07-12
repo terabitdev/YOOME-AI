@@ -25,12 +25,21 @@ class SessionHelper {
     await prefs.remove(_profileCompleteKey);
   }
 
+  static Future<void> debugPrintPrefs() async {
+    final prefs = await SharedPreferences.getInstance();
+    print("🔍 isProfileComplete: ${prefs.getBool(_profileCompleteKey)}");
+  }
+
   // 🔐 Logout User (Firebase + Session + Navigation)
   static Future<void> logoutUser() async {
     try {
-      await FirebaseAuth.instance.signOut(); // Sign out from Firebase
-      await clearSession(); // Clear session flag
-      Get.offAll(() => const SignInScreen()); // Navigate to login screen
+      await FirebaseAuth.instance.signOut();
+      print("✅ Firebase signed out");
+
+      await clearSession();
+      print("✅ Session cleared");
+
+      Get.offAll(() => const SignInScreen());
     } catch (e) {
       Get.snackbar('Logout Error', e.toString());
     }

@@ -6,6 +6,7 @@ import 'package:yoome_ai/resources/colors/app_colors.dart';
 import 'package:yoome_ai/resources/components/custom_textfield.dart';
 import 'package:yoome_ai/resources/components/round_button.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
+import 'package:yoome_ai/view/login_screnn.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -90,8 +91,26 @@ class _SignupScreenState extends State<SignupScreen> {
                     onTap: signupcontroller.signUp,
                   ),
                 ),
-
-                // Add spacing at bottom for safe scroll
+                SizedBox(height: 10.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Already have an account? ',
+                      style: LTextStyle14500.copyWith(color: Colors.white70),
+                    ),
+                    InkWell(
+                      onTap: () => Get.offAll(LoginScreen()),
+                      child: Text(
+                        'Login',
+                        style: LTextStyle14500.copyWith(
+                          color: ColorConstants.buttonColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),

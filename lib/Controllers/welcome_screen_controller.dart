@@ -107,6 +107,17 @@ class WelcomeController extends GetxController {
   }
 
   void onEnterYoome() async {
+    if (selectedPersonality.isEmpty ||
+        selectedRelationship.isEmpty ||
+        selectedScene.isEmpty) {
+      Get.snackbar(
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        'Required',
+        'Please select at least one interest in each category',
+      );
+      return;
+    }
     try {
       final uid = FirebaseAuth.instance.currentUser?.uid;
 
@@ -145,7 +156,7 @@ class WelcomeController extends GetxController {
         'Your profile has been saved successfully',
         backgroundColor: Color(0xFFB56AFF),
         colorText: Colors.white,
-        snackPosition: SnackPosition.BOTTOM,
+        snackPosition: SnackPosition.TOP,
       );
 
       Get.offAll(() => CustomNavigationBar()); // ✅ Navigate to main screen
