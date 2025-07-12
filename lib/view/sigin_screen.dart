@@ -9,9 +9,19 @@ import 'package:yoome_ai/view/login_screnn.dart';
 import 'package:get/get.dart';
 import 'package:yoome_ai/view/signup_screen.dart';
 
-class SignInScreen extends StatelessWidget {
+import '../Controllers/social_auth controller.dart';
+
+class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
 
+  @override
+  State<SignInScreen> createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends State<SignInScreen> {
+  final SocialAuthController socialAuthController = Get.put(
+    SocialAuthController(),
+  );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,12 +46,17 @@ class SignInScreen extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    GoogleRoundButton(
-                      title: " Continue with Google",
-                      onTap: () {},
-                      color: const Color(0xFF1A1A1A),
-                      loading: false,
+                    Obx(
+                      () => GoogleRoundButton(
+                        title: socialAuthController.isGoogleLoading.value
+                            ? 'Signing in...'
+                            : 'Continue with Google',
+                        onTap: socialAuthController.signInWithGoogle,
+                        color: const Color(0xFF1A1A1A),
+                        loading: socialAuthController.isGoogleLoading.value,
+                      ),
                     ),
+
                     SizedBox(height: 28.h),
                     Row(
                       children: [
