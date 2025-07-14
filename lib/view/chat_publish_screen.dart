@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:yoome_ai/resources/components/round_button.dart';
+import 'package:yoome_ai/resources/constants/app_style.dart';
 
 class ChatPublishScreen extends StatefulWidget {
   @override
@@ -50,14 +51,7 @@ class _ChatPublishScreenState extends State<ChatPublishScreen> {
                       ),
                     ),
                     const SizedBox(width: 16),
-                    const Text(
-                      'Grathok the Furious',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
+                    Text('Grathok the Furious', style: CPSTextStyle18500),
                   ],
                 ),
               ),
@@ -75,7 +69,7 @@ class _ChatPublishScreenState extends State<ChatPublishScreen> {
                         width: double.infinity,
                         padding: const EdgeInsets.all(20),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF2A2A2A).withOpacity(0.8),
+                          color: Colors.black12,
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: Column(
@@ -109,14 +103,13 @@ class _ChatPublishScreenState extends State<ChatPublishScreen> {
                       ),
 
                       const SizedBox(height: 20),
-
                       // Main Content
                       Expanded(
                         child: Container(
                           width: double.infinity,
                           padding: const EdgeInsets.all(20),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF2A2A2A).withOpacity(0.8),
+                            color: Colors.black,
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: SingleChildScrollView(

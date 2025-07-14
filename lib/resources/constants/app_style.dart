@@ -312,3 +312,9 @@ final TextStyle NVSTextStyle14500 = GoogleFonts.workSans(
   fontWeight: FontWeight.w500,
   color: Colors.white,
 );
+
+final TextStyle CPSTextStyle18500 = GoogleFonts.outfit(
+  fontSize: 18.sp,
+  fontWeight: FontWeight.w500,
+  color: Colors.white,
+);
