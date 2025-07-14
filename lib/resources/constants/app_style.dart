@@ -276,3 +276,39 @@ final TextStyle CSTextStyle15400 = GoogleFonts.outfit(
   fontWeight: FontWeight.w400,
   color: Colors.white,
 );
+
+final TextStyle CCSTextStyle12400 = GoogleFonts.outfit(
+  fontSize: 12.sp,
+  fontWeight: FontWeight.w400,
+  color: Colors.white,
+);
+
+final TextStyle CCSTextStyle124002 = GoogleFonts.outfit(
+  fontSize: 12.sp,
+  fontWeight: FontWeight.w400,
+  color: Colors.white54,
+);
+
+final TextStyle CCSTextStyle124003 = GoogleFonts.workSans(
+  fontSize: 12.sp,
+  fontWeight: FontWeight.w400,
+  color: Colors.white,
+);
+
+final TextStyle CCSTextStyle105004 = GoogleFonts.workSans(
+  fontSize: 10.sp,
+  fontWeight: FontWeight.w500,
+  color: Colors.white,
+);
+
+final TextStyle CCSTextStyle145005 = GoogleFonts.outfit(
+  fontSize: 14.sp,
+  fontWeight: FontWeight.w500,
+  color: Colors.white,
+);
+
+final TextStyle NVSTextStyle14500 = GoogleFonts.workSans(
+  fontSize: 14.sp,
+  fontWeight: FontWeight.w500,
+  color: Colors.white,
+);

@@ -5,10 +5,7 @@ import 'package:yoome_ai/resources/colors/app_colors.dart';
 import 'package:yoome_ai/resources/components/gradient_button.dart';
 import 'package:yoome_ai/resources/components/profile_header.dart';
 import 'package:yoome_ai/resources/components/profile_helpers.dart';
-import 'package:yoome_ai/view/create_character_screen.dart';
-import 'package:yoome_ai/view/create_character_screen_2.dart';
-import 'package:yoome_ai/view/matthew_supports_screen.dart';
-import 'package:yoome_ai/view/wallet_screen.dart';
+import 'package:yoome_ai/view/create_character_screen3.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -72,7 +69,12 @@ class ProfileScreen extends StatelessWidget {
                           SizedBox(height: 24.h),
                           const Subtitle('No Character yet'),
                           SizedBox(height: 36.h),
-                          GradientButton(label: 'Create', onPressed: () {}),
+                          GradientButton(
+                            label: 'Create',
+                            onPressed: () {
+                              Get.to(CreateCharacterScreen3());
+                            },
+                          ),
                         ],
                       ),
                     ),
