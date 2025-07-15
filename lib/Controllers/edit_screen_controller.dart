@@ -1,10 +1,13 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+import 'package:http/http.dart' as http;
+import 'package:mime/mime.dart';
+import 'package:http_parser/http_parser.dart';
 import 'package:yoome_ai/Controllers/profile_controller.dart';
 
 class EditProfileController extends GetxController {
@@ -13,8 +16,8 @@ class EditProfileController extends GetxController {
   final gender = ''.obs;
   final avatarUrl = ''.obs;
   final isLoading = false.obs;
+  var pickedImageFile = Rxn<File>(); // ✅ now observable
 
-  File? pickedImageFile;
   final ImagePicker _picker = ImagePicker();
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -67,82 +70,98 @@ class EditProfileController extends GetxController {
   Future<void> pickImageFromGallery() async {
     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
-      pickedImageFile = File(pickedFile.path);
-      avatarUrl.value = pickedImageFile!.path;
-      update(); // 👈 update UI // for local preview
+      pickedImageFile.value = File(pickedFile.path);
+      avatarUrl.value = pickedImageFile.value!.path; // for local preview
+      update();
+    }
+  }
+
+  // ✅ Upload to Cloudinary
+  Future<String> uploadImageToCloudinary(File imageFile) async {
+    const cloudName = 'dcjsnjl0d'; // 🔁 Replace with actual
+    const uploadPreset = 'flutter_unsigned'; // 🔁 Replace with actual
+    const folder = 'user_profiles'; // Optional: your folder in Cloudinary
+
+    final mimeType = lookupMimeType(imageFile.path);
+    final mediaType = mimeType != null ? MediaType.parse(mimeType) : null;
+
+    final url = Uri.parse(
+      'https://api.cloudinary.com/v1_1/$cloudName/image/upload',
+    );
+
+    final request = http.MultipartRequest('POST', url)
+      ..fields['upload_preset'] = uploadPreset
+      ..fields['folder'] = folder
+      ..files.add(
+        await http.MultipartFile.fromPath(
+          'file',
+          imageFile.path,
+          contentType: mediaType,
+        ),
+      );
+
+    final response = await request.send();
+    if (response.statusCode == 200) {
+      final res = await http.Response.fromStream(response);
+      final data = jsonDecode(res.body);
+      return data['secure_url']; // ✅ Final image URL
+    } else {
+      throw 'Cloudinary upload failed: ${response.statusCode}';
     }
   }
 
   Future<void> saveChanges() async {
     try {
       isLoading.value = true;
+
       final uid = _auth.currentUser?.uid;
       if (uid == null) throw 'User not logged in';
 
-      String? downloadUrl;
+      String? imageUrl;
 
-      // Upload image if picked
-      if (pickedImageFile != null) {
-        try {
-          final ref = FirebaseStorage.instance
-              .ref()
-              .child('user_profiles')
-              .child('$uid.jpg');
-
-          print('Uploading file from: ${pickedImageFile!.path}');
-          final uploadTask = ref.putFile(pickedImageFile!);
-          final snapshot = await uploadTask;
-
-          if (snapshot.state == TaskState.success) {
-            downloadUrl = await snapshot.ref.getDownloadURL();
-            print('Image uploaded. Download URL: $downloadUrl');
-          } else {
-            throw 'Image upload failed. Please try again.';
-          }
-        } catch (e) {
-          throw 'Error uploading image: $e';
-        }
+      if (pickedImageFile.value != null &&
+          pickedImageFile.value!.existsSync()) {
+        imageUrl = await uploadImageToCloudinary(pickedImageFile.value!);
       }
 
-      // Prepare data to update
       final updateData = {
         'name': nameController.text.trim(),
         'bio': bioController.text.trim(),
         'gender': gender.value,
       };
 
-      if (downloadUrl != null) {
-        updateData['photoUrl'] = downloadUrl;
+      if (imageUrl != null) {
+        updateData['photoUrl'] = imageUrl;
       }
 
       await _firestore.collection('users').doc(uid).update(updateData);
 
-      // Update local UI via ProfileController
       Get.find<ProfileController>().updateProfile(
         name: nameController.text.trim(),
         bio: bioController.text.trim(),
         gender: gender.value,
-        photoUrl: downloadUrl ?? avatarUrl.value,
+        photoUrl: imageUrl ?? avatarUrl.value,
       );
 
+      isLoading.value = false;
+      Get.back(); // ✅ Close the edit screen
+
+      // ✅ THEN show snackbar
       Get.snackbar(
         "Success",
         "Profile updated successfully",
         backgroundColor: Colors.green,
         colorText: Colors.white,
+        duration: const Duration(seconds: 2),
       );
-
-      Get.back(); // Go back to profile screen
     } catch (e) {
-      print('Error updating profile: $e');
+      isLoading.value = false;
       Get.snackbar(
         "Error",
         "Update failed: $e",
         backgroundColor: Colors.red,
         colorText: Colors.white,
       );
-    } finally {
-      isLoading.value = false;
     }
   }
 

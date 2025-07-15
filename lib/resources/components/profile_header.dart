@@ -2,12 +2,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:yoome_ai/Controllers/profile_controller.dart';
 import 'package:yoome_ai/resources/colors/app_colors.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
 import 'package:yoome_ai/view/edit_screen.dart';
 import 'package:yoome_ai/view/setting_screen.dart';
 
-class HeaderRow extends StatelessWidget {
+class HeaderRow extends GetView<ProfileController> {
   const HeaderRow({
     required this.avatarUrl,
     required this.username,
@@ -50,15 +51,15 @@ class HeaderRow extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Profile Avatar with fallback
-                CircleAvatar(
-                  radius: 32,
-                  backgroundColor: Colors.grey.shade800,
-                  backgroundImage:
-                      avatarUrl.isNotEmpty && avatarUrl.startsWith('http')
-                      ? NetworkImage(avatarUrl)
-                      : const AssetImage('assets/images/profile.png')
-                            as ImageProvider,
-                ),
+                Obx(() {
+                  return CircleAvatar(
+                    radius: 32,
+                    backgroundImage: controller.photoUrl.value.isNotEmpty
+                        ? NetworkImage(controller.photoUrl.value)
+                        : AssetImage('assets/images/profile.png')
+                              as ImageProvider,
+                  );
+                }),
 
                 SizedBox(width: 12.w),
 

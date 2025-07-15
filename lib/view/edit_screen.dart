@@ -24,35 +24,32 @@ class EditScreen extends StatelessWidget {
         return Stack(
           children: [
             // ✅ Profile image background
-            // ✅ Background image (fixed height)
             Positioned(
               top: 0,
               left: 0,
               right: 0,
               height: 400.h,
-              child: GetBuilder<EditProfileController>(
-                builder: (controller) {
-                  if (controller.pickedImageFile != null) {
-                    return Image.file(
-                      controller.pickedImageFile!,
-                      fit: BoxFit.cover,
-                    );
-                  } else if (controller.avatarUrl.value.startsWith('http')) {
-                    return Image.network(
-                      controller.avatarUrl.value,
-                      fit: BoxFit.cover,
-                    );
-                  } else {
-                    return Image.asset(
-                      'assets/images/profile.png',
-                      fit: BoxFit.cover,
-                    );
-                  }
-                },
-              ),
+              child: Obx(() {
+                if (controller.pickedImageFile.value != null) {
+                  return Image.file(
+                    controller.pickedImageFile.value!,
+                    fit: BoxFit.cover,
+                  );
+                } else if (controller.avatarUrl.value.startsWith('http')) {
+                  return Image.network(
+                    controller.avatarUrl.value,
+                    fit: BoxFit.cover,
+                  );
+                } else {
+                  return Image.asset(
+                    'assets/images/profile.png',
+                    fit: BoxFit.cover,
+                  );
+                }
+              }),
             ),
 
-            // ✅ Gradient overlay for readability
+            // ✅ Gradient overlay
             Positioned(
               top: 0,
               left: 0,
@@ -69,12 +66,12 @@ class EditScreen extends StatelessWidget {
               ),
             ),
 
-            // ✅ Dark overlay for readability
+            // ✅ Overall dark overlay
             Positioned.fill(
               child: Container(color: Colors.black.withOpacity(0.6)),
             ),
 
-            // ✅ App bar back button
+            // ✅ Back button
             Positioned(
               top: MediaQuery.of(context).padding.top + 10,
               left: 20,
@@ -96,7 +93,7 @@ class EditScreen extends StatelessWidget {
               ),
             ),
 
-            // ✅ Camera icon placeholder (optional action)
+            // ✅ Camera icon
             Positioned(
               top: 220.h,
               left: 24.w,
@@ -112,7 +109,7 @@ class EditScreen extends StatelessWidget {
               ),
             ),
 
-            // ✅ Form card
+            // ✅ Form area
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
@@ -129,7 +126,7 @@ class EditScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      /// Name Label
+                      // Name Label
                       Text(
                         'Name*',
                         style: TextStyle(
@@ -140,7 +137,7 @@ class EditScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 8),
 
-                      /// Name Input
+                      // Name Field
                       TextField(
                         controller: controller.nameController,
                         style: TextStyle(
@@ -163,7 +160,7 @@ class EditScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 20),
 
-                      /// Gender Label
+                      // Gender Label
                       Text(
                         'Gender*',
                         style: TextStyle(
@@ -174,7 +171,7 @@ class EditScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 10),
 
-                      /// Gender Options
+                      // Gender Options
                       Row(
                         children: [
                           GenderOptionWidget(
@@ -198,7 +195,7 @@ class EditScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 20),
 
-                      /// Bio Label
+                      // Bio Label
                       Text(
                         'Bio',
                         style: TextStyle(
@@ -209,26 +206,27 @@ class EditScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 10),
 
-                      /// Bio Input
+                      // Bio Field
                       BorderedMultilineInput(
                         controller: controller.bioController,
                         hint: 'Add your bio',
                       ),
                       const SizedBox(height: 30),
 
-                      /// Save Button
+                      // Save Button
                       Obx(() {
-                        return controller.isLoading.value
-                            ? const Center(
-                                child: CircularProgressIndicator(
-                                  color: Colors.white,
-                                ),
-                              )
-                            : RoundButton(
-                                title: 'Save',
-                                color: ColorConstants.buttonColor,
-                                onTap: controller.saveChanges,
-                              );
+                        if (controller.isLoading.value) {
+                          return Center(
+                            child: CircularProgressIndicator(
+                              color: ColorConstants.buttonColor,
+                            ),
+                          );
+                        }
+                        return RoundButton(
+                          title: 'Save',
+                          color: ColorConstants.buttonColor,
+                          onTap: controller.saveChanges,
+                        );
                       }),
                     ],
                   ),

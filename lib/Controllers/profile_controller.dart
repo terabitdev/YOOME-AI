@@ -48,7 +48,12 @@ class ProfileController extends GetxController {
             username.value = nameInFirestore;
           }
 
-          avatarUrl.value = data['photoURL'] ?? user.photoURL ?? '';
+          final fetchedPhotoUrl = data['photoUrl'] ?? user.photoURL ?? '';
+
+          // ✅ Update both
+          photoUrl.value = fetchedPhotoUrl;
+          avatarUrl.value = fetchedPhotoUrl;
+
           gender.value = data['gender'] ?? 'Other';
           bio.value = data['bio'] ?? '';
         } else {
@@ -58,13 +63,14 @@ class ProfileController extends GetxController {
             'uid': user.uid,
             'email': user.email,
             'name': user.email,
-            'photoURL': user.photoURL ?? '',
+            'photoUrl': user.photoURL ?? '',
             'gender': 'Other',
             'bio': '',
             'createdAt': FieldValue.serverTimestamp(),
           });
 
           username.value = user.email ?? 'User';
+          photoUrl.value = user.photoURL ?? '';
           avatarUrl.value = user.photoURL ?? '';
           gender.value = 'Other';
           bio.value = '';
@@ -86,6 +92,8 @@ class ProfileController extends GetxController {
     username.value = name;
     this.bio.value = bio;
     this.gender.value = gender;
+    this.photoUrl.value = photoUrl;
+    this.avatarUrl.value = photoUrl;
   }
 
   Future<void> signOut() async {
