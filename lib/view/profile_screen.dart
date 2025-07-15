@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:yoome_ai/Controllers/profile_controller.dart';
 import 'package:yoome_ai/resources/colors/app_colors.dart';
 import 'package:yoome_ai/resources/components/gradient_button.dart';
 import 'package:yoome_ai/resources/components/profile_header.dart';
 import 'package:yoome_ai/resources/components/profile_helpers.dart';
 import 'package:yoome_ai/view/create_character_screen3.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  final ProfileController controller = Get.put(ProfileController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,10 +26,12 @@ class ProfileScreen extends StatelessWidget {
         child: Column(
           children: [
             // ───────── HEADER ─────────
-            const HeaderRow(
-              avatarUrl: 'https://picsum.photos/id/64/200/200',
-              username: 'Demod - Enimy',
-              uid: '5F6XMUB64',
+            Obx(
+              () => HeaderRow(
+                avatarUrl: controller.avatarUrl.value,
+                username: controller.username.value,
+                uid: controller.uid.value,
+              ),
             ),
 
             SizedBox(height: 22.h),

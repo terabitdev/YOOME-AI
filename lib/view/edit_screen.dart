@@ -1,263 +1,243 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/instance_manager.dart';
+import 'package:yoome_ai/Controllers/edit_screen_controller.dart';
 import 'package:yoome_ai/resources/colors/app_colors.dart';
 import 'package:yoome_ai/resources/components/bio_textfield_widget.dart';
+import 'package:yoome_ai/resources/components/gender_option_widget.dart';
 import 'package:yoome_ai/resources/components/round_button.dart';
-import 'package:yoome_ai/view/edit_persona_screen.dart';
-import 'package:yoome_ai/view/edit_persona_screen_2.dart';
-import 'package:yoome_ai/view/matthew_supports_screen.dart';
 
-class EditScreen extends StatefulWidget {
-  const EditScreen({super.key});
+class EditScreen extends StatelessWidget {
+  final controller = Get.put(EditProfileController());
 
-  @override
-  State<EditScreen> createState() => _EditScreenState();
-}
-
-class _EditScreenState extends State<EditScreen> {
-  String selectedGender = 'Female'; // Track selected gender
-  final TextEditingController _bioController = TextEditingController();
+  EditScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Stack(
-        children: [
-          // Background Image - Full Screen
-          SizedBox.expand(
-            child: Image.asset(
-              'assets/images/csbackimage.png', // Use your anime character image
-              fit: BoxFit.cover,
-            ),
-          ),
-
-          // Top App Bar - Only Back Button
-          Positioned(
-            top: MediaQuery.of(context).padding.top + 10,
-            left: 20,
-            child: Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.3),
-                borderRadius: BorderRadius.circular(12),
+      body: Obx(() {
+        if (controller.isLoading.value) {
+          return const Center(
+            child: CircularProgressIndicator(color: Colors.white),
+          );
+        }
+        return Stack(
+          children: [
+            // ✅ Profile image background
+            // ✅ Background image (fixed height)
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              height: 400.h,
+              child: GetBuilder<EditProfileController>(
+                builder: (controller) {
+                  if (controller.pickedImageFile != null) {
+                    return Image.file(
+                      controller.pickedImageFile!,
+                      fit: BoxFit.cover,
+                    );
+                  } else if (controller.avatarUrl.value.startsWith('http')) {
+                    return Image.network(
+                      controller.avatarUrl.value,
+                      fit: BoxFit.cover,
+                    );
+                  } else {
+                    return Image.asset(
+                      'assets/images/profile.png',
+                      fit: BoxFit.cover,
+                    );
+                  }
+                },
               ),
-              child: IconButton(
-                icon: const Icon(
-                  Icons.arrow_back,
-                  color: Colors.white,
-                  size: 20,
-                ),
-                onPressed: () => Navigator.pop(context),
-              ),
             ),
-          ),
 
-          // Camera Icon Overlay
-          Positioned(
-            left: 15.w,
-            bottom: 480.h,
-            child: Image.asset(
-              'assets/images/camear1.png',
-              width: 91.w,
-              height: 91.h,
-            ),
-          ),
-
-          // Bottom Content with Gradient
-          Positioned.fill(
-            child: Align(
-              alignment: Alignment.bottomCenter,
+            // ✅ Gradient overlay for readability
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              height: 280.h,
               child: Container(
-                width: double.infinity,
-                padding: const EdgeInsets.fromLTRB(20, 30, 20, 30),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [
-                      Colors.transparent,
-                      Colors.transparent,
-                      Colors.black.withOpacity(0.1),
-                      Colors.black.withOpacity(0.3),
-                      Colors.black.withOpacity(0.7),
-                      Colors.black.withOpacity(0.9),
-                    ],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    stops: const [0.0, 0.2, 0.4, 0.6, 0.8, 1.0],
+                    colors: [Colors.black.withOpacity(0.6), Colors.transparent],
                   ),
                 ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // NAME Section
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'NAME',
-                          style: TextStyle(
-                            color: Colors.white.withOpacity(0.7),
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w500,
-                            letterSpacing: 1.2,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'AR Janjua',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        Container(
-                          height: 1,
-                          width: double.infinity,
-                          color: Colors.white.withOpacity(0.3),
-                        ),
-                      ],
-                    ),
+              ),
+            ),
 
-                    const SizedBox(height: 24),
+            // ✅ Dark overlay for readability
+            Positioned.fill(
+              child: Container(color: Colors.black.withOpacity(0.6)),
+            ),
 
-                    // Gender Section
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Your Gender',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-
-                        // Gender Options Row
-                        Row(
-                          children: [
-                            Expanded(child: _buildGenderOption('Female')),
-                            const SizedBox(width: 12),
-                            Expanded(child: _buildGenderOption('Male')),
-                            const SizedBox(width: 12),
-                            Expanded(child: _buildGenderOption('Other')),
-                          ],
-                        ),
-                      ],
-                    ),
-
-                    const SizedBox(height: 24),
-
-                    // Bio Section
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Bio',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-
-                        // Bio Text Field
-                        BorderedMultilineInput(
-                          controller: _bioController,
-                          hint: 'Add your bio',
-                        ),
-                      ],
-                    ),
-
-                    const SizedBox(height: 30),
-
-                    // Save Button using RoundButton
-                    RoundButton(
-                      title: 'Save',
-                      color: ColorConstants.buttonColor,
-                      onTap: () {
-                        Get.to(MatthewSupportsScreen());
-                      },
-                    ),
-
-                    SizedBox(height: MediaQuery.of(context).padding.bottom),
-                  ],
+            // ✅ App bar back button
+            Positioned(
+              top: MediaQuery.of(context).padding.top + 10,
+              left: 20,
+              child: Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.3),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: IconButton(
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                    size: 20,
+                  ),
+                  onPressed: () => Navigator.pop(context),
                 ),
               ),
             ),
-          ),
-        ],
-      ),
-    );
-  }
 
-  Widget _buildGenderOption(String gender) {
-    final isSelected = selectedGender == gender;
-
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          selectedGender = gender;
-        });
-      },
-      child: Container(
-        width: 100.w,
-        height: 40.h,
-        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
-        decoration: BoxDecoration(
-          color: isSelected ? const Color(0xFFA259FF) : Colors.transparent,
-          borderRadius: BorderRadius.circular(7),
-          border: Border.all(
-            color: isSelected
-                ? const Color(0xFFA259FF)
-                : Colors.white.withOpacity(0.3),
-            width: 1,
-          ),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Flexible(
-              child: Text(
-                gender,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 12.sp,
-                  fontWeight: FontWeight.w500,
+            // ✅ Camera icon placeholder (optional action)
+            Positioned(
+              top: 220.h,
+              left: 24.w,
+              child: GestureDetector(
+                onTap: () {
+                  controller.pickImageFromGallery();
+                },
+                child: Image.asset(
+                  'assets/images/camear1.png',
+                  width: 50,
+                  height: 50,
                 ),
               ),
             ),
-            const SizedBox(width: 6),
-            Container(
-              width: 12,
-              height: 12,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: isSelected ? Colors.white : Colors.transparent,
-                border: Border.all(color: Colors.white, width: 1),
+
+            // ✅ Form card
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 30,
+                ),
+                decoration: const BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+                ),
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      /// Name Label
+                      Text(
+                        'Name*',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+
+                      /// Name Input
+                      TextField(
+                        controller: controller.nameController,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        decoration: InputDecoration(
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.white.withOpacity(0.3),
+                            ),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: ColorConstants.buttonColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+
+                      /// Gender Label
+                      Text(
+                        'Gender*',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+
+                      /// Gender Options
+                      Row(
+                        children: [
+                          GenderOptionWidget(
+                            gender: 'Female',
+                            selectedGender: controller.gender.value,
+                            onTap: controller.updateGender,
+                          ),
+                          const SizedBox(width: 12),
+                          GenderOptionWidget(
+                            gender: 'Male',
+                            selectedGender: controller.gender.value,
+                            onTap: controller.updateGender,
+                          ),
+                          const SizedBox(width: 12),
+                          GenderOptionWidget(
+                            gender: 'Other',
+                            selectedGender: controller.gender.value,
+                            onTap: controller.updateGender,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+
+                      /// Bio Label
+                      Text(
+                        'Bio',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+
+                      /// Bio Input
+                      BorderedMultilineInput(
+                        controller: controller.bioController,
+                        hint: 'Add your bio',
+                      ),
+                      const SizedBox(height: 30),
+
+                      /// Save Button
+                      Obx(() {
+                        return controller.isLoading.value
+                            ? const Center(
+                                child: CircularProgressIndicator(
+                                  color: Colors.white,
+                                ),
+                              )
+                            : RoundButton(
+                                title: 'Save',
+                                color: ColorConstants.buttonColor,
+                                onTap: controller.saveChanges,
+                              );
+                      }),
+                    ],
+                  ),
+                ),
               ),
-              child: isSelected
-                  ? const Icon(Icons.check, size: 8, color: Color(0xFFA259FF))
-                  : null,
             ),
           ],
-        ),
-      ),
+        );
+      }),
     );
-  }
-
-  @override
-  void dispose() {
-    _bioController.dispose();
-    super.dispose();
   }
 }
