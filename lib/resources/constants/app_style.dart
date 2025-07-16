@@ -318,3 +318,15 @@ final TextStyle CPSTextStyle18500 = GoogleFonts.outfit(
   fontWeight: FontWeight.w500,
   color: Colors.white,
 );
+
+final TextStyle ESTextStyle12400 = GoogleFonts.outfit(
+  fontSize: 12.sp,
+  fontWeight: FontWeight.w400,
+  color: Colors.white54,
+);
+
+final TextStyle ESTextStyle14500 = GoogleFonts.outfit(
+  fontSize: 14.sp,
+  fontWeight: FontWeight.w500,
+  color: Colors.white,
+);

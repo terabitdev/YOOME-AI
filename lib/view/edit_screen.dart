@@ -6,6 +6,7 @@ import 'package:yoome_ai/resources/colors/app_colors.dart';
 import 'package:yoome_ai/resources/components/bio_textfield_widget.dart';
 import 'package:yoome_ai/resources/components/gender_option_widget.dart';
 import 'package:yoome_ai/resources/components/round_button.dart';
+import 'package:yoome_ai/resources/constants/app_style.dart';
 
 class EditScreen extends StatefulWidget {
   EditScreen({super.key});
@@ -71,10 +72,10 @@ class _EditScreenState extends State<EditScreen> {
                   ),
                 ),
 
-                // ✅ Overall dark overlay
-                Positioned.fill(
-                  child: Container(color: Colors.black.withOpacity(0.6)),
-                ),
+                // // ✅ Overall dark overlay
+                // Positioned.fill(
+                //   child: Container(color: Colors.black.withOpacity(0.6)),
+                // ),
 
                 // ✅ Back button
                 Positioned(
@@ -134,24 +135,13 @@ class _EditScreenState extends State<EditScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           // Name Label
-                          Text(
-                            'Name*',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 15.sp,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
+                          Text('Name', style: ESTextStyle12400),
                           const SizedBox(height: 8),
 
                           // Name Field
                           TextField(
                             controller: controller.nameController,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w500,
-                            ),
+                            style: ESTextStyle14500,
                             decoration: InputDecoration(
                               enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(
@@ -168,14 +158,7 @@ class _EditScreenState extends State<EditScreen> {
                           const SizedBox(height: 20),
 
                           // Gender Label
-                          Text(
-                            'Gender*',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 15.sp,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
+                          Text('Gender', style: ESTextStyle14500),
                           const SizedBox(height: 10),
 
                           // Gender Options
@@ -203,14 +186,7 @@ class _EditScreenState extends State<EditScreen> {
                           const SizedBox(height: 20),
 
                           // Bio Label
-                          Text(
-                            'Bio',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 15.sp,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
+                          Text('Bio', style: ESTextStyle14500),
                           const SizedBox(height: 10),
 
                           // Bio Field
