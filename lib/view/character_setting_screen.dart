@@ -5,14 +5,11 @@ import 'package:get/utils.dart';
 import 'package:yoome_ai/resources/components/character_setting_card_widget.dart';
 import 'package:yoome_ai/resources/components/character_setting_toggle_card_widget.dart';
 import 'package:yoome_ai/resources/components/confirmation_dialog.dart';
-import 'package:yoome_ai/resources/components/setting_toggle_card_widget.dart';
-import 'package:yoome_ai/resources/components/settings_card_widget.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
 import 'package:yoome_ai/view/alias_screen.dart';
 import 'package:yoome_ai/view/background_setting_screen.dart';
 import 'package:yoome_ai/view/matthew_supports_screen.dart';
 import 'package:yoome_ai/view/report_screen.dart';
-import 'package:yoome_ai/view/subscribe_screen.dart';
 import 'package:yoome_ai/view/view_profile_screen.dart';
 
 class CharacterSettingScreen extends StatefulWidget {

@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -87,7 +86,12 @@ class HeaderRow extends GetView<ProfileController> {
 
                 // Edit Icon
                 InkWell(
-                  onTap: () => Get.to(EditScreen()),
+                  onTap: () => Get.to(
+                    () => EditScreen(),
+                    transition: Transition.fadeIn,
+                    duration: Duration(milliseconds: 200),
+                  ),
+
                   child: Padding(
                     padding: EdgeInsets.only(left: 8.w),
                     child: Image.asset(

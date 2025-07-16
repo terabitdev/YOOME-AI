@@ -4,8 +4,6 @@ import 'package:get/get.dart';
 import 'package:get/utils.dart';
 import 'package:yoome_ai/resources/components/dual_action_button_widget.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
-import 'package:yoome_ai/view/create_avatar_screen.dart';
-import 'package:yoome_ai/view/create_avatar_screen2.dart';
 import 'package:yoome_ai/view/matthew_supports_screen.dart';
 
 class BackgroundSettingScreen extends StatefulWidget {

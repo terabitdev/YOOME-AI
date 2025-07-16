@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:mime/mime.dart';
@@ -69,10 +70,29 @@ class EditProfileController extends GetxController {
 
   Future<void> pickImageFromGallery() async {
     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+
     if (pickedFile != null) {
-      pickedImageFile.value = File(pickedFile.path);
-      avatarUrl.value = pickedImageFile.value!.path; // for local preview
-      update();
+      final croppedFile = await ImageCropper().cropImage(
+        sourcePath: pickedFile.path,
+        aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
+        uiSettings: [
+          AndroidUiSettings(
+            toolbarTitle: 'Crop Image',
+            toolbarColor: Colors.black,
+            toolbarWidgetColor: Colors.white,
+            initAspectRatio: CropAspectRatioPreset.original,
+            lockAspectRatio: false,
+          ),
+          IOSUiSettings(title: 'Crop Image'),
+        ],
+      );
+
+      if (croppedFile != null) {
+        final file = File(croppedFile.path);
+        pickedImageFile.value = file;
+        avatarUrl.value = file.path; // local preview
+        update();
+      }
     }
   }
 
@@ -142,6 +162,8 @@ class EditProfileController extends GetxController {
         gender: gender.value,
         photoUrl: imageUrl ?? avatarUrl.value,
       );
+
+      Get.find<ProfileController>().fetchUserProfile();
 
       isLoading.value = false;
       Get.back(); // ✅ Close the edit screen

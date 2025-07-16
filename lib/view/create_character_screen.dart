@@ -12,8 +12,8 @@ class CreateCharacterSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // colours that match your previous palette
-    const outline = Color(0xFF7B59FF);
-    const tileBg = Color(0xFF18003A);
+    // const outline = Color(0xFF7B59FF);
+    // const tileBg = Color(0xFF18003A);
 
     return Padding(
       // keep some air around the panel
@@ -83,8 +83,8 @@ class _ModeTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const tileBg = Color(0xFF18003A);
-    const outline = Color(0xFF7B59FF);
+    // const tileBg = Color(0xFF18003A);
+    // const outline = Color(0xFF7B59FF);
 
     return InkWell(
       onTap: onTap,

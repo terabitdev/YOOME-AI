@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yoome_ai/config/splash_services.dart';
 import 'package:yoome_ai/nav_bar.dart';
-import 'package:yoome_ai/view/login_screnn.dart';
 import 'package:yoome_ai/view/welcome_screen.dart';
 
 class LoginController extends GetxController {

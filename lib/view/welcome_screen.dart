@@ -10,7 +10,6 @@ import 'package:yoome_ai/resources/components/progress_bar.dart';
 import 'package:yoome_ai/resources/components/round_button.dart';
 import 'package:yoome_ai/resources/colors/app_colors.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
-import 'package:yoome_ai/view/your_preference_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);

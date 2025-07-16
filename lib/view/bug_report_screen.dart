@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yoome_ai/resources/colors/app_colors.dart';
 import 'package:yoome_ai/resources/components/bio_textfield_widget.dart';
 import 'package:yoome_ai/resources/components/dual_action_button_widget.dart';
-import 'package:yoome_ai/resources/components/round_button.dart';
 import 'package:yoome_ai/resources/components/upload_section_widget.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
 

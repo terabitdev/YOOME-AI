@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yoome_ai/view/edit_screen.dart';
-import 'package:yoome_ai/view/login_screnn.dart';
 import 'package:get/get.dart';
 
 class PersonaScreen extends StatelessWidget {

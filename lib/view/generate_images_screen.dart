@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:yoome_ai/resources/components/custom_appheader.dart';
-import 'package:yoome_ai/resources/components/custom_textfield.dart';
 import 'package:yoome_ai/resources/components/reuseable_textfield.dart';
 import 'package:yoome_ai/resources/constants/app_images.dart';
 

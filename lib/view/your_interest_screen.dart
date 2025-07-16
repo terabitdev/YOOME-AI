@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:yoome_ai/Controllers/welcome_screen_controller.dart';
-import 'package:yoome_ai/nav_bar.dart';
 import 'package:yoome_ai/resources/colors/app_colors.dart';
 import 'package:yoome_ai/resources/components/progress_bar.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';

@@ -7,7 +7,6 @@ import 'package:yoome_ai/resources/components/round_button.dart';
 import 'package:yoome_ai/resources/components/tab_button_widget.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
 import 'package:yoome_ai/view/matthew_supports_screen.dart';
-import 'package:yoome_ai/view/wallet_screen.dart';
 
 class SubscribeScreen extends StatefulWidget {
   const SubscribeScreen({super.key});

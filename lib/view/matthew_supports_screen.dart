@@ -9,8 +9,6 @@ import 'package:yoome_ai/view/character_setting_screen.dart';
 import 'package:yoome_ai/view/enhanced_memory_screen.dart';
 import 'package:yoome_ai/view/persona_screen.dart';
 import 'package:yoome_ai/view/report_screen.dart';
-import 'package:yoome_ai/view/reset_screen.dart';
-import 'package:yoome_ai/view/setting_screen.dart';
 import 'package:yoome_ai/view/share_screen.dart';
 
 class MatthewSupportsScreen extends StatefulWidget {

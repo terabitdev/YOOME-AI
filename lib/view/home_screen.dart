@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:yoome_ai/resources/constants/app_images.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
-import 'package:yoome_ai/view/character_setting_screen.dart';
 import 'package:yoome_ai/view/matthew_supports_screen.dart';
 
 class HomeScreen extends StatefulWidget {

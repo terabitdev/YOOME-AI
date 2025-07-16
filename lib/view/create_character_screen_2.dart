@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:yoome_ai/resources/colors/app_colors.dart';
@@ -9,7 +8,6 @@ import 'package:yoome_ai/resources/components/bio_textfield_widget.dart';
 import 'package:yoome_ai/resources/components/round_button.dart';
 import 'package:yoome_ai/resources/components/tab_button_widget.dart';
 import 'package:yoome_ai/resources/components/upload_section_widget.dart';
-import 'package:yoome_ai/view/create_avatar_screen2.dart';
 
 class CreateCharacterScreen2 extends StatefulWidget {
   const CreateCharacterScreen2({super.key});

@@ -5,8 +5,6 @@ import 'package:yoome_ai/resources/components/action_sheet_widget.dart';
 import 'package:yoome_ai/resources/components/character_setting_card_widget.dart';
 import 'package:yoome_ai/resources/components/character_setting_toggle_card_widget.dart';
 import 'package:yoome_ai/resources/components/confirmation_dialog.dart';
-import 'package:yoome_ai/resources/components/setting_toggle_card_widget.dart';
-import 'package:yoome_ai/resources/components/settings_card_widget.dart';
 import 'package:yoome_ai/resources/components/textfield_dialog_box.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
 import 'package:yoome_ai/view/background_setting_screen.dart';

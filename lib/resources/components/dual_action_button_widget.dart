@@ -25,9 +25,7 @@ class DualActionButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final primaryColor = Color.fromARGB(255, 114, 69, 187);
-    final overlayColor = primaryColor.withOpacity(0.08);
 
     Widget _buildFilled(String text, VoidCallback onTap) {
       return ElevatedButton(

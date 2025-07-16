@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yoome_ai/resources/components/google_roundbutton.dart';
 import 'package:yoome_ai/resources/components/reuseable_social_button.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,7 +6,6 @@ import 'package:yoome_ai/resources/constants/app_images.dart';
 import 'package:yoome_ai/resources/constants/app_style.dart';
 import 'package:yoome_ai/view/login_screnn.dart';
 import 'package:get/get.dart';
-import 'package:yoome_ai/view/signup_screen.dart';
 
 import '../Controllers/social_auth controller.dart';
 
