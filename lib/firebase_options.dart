@@ -41,48 +41,48 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyABzZjwjlclq8qUw9YccDAx760Sk7XK1ow',
-    appId: '1:353818779194:web:0db7199e82c6a86dc05f03',
-    messagingSenderId: '353818779194',
-    projectId: 'yoome-ai',
-    authDomain: 'yoome-ai.firebaseapp.com',
-    storageBucket: 'yoome-ai.firebasestorage.app',
-    measurementId: 'G-Z02WT8FLL0',
+    apiKey: 'AIzaSyAP5qWEOLCw22UXEGErF_Ls_QztDLKw504',
+    appId: '1:898756982960:web:6aeb029269e2a94a512375',
+    messagingSenderId: '898756982960',
+    projectId: 'yoome-ai-b03cf',
+    authDomain: 'yoome-ai-b03cf.firebaseapp.com',
+    storageBucket: 'yoome-ai-b03cf.firebasestorage.app',
+    measurementId: 'G-ZB5G428D8E',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyB5AdIj0X0zXp1cHVIkB3HfOaSQo_VM17w',
-    appId: '1:353818779194:android:08b8a89c04ffb1f9c05f03',
-    messagingSenderId: '353818779194',
-    projectId: 'yoome-ai',
-    storageBucket: 'yoome-ai.firebasestorage.app',
+    apiKey: 'AIzaSyASS6HjhrTc7TgIJCcBHa7aggXuV6S_ZdI',
+    appId: '1:898756982960:android:f1bf90eba27d4207512375',
+    messagingSenderId: '898756982960',
+    projectId: 'yoome-ai-b03cf',
+    storageBucket: 'yoome-ai-b03cf.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBdnTIKe0penzOHhoQlL0Rze9Db4cccR-0',
-    appId: '1:353818779194:ios:4db278fc50576c9bc05f03',
-    messagingSenderId: '353818779194',
-    projectId: 'yoome-ai',
-    storageBucket: 'yoome-ai.firebasestorage.app',
+    apiKey: 'AIzaSyBXDR131ZInqe7tN3XXEHX4im1N39AVp2c',
+    appId: '1:898756982960:ios:029ab8bcc215ba70512375',
+    messagingSenderId: '898756982960',
+    projectId: 'yoome-ai-b03cf',
+    storageBucket: 'yoome-ai-b03cf.firebasestorage.app',
     iosBundleId: 'com.example.yoomeAi',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBdnTIKe0penzOHhoQlL0Rze9Db4cccR-0',
-    appId: '1:353818779194:ios:4db278fc50576c9bc05f03',
-    messagingSenderId: '353818779194',
-    projectId: 'yoome-ai',
-    storageBucket: 'yoome-ai.firebasestorage.app',
+    apiKey: 'AIzaSyBXDR131ZInqe7tN3XXEHX4im1N39AVp2c',
+    appId: '1:898756982960:ios:029ab8bcc215ba70512375',
+    messagingSenderId: '898756982960',
+    projectId: 'yoome-ai-b03cf',
+    storageBucket: 'yoome-ai-b03cf.firebasestorage.app',
     iosBundleId: 'com.example.yoomeAi',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyABzZjwjlclq8qUw9YccDAx760Sk7XK1ow',
-    appId: '1:353818779194:web:88a9f0a7e881c739c05f03',
-    messagingSenderId: '353818779194',
-    projectId: 'yoome-ai',
-    authDomain: 'yoome-ai.firebaseapp.com',
-    storageBucket: 'yoome-ai.firebasestorage.app',
-    measurementId: 'G-SHWPBNBTXY',
+    apiKey: 'AIzaSyAP5qWEOLCw22UXEGErF_Ls_QztDLKw504',
+    appId: '1:898756982960:web:47d0332ec521a8d5512375',
+    messagingSenderId: '898756982960',
+    projectId: 'yoome-ai-b03cf',
+    authDomain: 'yoome-ai-b03cf.firebaseapp.com',
+    storageBucket: 'yoome-ai-b03cf.firebasestorage.app',
+    measurementId: 'G-DWV4X0ZCS9',
   );
 }
